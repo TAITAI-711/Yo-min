@@ -252,6 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BanmenObj: {fileID: 736655659}
   OseroPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
+  PlayerType: 0
   MovePow: 5
   MaxMovePow: 50
   DownMovePow: 1.5

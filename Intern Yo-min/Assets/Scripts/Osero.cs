@@ -20,7 +20,6 @@ public class Osero : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Gravity.y = -9.8f;
         Rb = gameObject.GetComponent<Rigidbody>();
         Rb.useGravity = false;
 
