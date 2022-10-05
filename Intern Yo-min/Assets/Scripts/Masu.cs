@@ -18,7 +18,7 @@ public class Masu : MonoBehaviour
         
     }
 
-    public void Osero()
+    public void SetOsero(Osero osero)
     {
 
     }

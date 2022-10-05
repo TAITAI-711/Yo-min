@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,6 +10,17 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Banmen BanmenObj;
     [SerializeField] private GameObject OseroPrefab;
     private Transform BanmenTf;
+
+    public enum EnumPlayerType
+    {
+        Player1,
+        Player2,
+        Player3,
+        Player4
+    }
+    [Tooltip("プレイヤーのコントローラー番号")]
+    [SerializeField]
+    EnumPlayerType PlayerType = EnumPlayerType.Player1;
 
     [Tooltip("プレイヤーの移動量")]
     public float MovePow = 1.0f;
@@ -35,6 +47,12 @@ public class PlayerMove : MonoBehaviour
     private float MaxMovePosX = 0;
     private float MaxMovePosZ = 0;
 
+    // プレイヤーの向き
+    private Vector2 PlayerAngle;
+
+    // 入力キーの一回判定用
+    private bool isKeyDown = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,36 +77,109 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 力を加える処理
-        Vector3 Vel = rb.velocity; // ベロシティ
-        float Pow = MovePow;
+        // プレイヤーの移動処理
+        PlayerMovePow();
 
-        if (Input.GetKey(KeyCode.W))
+        // プレイヤーの移動座標の固定処理
+        PlayerMoveMax();
+
+        // プレイヤーがオセロを飛ばす向きの処理
+        PlayerShootAngle();
+
+        // オセロ飛ばす処理
+        PlayerShootOsero();        
+    }
+
+    // プレイヤーがオセロを飛ばす向きの処理
+    private void PlayerShootAngle()
+    {
+        Vector2 Vec = new Vector2();
+
+        switch (PlayerType)
         {
-            Vel.z += Pow;
+            case EnumPlayerType.Player1:
+                Vec.x = Input.GetAxis("Joystick_1_RightAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_1_RightAxis_Y");
+                break;
+            case EnumPlayerType.Player2:
+                Vec.x = Input.GetAxis("Joystick_2_RightAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_2_RightAxis_Y");
+                break;
+            case EnumPlayerType.Player3:
+                Vec.x = Input.GetAxis("Joystick_3_RightAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_3_RightAxis_Y");
+                break;
+            case EnumPlayerType.Player4:
+                Vec.x = Input.GetAxis("Joystick_4_RightAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_4_RightAxis_Y");
+                break;
+            default:
+                break;
         }
-        if (Input.GetKey(KeyCode.S))
+
+        PlayerAngle = Vec.normalized;
+    }
+
+    // オセロ飛ばす処理
+    private void PlayerShootOsero()
+    {
+        bool isPress = false;
+
+        switch (PlayerType)
         {
-            Vel.z += -Pow;
+            case EnumPlayerType.Player1:
+                if (Input.GetAxis("Joystick_1_Button_L2_R2") > 0)
+                    isPress = true;
+                break;
+            case EnumPlayerType.Player2:
+                if (Input.GetAxis("Joystick_2_Button_L2_R2") > 0)
+                    isPress = true;
+                break;
+            case EnumPlayerType.Player3:
+                if (Input.GetAxis("Joystick_3_Button_L2_R2") > 0)
+                    isPress = true;
+                break;
+            case EnumPlayerType.Player4:
+                if (Input.GetAxis("Joystick_4_Button_L2_R2") > 0)
+                    isPress = true;
+                break;
+            default:
+                break;
         }
-        if (Input.GetKey(KeyCode.D))
+
+        if (!isPress)
         {
-            Vel.x += Pow;
+            isKeyDown = false;
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (!isKeyDown)
         {
-            Vel.x += -Pow;
+            isKeyDown = true;
+
+            // オセロの生成座標
+            Vector3 OseroPos = transform.position;
+            OseroPos.y += 5.0f;
+
+            // オセロ生成
+            GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
+
+            // サイズ設定
+            Vector3 OseroSize = osero.transform.localScale;
+            OseroSize.x = BanmenObj.YokoLength - OseroScaleDown;
+            OseroSize.y = 1.0f;
+            OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
+            osero.transform.localScale = OseroSize;
+
+            // 着地座標
+            //new Vector3()
+            Vector3 EndPos = new Vector3(OseroPos.x + MaxOseroMove * BanmenObj.YokoLength, 0.0f, OseroPos.z);
+
+            osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos);
         }
+    }
 
-
-        if (Vel.x > MaxMovePow) Vel.x = MaxMovePow;
-        if (Vel.x < -MaxMovePow) Vel.x = -MaxMovePow;
-        if (Vel.z > MaxMovePow) Vel.z = MaxMovePow;
-        if (Vel.z < -MaxMovePow) Vel.z = -MaxMovePow;
-
-        rb.velocity = Vel;
-
-
+    // プレイヤーの移動座標の固定処理
+    private void PlayerMoveMax()
+    {
         // 移動制限
         Vector3 Pos = gameObject.transform.position; // 位置
 
@@ -106,30 +197,70 @@ public class PlayerMove : MonoBehaviour
             Pos.z = -MaxMovePosZ;
 
         gameObject.transform.position = Pos;
+    }
 
+    // プレイヤーの移動処理
+    private void PlayerMovePow()
+    {
+        // 力を加える処理
+        Vector3 Vel = rb.velocity; // ベロシティ
+        float Pow = MovePow;
 
-        // オセロ飛ばす処理
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    Vel.z += Pow;
+        //}
+        //if (Input.GetKey(KeyCode.S))
+        //{
+        //    Vel.z += -Pow;
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    Vel.x += Pow;
+        //}
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    Vel.x += -Pow;
+        //}
+
+        Vector2 Vec = new Vector2();
+        switch (PlayerType)
         {
-            // オセロの生成座標
-            Vector3 OseroPos = Pos;
-            OseroPos.y += 5.0f;
-
-            // オセロ生成
-            GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
-
-            // サイズ設定
-            Vector3 OseroSize = osero.transform.localScale;
-            OseroSize.x = BanmenObj.YokoLength - OseroScaleDown;
-            OseroSize.y = 1.0f;
-            OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
-            osero.transform.localScale = OseroSize;
-
-            // 着地座標
-            //new Vector3()
-            Vector3 EndPos = new Vector3(Pos.x + MaxOseroMove * BanmenObj.YokoLength, 0.0f, Pos.z);
-
-            osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos);
+            case EnumPlayerType.Player1:
+                Vec.x = Input.GetAxis("Joystick_1_LeftAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_1_LeftAxis_Y");
+                break;
+            case EnumPlayerType.Player2:
+                Vec.x = Input.GetAxis("Joystick_2_LeftAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_2_LeftAxis_Y");
+                break;
+            case EnumPlayerType.Player3:
+                Vec.x = Input.GetAxis("Joystick_3_LeftAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_3_LeftAxis_Y");
+                break;
+            case EnumPlayerType.Player4:
+                Vec.x = Input.GetAxis("Joystick_4_LeftAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_4_LeftAxis_Y");
+                break;
+            default:
+                break;
         }
+
+        //Debug.Log("X:" + Input.GetAxis("Joystick_1_LeftAxis_X"));
+        //Debug.Log("Y:" + -Input.GetAxis("Joystick_1_LeftAxis_Y"));
+
+        Vec.Normalize();
+
+        // 移動量加える
+        Vel.x += Pow * Vec.x;
+        Vel.z += Pow * Vec.y;
+
+        // 最大移動量超えたら戻す
+        if (Vel.x > MaxMovePow) Vel.x = MaxMovePow;
+        if (Vel.x < -MaxMovePow) Vel.x = -MaxMovePow;
+        if (Vel.z > MaxMovePow) Vel.z = MaxMovePow;
+        if (Vel.z < -MaxMovePow) Vel.z = -MaxMovePow;
+
+        rb.velocity = Vel; // 移動量変更
     }
 }
