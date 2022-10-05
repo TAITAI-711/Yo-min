@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Osero : MonoBehaviour
 {
-    private Banmen BanmenObj;       // ”Õ–ÊƒIƒuƒWƒFƒNƒg
-    private Vector3 Gravity;          // ƒIƒZƒ‚Ìd—Í
-    private Vector3 StartPos;       // ƒIƒZƒ‚ÌŠJnÀ•W
-    private Vector3 EndPos;         // ƒIƒZƒ‚Ì’…’nÀ•W
-    private Vector3 MovePow;        // ˆÚ“®‚·‚é—Ê(ƒ}ƒX–ÚŠ·Z:0`3‚Æ‚©)
-    private float Angle;            // ËoŠp“x
+    private Banmen BanmenObj;       // ç›¤é¢ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+    private Vector3 Gravity;        // ã‚ªã‚»ãƒ­ã®é‡åŠ›
+    private Vector3 StartPos;       // ã‚ªã‚»ãƒ­ã®é–‹å§‹åº§æ¨™
+    private Vector3 EndPos;         // ã‚ªã‚»ãƒ­ã®ç€åœ°åº§æ¨™
+    private Vector3 MovePow;        // ç§»å‹•ã™ã‚‹é‡(ãƒã‚¹ç›®æ›ç®—:0ï½3ã¨ã‹)
+    private float Angle;            // å°„å‡ºè§’åº¦
 
     private Rigidbody Rb;
-    //private bool isMove = false;    // ˆÚ“®ŠJnƒtƒ‰ƒO
+    private Collider Cd;
+    //private bool isMove = false;    // ç§»å‹•é–‹å§‹ãƒ•ãƒ©ã‚°
 
 
     // Start is called before the first frame update
@@ -21,6 +23,13 @@ public class Osero : MonoBehaviour
         Gravity.y = -9.8f;
         Rb = gameObject.GetComponent<Rigidbody>();
         Rb.useGravity = false;
+
+        Cd = gameObject.GetComponent<Collider>();
+    }
+
+    void Update()
+    {
+        
     }
 
     // Update is called once per frame
@@ -29,7 +38,25 @@ public class Osero : MonoBehaviour
         Rb.AddForce(Gravity, ForceMode.Acceleration);
     }
 
-    // ƒIƒZƒ‚ğ“®‚©‚·ˆ—(”Õ–Ê, d—Í, ËoŠp“x, ŠJnÀ•W, ’…’nÀ•W)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Banmen"))
+        {
+            //Debug.Log("ç›¤é¢ã¨å½“ãŸã£ãŸ");
+            Destroy(gameObject);
+        }
+    }
+
+    //private void OnTriggerExit(Collider collider)
+    //{
+    //    if (collider.CompareTag("Player"))
+    //    {
+    //        Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰ã‚ªã‚»ãƒ­ãŒé›¢ã‚ŒãŸ");
+    //        Cd.isTrigger = false;
+    //    }
+    //}
+
+    // ã‚ªã‚»ãƒ­ã‚’å‹•ã‹ã™å‡¦ç†(ç›¤é¢, é‡åŠ›, å°„å‡ºè§’åº¦, é–‹å§‹åº§æ¨™, ç€åœ°åº§æ¨™)
     public void Move(Banmen banmenObj, float gravity, float throwingAngle, Vector3 startPos, Vector3 endPos)
     {
         BanmenObj = banmenObj;
@@ -41,10 +68,16 @@ public class Osero : MonoBehaviour
         Rb = gameObject.GetComponent<Rigidbody>();
         Rb.useGravity = false;
 
-        // Ëo‘¬“xŒvZ
+        Cd = gameObject.GetComponent<Collider>();
+        Cd.isTrigger = false;
+
+        // ãƒ¬ã‚¤ãƒ¤ãƒ¼å¤‰æ›´
+        //gameObject.layer = LayerMask.NameToLayer("HitOsero");
+
+        // å°„å‡ºé€Ÿåº¦è¨ˆç®—
         Vector3 Vel = Calculation.InjectionSpeed(StartPos, EndPos, Angle, Gravity.y);
 
-        // ƒIƒZƒËo
+        // ã‚ªã‚»ãƒ­å°„å‡º
         Rb.AddForce(Vel * Rb.mass, ForceMode.Impulse);
     }
 }

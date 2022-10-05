@@ -61,23 +61,23 @@ public class PlayerMove : MonoBehaviour
     {
         // 力を加える処理
         Vector3 Vel = rb.velocity; // ベロシティ
-
+        float Pow = MovePow;
 
         if (Input.GetKey(KeyCode.W))
         {
-            Vel.z += MovePow;
+            Vel.z += Pow;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            Vel.z += -MovePow;
+            Vel.z += -Pow;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            Vel.x += MovePow;
+            Vel.x += Pow;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            Vel.x += -MovePow;
+            Vel.x += -Pow;
         }
 
 
@@ -111,19 +111,23 @@ public class PlayerMove : MonoBehaviour
         // オセロ飛ばす処理
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // オセロの生成座標
+            Vector3 OseroPos = Pos;
+            OseroPos.y += 5.0f;
+
             // オセロ生成
-            GameObject Koma = Instantiate(OseroPrefab, gameObject.transform.position, Quaternion.identity);
+            GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
 
             // サイズ設定
-            Vector3 KomaSize = Koma.transform.localScale;
-            KomaSize.x = BanmenObj.YokoLength - OseroScaleDown;
-            KomaSize.y = 1.0f;
-            KomaSize.z = BanmenObj.TateLength - OseroScaleDown;
-            Koma.transform.localScale = KomaSize;
+            Vector3 OseroSize = osero.transform.localScale;
+            OseroSize.x = BanmenObj.YokoLength - OseroScaleDown;
+            OseroSize.y = 1.0f;
+            OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
+            osero.transform.localScale = OseroSize;
 
-            Vector3 EndPos = new Vector3(Pos.x + MaxOseroMove * BanmenObj.YokoLength, 0.0f, Pos.z + -MaxOseroMove * BanmenObj.TateLength);
+            Vector3 EndPos = new Vector3(Pos.x + MaxOseroMove * BanmenObj.YokoLength, 0.0f, Pos.z);
 
-            Koma.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, transform.position, EndPos);
+            osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos);
         }
     }
 }
