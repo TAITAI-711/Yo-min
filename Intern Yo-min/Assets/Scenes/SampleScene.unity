@@ -251,13 +251,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BanmenObj: {fileID: 736655659}
-  KomaPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
+  OseroPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
   MovePow: 1
   MaxMovePow: 50
   DownMovePow: 1.5
-  KomaMoveSpeed: 1
-  MaxKomaMove: 3
-  KomaMoveHeight: 5
+  MaxOseroMove: 3
+  OseroGravity: 9.8
+  ThrowingAngle: 30
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +464,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MasuPrefab: {fileID: 3329503098532617140, guid: 55b9a8cb75695ff46ac51fde911e1de1, type: 3}
   Tate: 9
-  Yoko: 9
   TateLength: 0
   YokoLength: 0
 --- !u!1 &963194225

@@ -7,7 +7,7 @@ public class Banmen : MonoBehaviour
     [SerializeField] private GameObject MasuPrefab;
 
     public int Tate = 9;
-    public int Yoko = 9;
+    private int Yoko;
 
     [HideInInspector] public float TateLength;
     [HideInInspector] public float YokoLength;
@@ -16,6 +16,8 @@ public class Banmen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Yoko = Tate;
+
         Masu = new GameObject[Yoko, Tate];
 
         // åvéZópïœêî

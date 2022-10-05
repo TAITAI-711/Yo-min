@@ -2,25 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private Banmen BanmenObj;
-    [SerializeField] private GameObject KomaPrefab;
+    [SerializeField] private GameObject OseroPrefab;
     private Transform BanmenTf;
 
-    
+    [Tooltip("プレイヤーの移動量")]
     public float MovePow = 1.0f;
+    [Tooltip("プレイヤーの最大移動量")]
     public float MaxMovePow = 10.0f;
+    [Tooltip("プレイヤーの移動量減少値(空気抵抗値)")]
     public float DownMovePow = 0.1f;
 
-    public float MaxKomaMove = 0.0f;    // オセロの最大移動マス数
-    public float KomaFallPow = 5.0f;    // オセロの重力
+    [Tooltip("オセロの最大飛距離マス数")] 
+    public float MaxOseroMove = 3.0f;    // オセロの最大飛距離マス数
+    [Tooltip("オセロの重力")] 
+    public float OseroGravity = 9.8f;    // オセロの重力
+
+    [SerializeField, Range(5F, 85F), Tooltip("射出する角度")]
+    private float ThrowingAngle;
 
     private Rigidbody rb;
 
     // オセロの大きさ少し小さくする用変数
-    private float KomaScaleDown = 0.2f;
+    private float OseroScaleDown = 0.2f;
 
 
     // 最大移動範囲用変数
@@ -104,18 +112,18 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // オセロ生成
-            GameObject Koma = Instantiate(KomaPrefab, gameObject.transform.position, Quaternion.identity);
+            GameObject Koma = Instantiate(OseroPrefab, gameObject.transform.position, Quaternion.identity);
 
             // サイズ設定
             Vector3 KomaSize = Koma.transform.localScale;
-            KomaSize.x = BanmenObj.YokoLength - KomaScaleDown;
+            KomaSize.x = BanmenObj.YokoLength - OseroScaleDown;
             KomaSize.y = 1.0f;
-            KomaSize.z = BanmenObj.TateLength - KomaScaleDown;
+            KomaSize.z = BanmenObj.TateLength - OseroScaleDown;
             Koma.transform.localScale = KomaSize;
 
-            Vector3 EndPos = new Vector3(Pos.x + MaxKomaMove * BanmenObj.YokoLength, 0.0f, Pos.z + -MaxKomaMove * BanmenObj.TateLength);
+            Vector3 EndPos = new Vector3(Pos.x + MaxOseroMove * BanmenObj.YokoLength, 0.0f, Pos.z + -MaxOseroMove * BanmenObj.TateLength);
 
-            Koma.GetComponent<Koma>().Move(BanmenObj, KomaFallPow, transform.position, EndPos);
+            Koma.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, transform.position, EndPos);
         }
     }
 }
