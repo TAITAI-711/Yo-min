@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -87,7 +83,7 @@ public class PlayerMove : MonoBehaviour
         PlayerShootAngle();
 
         // オセロ飛ばす処理
-        PlayerShootOsero();        
+        PlayerShootOsero();
     }
 
     // プレイヤーがオセロを飛ばす向きの処理
@@ -116,6 +112,8 @@ public class PlayerMove : MonoBehaviour
             default:
                 break;
         }
+
+        //UnityEngine.Debug.Log(Vec);
 
         PlayerAngle = Vec.normalized;
     }
@@ -170,8 +168,7 @@ public class PlayerMove : MonoBehaviour
             osero.transform.localScale = OseroSize;
 
             // 着地座標
-            //new Vector3()
-            Vector3 EndPos = new Vector3(OseroPos.x + MaxOseroMove * BanmenObj.YokoLength, 0.0f, OseroPos.z);
+            Vector3 EndPos = new Vector3(OseroPos.x + PlayerAngle.x * MaxOseroMove * BanmenObj.YokoLength, 0.0f, OseroPos.z + PlayerAngle.y * MaxOseroMove * BanmenObj.TateLength);
 
             osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos);
         }
