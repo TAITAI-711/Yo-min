@@ -65,7 +65,7 @@ public class Banmen : MonoBehaviour
 
         for(int i = 0; i < Yoko; i++)
         {
-            if (Pos.x < Masu[i, 0].transform.position.x + YokoLength)
+            if (Pos.x < Masu[i, 0].transform.position.x + YokoLength * 0.5f)
             {
                 X = i;
                 break;
@@ -75,7 +75,7 @@ public class Banmen : MonoBehaviour
 
         for (int j = 0; j < Tate; j++)
         {
-            if (Pos.z < Masu[0, j].transform.position.z + TateLength)
+            if (Pos.z > Masu[0, j].transform.position.z - TateLength * 0.5f)
             {
                 Y = j;
                 break;

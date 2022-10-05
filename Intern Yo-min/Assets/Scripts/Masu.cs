@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Masu : MonoBehaviour
 {
-    private Osero osero;
+    private Osero OseroObj = null;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,16 @@ public class Masu : MonoBehaviour
 
     public void SetOsero(Osero osero)
     {
-
+        if (OseroObj == null)
+        {
+            OseroObj = osero;
+            OseroObj.OseroSet(transform.position);
+        }
+        else
+        {
+            Destroy(OseroObj.gameObject);
+            OseroObj = osero;
+            OseroObj.OseroSet(transform.position);
+        }
     }
 }

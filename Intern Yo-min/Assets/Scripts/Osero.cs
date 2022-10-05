@@ -9,11 +9,14 @@ public class Osero : MonoBehaviour
     private Vector3 Gravity;        // オセロの重力
     private Vector3 StartPos;       // オセロの開始座標
     private Vector3 EndPos;         // オセロの着地座標
-    private Vector3 MovePow;        // 移動する量(マス目換算:0～3とか)
+    //private Vector3 MovePow;        // 移動する量(マス目換算:0～3とか)
     private float Angle;            // 射出角度
 
     private Rigidbody Rb;
     private Collider Cd;
+
+    private bool isOseroSet = false;        // 盤上にオセロ固定
+
     //private bool isMove = false;    // 移動開始フラグ
 
 
@@ -34,7 +37,10 @@ public class Osero : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Rb.AddForce(Gravity, ForceMode.Acceleration);
+        if (!isOseroSet)
+        {
+            Rb.AddForce(Gravity, ForceMode.Acceleration);
+        }           
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -42,9 +48,9 @@ public class Osero : MonoBehaviour
         if (collision.gameObject.CompareTag("Banmen"))
         {
             //Debug.Log("盤面と当たった");
-            BanmenObj.GetMasu(transform.position);
+            BanmenObj.GetMasu(transform.position).GetComponent<Masu>().SetOsero(this);
 
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -80,5 +86,14 @@ public class Osero : MonoBehaviour
 
         // オセロ射出
         Rb.AddForce(Vel * Rb.mass, ForceMode.Impulse);
+    }
+
+    public void OseroSet(Vector3 OseroSetPosition)
+    {
+        isOseroSet = true;
+        Rb.isKinematic = true;
+        Cd.isTrigger = true;
+        transform.position = OseroSetPosition;
+        transform.rotation = Quaternion.identity;
     }
 }
