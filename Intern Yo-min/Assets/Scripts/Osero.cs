@@ -43,6 +43,8 @@ public class Osero : MonoBehaviour
         if (collision.gameObject.CompareTag("Banmen"))
         {
             //Debug.Log("盤面と当たった");
+            BanmenObj.GetMasu(transform.position);
+
             Destroy(gameObject);
         }
     }

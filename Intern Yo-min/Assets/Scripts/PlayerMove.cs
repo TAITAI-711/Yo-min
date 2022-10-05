@@ -125,6 +125,8 @@ public class PlayerMove : MonoBehaviour
             OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
             osero.transform.localScale = OseroSize;
 
+            // íÖínç¿ïW
+            //new Vector3()
             Vector3 EndPos = new Vector3(Pos.x + MaxOseroMove * BanmenObj.YokoLength, 0.0f, Pos.z);
 
             osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos);
