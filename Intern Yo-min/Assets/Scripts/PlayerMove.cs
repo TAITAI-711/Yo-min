@@ -6,6 +6,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Banmen BanmenObj;
     [SerializeField] private GameObject OseroPrefab;
     private Transform BanmenTf;
+    [SerializeField] private Material MaterialWhite;
+    [SerializeField] private Material MaterialBlack;
 
     public enum EnumPlayerType
     {
@@ -17,6 +19,15 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("プレイヤーのコントローラー番号")]
     [SerializeField]
     EnumPlayerType PlayerType = EnumPlayerType.Player1;
+
+    public enum EnumOseroType
+    {
+        White,
+        Black
+    }
+    [Tooltip("プレイヤーのオセロの色")]
+    [SerializeField]
+    EnumOseroType OseroType = EnumOseroType.White;
 
     [Tooltip("プレイヤーの移動量")]
     public float MovePow = 1.0f;
@@ -68,6 +79,15 @@ public class PlayerMove : MonoBehaviour
 
         MaxMovePosZ = BanmenTf.position.z + BanmenTf.localScale.z * 0.5f + 
             gameObject.transform.localScale.z * 0.5f + 0.1f; // 0.1f分余裕もたせる
+
+        if (OseroType == EnumOseroType.White)
+        {
+            gameObject.GetComponent<MeshRenderer>().material = MaterialWhite;
+        }
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().material = MaterialBlack;
+        }
     }
 
     // Update is called once per frame
@@ -159,6 +179,16 @@ public class PlayerMove : MonoBehaviour
 
             // オセロ生成
             GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
+
+            // 色設定
+            if (OseroType == EnumOseroType.White)
+            {
+                osero.GetComponent<MeshRenderer>().material = MaterialWhite;
+            }
+            else
+            {
+                osero.GetComponent<MeshRenderer>().material = MaterialBlack;
+            }
 
             // サイズ設定
             Vector3 OseroSize = osero.transform.localScale;
