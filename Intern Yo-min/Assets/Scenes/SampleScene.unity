@@ -560,8 +560,9 @@ MonoBehaviour:
   MaxMovePow: 100
   DownMovePow: 0.005
   ChargeSpeed: 0.5
-  MaxOseroMove: 3
-  OseroGravity: 9.8
+  OseroShootType: 0
+  MaxOseroMove: 4
+  OseroGravity: 30
   ThrowingAngle: 45
 --- !u!54 &1446206727
 Rigidbody:
@@ -723,6 +724,10 @@ PrefabInstance:
     - target: {fileID: 4019087756554107230, guid: fea935f514ab95240a91605508d52e8f, type: 3}
       propertyPath: DownMovePow
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4019087756554107230, guid: fea935f514ab95240a91605508d52e8f, type: 3}
+      propertyPath: OseroGravity
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4019087756554107231, guid: fea935f514ab95240a91605508d52e8f, type: 3}
       propertyPath: m_AngularDrag
