@@ -12,13 +12,13 @@ public class Banmen : MonoBehaviour
     [HideInInspector] public float TateLength;
     [HideInInspector] public float YokoLength;
 
-    private GameObject[,] Masu;
+    private Masu[,] Masu;
     // Start is called before the first frame update
     void Start()
     {
         Yoko = Tate;
 
-        Masu = new GameObject[Yoko, Tate];
+        Masu = new Masu[Yoko, Tate];
 
         // 計算用変数
 
@@ -33,7 +33,8 @@ public class Banmen : MonoBehaviour
             for (int j = 0; j < Tate; j++)
             {
                 // マス目生成
-                Masu[i, j] = Instantiate(MasuPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+                GameObject Obj = Instantiate(MasuPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+                Masu[i, j] = Obj.GetComponent<Masu>();
 
                 // サイズ設定
                 Vector3 MasuSize = Masu[i, j].transform.localScale;
@@ -58,7 +59,7 @@ public class Banmen : MonoBehaviour
         
     }
 
-    public GameObject GetMasu(Vector3 Pos)
+    public Masu GetMasu(Vector3 Pos)
     {
         int X = 0;
         int Y = 0;

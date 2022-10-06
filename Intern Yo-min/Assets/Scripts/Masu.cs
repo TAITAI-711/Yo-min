@@ -27,7 +27,7 @@ public class Masu : MonoBehaviour
         }
         else
         {
-            Destroy(OseroObj.gameObject);
+            Destroy(OseroObj);
             OseroObj = osero;
             OseroObj.OseroSet(transform.position);
         }

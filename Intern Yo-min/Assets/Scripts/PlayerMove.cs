@@ -6,8 +6,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Banmen BanmenObj;
     [SerializeField] private GameObject OseroPrefab;
     private Transform BanmenTf;
-    [SerializeField] private Material MaterialWhite;
-    [SerializeField] private Material MaterialBlack;
+    [SerializeField] private Material[] OseroMaterials = new Material[4];
 
     public enum EnumPlayerType
     {
@@ -24,7 +23,9 @@ public class PlayerMove : MonoBehaviour
     public enum EnumOseroType
     {
         White,
-        Black
+        Black,
+        Blue,
+        Red
     }
     [Tooltip("プレイヤーのオセロの色")]
     [SerializeField]
@@ -80,17 +81,27 @@ public class PlayerMove : MonoBehaviour
         MaxMovePosZ = BanmenTf.position.z + BanmenTf.localScale.z * 0.5f + 
             gameObject.transform.localScale.z * 0.5f + 0.1f; // 0.1f分余裕もたせる
 
-        if (OseroType == EnumOseroType.White)
+        switch (OseroType)
         {
-            gameObject.GetComponent<MeshRenderer>().material = MaterialWhite;
-        }
-        else
-        {
-            gameObject.GetComponent<MeshRenderer>().material = MaterialBlack;
+            case EnumOseroType.White:
+                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[0];
+                break;
+            case EnumOseroType.Black:
+                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[1];
+                break;
+            case EnumOseroType.Blue:
+                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[2];
+                break;
+            case EnumOseroType.Red:
+                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[3];
+                break;
+            default:
+                break;
         }
 
         // 初期のプレイヤーの向き
         PlayerAngle = BanmenObj.transform.position - transform.position;
+        PlayerAngle = PlayerAngle.normalized;
     }
 
     // Update is called once per frame
@@ -141,7 +152,7 @@ public class PlayerMove : MonoBehaviour
         //スティックの入力が一定以上ない場合は反映されない
         if (Mathf.Abs(Vec.magnitude) > 0.7f)
         {
-            UnityEngine.Debug.Log(Vec.normalized);
+            //UnityEngine.Debug.Log(Vec.normalized);
             PlayerAngle = Vec.normalized;
         }
     }
@@ -190,14 +201,7 @@ public class PlayerMove : MonoBehaviour
             GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
 
             // 色設定
-            if (OseroType == EnumOseroType.White)
-            {
-                osero.GetComponent<MeshRenderer>().material = MaterialWhite;
-            }
-            else
-            {
-                osero.GetComponent<MeshRenderer>().material = MaterialBlack;
-            }
+            osero.GetComponent<Osero>().SetOseroType(OseroType);
 
             // サイズ設定
             Vector3 OseroSize = osero.transform.localScale;

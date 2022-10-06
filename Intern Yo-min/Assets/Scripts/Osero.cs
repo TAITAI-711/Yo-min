@@ -2,20 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static PlayerMove;
 
 public class Osero : MonoBehaviour
 {
+    [SerializeField] private Material[] OseroMaterials = new Material[4];
     private Banmen BanmenObj;       // 盤面オブジェクト
+
     private Vector3 Gravity;        // オセロの重力
     private Vector3 StartPos;       // オセロの開始座標
     private Vector3 EndPos;         // オセロの着地座標
     //private Vector3 MovePow;        // 移動する量(マス目換算:0～3とか)
     private float Angle;            // 射出角度
 
+    private PlayerMove.EnumOseroType OseroType = PlayerMove.EnumOseroType.White;
+
     private Rigidbody Rb;
     private Collider Cd;
 
-    private bool isOseroSet = false;        // 盤上にオセロ固定
+
+
+    private bool isOseroSet = false;        // 盤上にオセロ固定フラグ
 
     //private bool isMove = false;    // 移動開始フラグ
 
@@ -48,7 +56,7 @@ public class Osero : MonoBehaviour
         if (collision.gameObject.CompareTag("Banmen"))
         {
             //Debug.Log("盤面と当たった");
-            BanmenObj.GetMasu(transform.position).GetComponent<Masu>().SetOsero(this);
+            BanmenObj.GetMasu(transform.position).SetOsero(this);
 
             //Destroy(gameObject);
         }
@@ -95,5 +103,28 @@ public class Osero : MonoBehaviour
         Cd.isTrigger = true;
         transform.position = OseroSetPosition;
         transform.rotation = Quaternion.identity;
+    }
+
+    public void SetOseroType(PlayerMove.EnumOseroType oseroType)
+    {
+        OseroType = oseroType;
+
+        switch (OseroType)
+        {
+            case EnumOseroType.White:
+                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[0];
+                break;
+            case EnumOseroType.Black:
+                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[1];
+                break;
+            case EnumOseroType.Blue:
+                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[2];
+                break;
+            case EnumOseroType.Red:
+                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[3];
+                break;
+            default:
+                break;
+        }
     }
 }
