@@ -13,7 +13,8 @@ public class PlayerMove : MonoBehaviour
         Player1,
         Player2,
         Player3,
-        Player4
+        Player4,
+        Player5
     }
     [Header("[ プレイヤー設定 ]")]
     [Tooltip("プレイヤーのコントローラー番号")]
@@ -38,6 +39,9 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("プレイヤーの移動量減少値(空気抵抗値)"), Range(0.1F, 20.0F)]
     public float DownMovePow = 0.1f;
 
+    [Tooltip("プレイヤーのオセロを飛ばすチャージ速度(秒)"), Range(0.1F, 3F)]
+    public float ChargeSpeed = 0.4f;
+
 
     [Header("[ オセロ設定 ]")]
     [Tooltip("オセロの最大飛距離マス数"), Range(1F, 9F)] 
@@ -61,6 +65,10 @@ public class PlayerMove : MonoBehaviour
     // プレイヤーの向き
     private Vector2 PlayerAngle;
 
+    // チャージ用変数
+    //private float ChargePow;
+    //private float NowChargeTime;
+
     // 入力キーの一回判定用
     private bool isKeyDown = false;
 
@@ -70,6 +78,8 @@ public class PlayerMove : MonoBehaviour
         // 初期化
         rb = gameObject.GetComponent<Rigidbody>();
         rb.drag = DownMovePow;
+        //ChargePow = 0.0f;
+        //NowChargeTime = 0.0f;
 
         // 盤面取得
         BanmenTf = BanmenObj.GetComponent<Transform>();
@@ -81,6 +91,7 @@ public class PlayerMove : MonoBehaviour
         MaxMovePosZ = BanmenTf.position.z + BanmenTf.localScale.z * 0.5f + 
             gameObject.transform.localScale.z * 0.5f + 0.1f; // 0.1f分余裕もたせる
 
+        // オセロの種類
         switch (OseroType)
         {
             case EnumOseroType.White:
@@ -102,6 +113,18 @@ public class PlayerMove : MonoBehaviour
         // 初期のプレイヤーの向き
         PlayerAngle = BanmenObj.transform.position - transform.position;
         PlayerAngle = PlayerAngle.normalized;
+
+        // プレイヤー数取得
+        //string[] cName = Input.GetJoystickNames();
+        //var currentConnectionCount = 0;
+        //for (int i = 0; i < cName.Length; i++)
+        //{
+        //    if (cName[i] != "")
+        //    {
+        //        currentConnectionCount++;
+        //    }
+        //}
+        //UnityEngine.Debug.Log(currentConnectionCount);
     }
 
     // Update is called once per frame
@@ -143,6 +166,10 @@ public class PlayerMove : MonoBehaviour
                 Vec.x = Input.GetAxis("Joystick_4_RightAxis_X");
                 Vec.y = -Input.GetAxis("Joystick_4_RightAxis_Y");
                 break;
+            case EnumPlayerType.Player5:
+                Vec.x = Input.GetAxis("Joystick_5_RightAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_5_RightAxis_Y");
+                break;
             default:
                 break;
         }
@@ -181,6 +208,10 @@ public class PlayerMove : MonoBehaviour
                 if (Input.GetAxis("Joystick_4_Button_L2_R2") > 0)
                     isPress = true;
                 break;
+            case EnumPlayerType.Player5:
+                if (Input.GetAxis("Joystick_5_Button_L2_R2") > 0)
+                    isPress = true;
+                break;
             default:
                 break;
         }
@@ -192,6 +223,12 @@ public class PlayerMove : MonoBehaviour
         else if (!isKeyDown)
         {
             isKeyDown = true;
+
+            // チャージ処理
+            //if (NowChargeTime >= ChargeSpeed)
+            //{
+
+            //}
 
             // オセロの生成座標
             Vector3 OseroPos = transform.position;
@@ -281,6 +318,10 @@ public class PlayerMove : MonoBehaviour
             case EnumPlayerType.Player4:
                 Vec.x = Input.GetAxis("Joystick_4_LeftAxis_X");
                 Vec.y = -Input.GetAxis("Joystick_4_LeftAxis_Y");
+                break;
+            case EnumPlayerType.Player5:
+                Vec.x = Input.GetAxis("Joystick_5_LeftAxis_X");
+                Vec.y = -Input.GetAxis("Joystick_5_LeftAxis_Y");
                 break;
             default:
                 break;

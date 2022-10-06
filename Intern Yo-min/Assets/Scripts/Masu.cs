@@ -119,15 +119,15 @@ public class Masu : MonoBehaviour
         // 斜め右上方向
         for (int i = 1; ; i++)
         {
-            Debug.Log("繰り返し中右上");
+            //Debug.Log("繰り返し中右上");
             if (MasuXY.x + i > BanmenObj.Yoko - 1 || MasuXY.y - i < 0)
             {
-                Debug.Log("抜けた範囲外");
+                //Debug.Log("抜けた範囲外");
                 break;
             }
             else if (BanmenObj.Masu[MasuXY.x + i, MasuXY.y - i].OseroObj == null)
             {
-                Debug.Log("抜けたnull");
+                //Debug.Log("抜けたnull");
                 break;
             }
             else if (BanmenObj.Masu[MasuXY.x + i, MasuXY.y - i].OseroObj.GetOseroType() == MyOseroType)
@@ -136,11 +136,11 @@ public class Masu : MonoBehaviour
                 {
                     BanmenObj.Masu[MasuXY.x + j, MasuXY.y - j].OseroObj.SetOseroType(MyOseroType);
                 }
-                Debug.Log("抜けた同じコマ");
+                //Debug.Log("抜けた同じコマ");
                 break;
             }
         }
-        Debug.Log("繰り返し終わり");
+        //Debug.Log("繰り返し終わり");
 
         // 斜め右下方向
         for (int i = 1; ; i++)
