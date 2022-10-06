@@ -56,7 +56,8 @@ public class Osero : MonoBehaviour
         if (collision.gameObject.CompareTag("Banmen"))
         {
             //Debug.Log("盤面と当たった");
-            BanmenObj.GetMasu(transform.position).SetOsero(this);
+            Masu masu = BanmenObj.GetMasu(transform.position);
+            masu.SetOsero(this);
 
             //Destroy(gameObject);
         }
@@ -126,5 +127,10 @@ public class Osero : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public EnumOseroType GetOseroType()
+    {
+        return OseroType;
     }
 }

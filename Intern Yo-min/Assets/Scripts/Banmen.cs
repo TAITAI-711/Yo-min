@@ -6,17 +6,17 @@ public class Banmen : MonoBehaviour
 {
     [SerializeField] private GameObject MasuPrefab;
 
-    public int Tate = 9;
-    private int Yoko;
+    [Range(1, 20)] public int Tate = 9;
+    [Range(1, 20)] public int Yoko = 9;
 
     [HideInInspector] public float TateLength;
     [HideInInspector] public float YokoLength;
 
-    private Masu[,] Masu;
+    public Masu[,] Masu;
     // Start is called before the first frame update
     void Start()
     {
-        Yoko = Tate;
+        //Yoko = Tate;
 
         Masu = new Masu[Yoko, Tate];
 
@@ -35,6 +35,8 @@ public class Banmen : MonoBehaviour
                 // マス目生成
                 GameObject Obj = Instantiate(MasuPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
                 Masu[i, j] = Obj.GetComponent<Masu>();
+                Masu[i, j].BanmenObj = this;
+                Masu[i, j].MasuXY = new Vector2Int(i, j);
 
                 // サイズ設定
                 Vector3 MasuSize = Masu[i, j].transform.localScale;

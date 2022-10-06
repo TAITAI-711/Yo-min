@@ -31,18 +31,18 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     EnumOseroType OseroType = EnumOseroType.White;
 
-    [Tooltip("プレイヤーの移動量")]
+    [Tooltip("プレイヤーの移動量"), Range(1F, 30F)]
     public float MovePow = 1.0f;
-    [Tooltip("プレイヤーの最大移動量")]
+    [Tooltip("プレイヤーの最大移動量"), Range(10F, 100F)]
     public float MaxMovePow = 10.0f;
-    [Tooltip("プレイヤーの移動量減少値(空気抵抗値)")]
+    [Tooltip("プレイヤーの移動量減少値(空気抵抗値)"), Range(0.1F, 20.0F)]
     public float DownMovePow = 0.1f;
 
 
     [Header("[ オセロ設定 ]")]
-    [Tooltip("オセロの最大飛距離マス数")] 
+    [Tooltip("オセロの最大飛距離マス数"), Range(1F, 9F)] 
     public float MaxOseroMove = 3.0f;    // オセロの最大飛距離マス数
-    [Tooltip("オセロの重力")] 
+    [Tooltip("オセロの重力"), Range(1F, 100F)] 
     public float OseroGravity = 9.8f;    // オセロの重力
 
     [SerializeField, Range(5F, 85F), Tooltip("射出する角度")]
