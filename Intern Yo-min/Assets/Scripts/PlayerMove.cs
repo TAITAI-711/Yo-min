@@ -215,6 +215,31 @@ public class PlayerMove : MonoBehaviour
                 }
                 break;
             case EnumOseroShootType.Type3:
+                switch (PlayerType)
+                    {
+                        case EnumPlayerType.Player1:
+                            Vec.x = Input.GetAxis("Joystick_1_LeftAxis_X");
+                            Vec.y = -Input.GetAxis("Joystick_1_LeftAxis_Y");
+                            break;
+                        case EnumPlayerType.Player2:
+                            Vec.x = Input.GetAxis("Joystick_2_LeftAxis_X");
+                            Vec.y = -Input.GetAxis("Joystick_2_LeftAxis_Y");
+                            break;
+                        case EnumPlayerType.Player3:
+                            Vec.x = Input.GetAxis("Joystick_3_LeftAxis_X");
+                            Vec.y = -Input.GetAxis("Joystick_3_LeftAxis_Y");
+                            break;
+                        case EnumPlayerType.Player4:
+                            Vec.x = Input.GetAxis("Joystick_4_LeftAxis_X");
+                            Vec.y = -Input.GetAxis("Joystick_4_LeftAxis_Y");
+                            break;
+                        case EnumPlayerType.Player5:
+                            Vec.x = Input.GetAxis("Joystick_5_LeftAxis_X");
+                            Vec.y = -Input.GetAxis("Joystick_5_LeftAxis_Y");
+                            break;
+                        default:
+                            break;
+                    }
                 break;
             default:
                 break;
@@ -371,6 +396,7 @@ public class PlayerMove : MonoBehaviour
         {
             case EnumOseroShootType.Type1:
             case EnumOseroShootType.Type2:
+            case EnumOseroShootType.Type3:
                 if (OseroShootType == EnumOseroShootType.Type2 && isPress) 
                     break;
 
@@ -399,8 +425,6 @@ public class PlayerMove : MonoBehaviour
                     default:
                         break;
                 }
-                break;
-            case EnumOseroShootType.Type3:
                 break;
             default:
                 break;

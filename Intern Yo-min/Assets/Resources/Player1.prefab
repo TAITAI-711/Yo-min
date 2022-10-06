@@ -137,7 +137,7 @@ MonoBehaviour:
   PlayerType: 0
   OseroType: 0
   MovePow: 0.2
-  MaxMovePow: 100
+  MaxMovePow: 50
   DownMovePow: 0.05
   ChargeSpeed: 0.5
   OseroShootType: 0
