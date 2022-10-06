@@ -32,12 +32,12 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     EnumOseroType OseroType = EnumOseroType.White;
 
-    [Tooltip("プレイヤーの移動量"), Range(1F, 30F)]
-    public float MovePow = 1.0f;
-    [Tooltip("プレイヤーの最大移動量"), Range(10F, 100F)]
+    [Tooltip("プレイヤーの移動量(何秒で最大速度に達するか)"), Range(0.05F, 3.0F)]
+    public float MovePow = 0.2f;
+    [Tooltip("プレイヤーの最大移動量(1秒間に動く距離)"), Range(10.0F, 500.0F)]
     public float MaxMovePow = 10.0f;
-    [Tooltip("プレイヤーの移動量減少値(空気抵抗値)"), Range(0.1F, 20.0F)]
-    public float DownMovePow = 0.1f;
+    [Tooltip("プレイヤーの移動量減少値(入力していない時の抵抗値)"), Range(0.0001F, 0.05F)]
+    public float DownMovePow = 0.05f;
 
     [Tooltip("プレイヤーのオセロを飛ばすチャージ速度(秒)"), Range(0.1F, 3F)]
     public float ChargeSpeed = 0.5f;
@@ -77,7 +77,6 @@ public class PlayerMove : MonoBehaviour
     {
         // 初期化
         rb = gameObject.GetComponent<Rigidbody>();
-        rb.drag = DownMovePow;
         ChargePow = 0.0f;
         NowChargeTime = 0.0f;
 
@@ -299,8 +298,8 @@ public class PlayerMove : MonoBehaviour
     private void PlayerMovePow()
     {
         // 力を加える処理
-        Vector3 Vel = rb.velocity; // ベロシティ
-        float Pow = MovePow;
+        Vector3 Vel = rb.velocity;  // ベロシティ
+        float Pow = MaxMovePow / MovePow;        // 1秒間で加える量
 
         //if (Input.GetKey(KeyCode.W))
         //{
@@ -349,17 +348,34 @@ public class PlayerMove : MonoBehaviour
         //Debug.Log("X:" + Input.GetAxis("Joystick_1_LeftAxis_X"));
         //Debug.Log("Y:" + -Input.GetAxis("Joystick_1_LeftAxis_Y"));
 
-        Vec.Normalize();
 
-        // 移動量加える
-        Vel.x += Pow * Vec.x;
-        Vel.z += Pow * Vec.y;
+        // 入力していたら
+        if (Vec.x != 0 || Vec.y != 0)
+        {
+            Vec.Normalize();
 
-        // 最大移動量超えたら戻す
-        if (Vel.x > MaxMovePow) Vel.x = MaxMovePow;
-        if (Vel.x < -MaxMovePow) Vel.x = -MaxMovePow;
-        if (Vel.z > MaxMovePow) Vel.z = MaxMovePow;
-        if (Vel.z < -MaxMovePow) Vel.z = -MaxMovePow;
+            // 移動量加える
+            Vel.x += Pow * Vec.x * Time.deltaTime;
+            Vel.z += Pow * Vec.y * Time.deltaTime;
+
+            // 最大移動量超えたら戻す
+            if (Vel.x > MaxMovePow) Vel.x = MaxMovePow;
+            if (Vel.x < -MaxMovePow) Vel.x = -MaxMovePow;
+            if (Vel.z > MaxMovePow) Vel.z = MaxMovePow;
+            if (Vel.z < -MaxMovePow) Vel.z = -MaxMovePow;
+        }
+        // 入力していなかったら
+        else
+        {
+            if (Vel.magnitude < 0.01f) // 一定量以下は止まる
+            {
+                Vel = Vector3.zero;
+            }
+            else
+            {
+                Vel *= 1.0f - DownMovePow;
+            }
+        }
 
         rb.velocity = Vel; // 移動量変更
     }
