@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
         Player3,
         Player4
     }
+    [Header("[ プレイヤー設定 ]")]
     [Tooltip("プレイヤーのコントローラー番号")]
     [SerializeField]
     EnumPlayerType PlayerType = EnumPlayerType.Player1;
@@ -36,6 +37,8 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("プレイヤーの移動量減少値(空気抵抗値)")]
     public float DownMovePow = 0.1f;
 
+
+    [Header("[ オセロ設定 ]")]
     [Tooltip("オセロの最大飛距離マス数")] 
     public float MaxOseroMove = 3.0f;    // オセロの最大飛距離マス数
     [Tooltip("オセロの重力")] 
@@ -68,10 +71,7 @@ public class PlayerMove : MonoBehaviour
         rb.drag = DownMovePow;
 
         // 盤面取得
-        if (BanmenObj != null)
-        {
-            BanmenTf = BanmenObj.GetComponent<Transform>();
-        }
+        BanmenTf = BanmenObj.GetComponent<Transform>();
 
         // 最大移動距離
         MaxMovePosX = BanmenTf.position.x + BanmenTf.localScale.x * 0.5f + 
@@ -88,6 +88,9 @@ public class PlayerMove : MonoBehaviour
         {
             gameObject.GetComponent<MeshRenderer>().material = MaterialBlack;
         }
+
+        // 初期のプレイヤーの向き
+        PlayerAngle = BanmenObj.transform.position - transform.position;
     }
 
     // Update is called once per frame
@@ -109,7 +112,7 @@ public class PlayerMove : MonoBehaviour
     // プレイヤーがオセロを飛ばす向きの処理
     private void PlayerShootAngle()
     {
-        Vector2 Vec = new Vector2();
+        Vector2 Vec = new Vector2(0, 0);
 
         switch (PlayerType)
         {
@@ -135,8 +138,14 @@ public class PlayerMove : MonoBehaviour
 
         //UnityEngine.Debug.Log(Vec);
 
-        PlayerAngle = Vec.normalized;
+        //スティックの入力が一定以上ない場合は反映されない
+        if (Mathf.Abs(Vec.magnitude) > 0.7f)
+        {
+            UnityEngine.Debug.Log(Vec.normalized);
+            PlayerAngle = Vec.normalized;
+        }
     }
+
 
     // オセロ飛ばす処理
     private void PlayerShootOsero()
