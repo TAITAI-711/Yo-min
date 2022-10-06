@@ -252,8 +252,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BanmenObj: {fileID: 736655659}
   OseroPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
-  MaterialWhite: {fileID: 2100000, guid: 5ec4964c6a7faa446801ebd0c126c5e6, type: 2}
-  MaterialBlack: {fileID: 2100000, guid: 8f1788a95ddadbb4ba20c4131ee9a581, type: 2}
+  OseroMaterials:
+  - {fileID: 2100000, guid: 5ec4964c6a7faa446801ebd0c126c5e6, type: 2}
+  - {fileID: 2100000, guid: 8f1788a95ddadbb4ba20c4131ee9a581, type: 2}
+  - {fileID: 2100000, guid: 13e3e31bb073bea43acc3508a6938736, type: 2}
+  - {fileID: 2100000, guid: 853a8cff5f324eb4aba0521c4e0552c8, type: 2}
   PlayerType: 0
   OseroType: 0
   MovePow: 8
@@ -687,8 +690,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BanmenObj: {fileID: 736655659}
   OseroPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
-  MaterialWhite: {fileID: 2100000, guid: 5ec4964c6a7faa446801ebd0c126c5e6, type: 2}
-  MaterialBlack: {fileID: 2100000, guid: 8f1788a95ddadbb4ba20c4131ee9a581, type: 2}
+  OseroMaterials:
+  - {fileID: 2100000, guid: 5ec4964c6a7faa446801ebd0c126c5e6, type: 2}
+  - {fileID: 2100000, guid: 8f1788a95ddadbb4ba20c4131ee9a581, type: 2}
+  - {fileID: 2100000, guid: 13e3e31bb073bea43acc3508a6938736, type: 2}
+  - {fileID: 2100000, guid: 853a8cff5f324eb4aba0521c4e0552c8, type: 2}
   PlayerType: 1
   OseroType: 1
   MovePow: 5
