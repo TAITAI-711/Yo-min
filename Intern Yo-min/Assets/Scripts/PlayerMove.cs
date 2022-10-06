@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
     public float DownMovePow = 0.1f;
 
     [Tooltip("プレイヤーのオセロを飛ばすチャージ速度(秒)"), Range(0.1F, 3F)]
-    public float ChargeSpeed = 0.4f;
+    public float ChargeSpeed = 0.5f;
 
 
     [Header("[ オセロ設定 ]")]
@@ -66,8 +66,8 @@ public class PlayerMove : MonoBehaviour
     private Vector2 PlayerAngle;
 
     // チャージ用変数
-    //private float ChargePow;
-    //private float NowChargeTime;
+    private float ChargePow;
+    private float NowChargeTime;
 
     // 入力キーの一回判定用
     private bool isKeyDown = false;
@@ -78,8 +78,8 @@ public class PlayerMove : MonoBehaviour
         // 初期化
         rb = gameObject.GetComponent<Rigidbody>();
         rb.drag = DownMovePow;
-        //ChargePow = 0.0f;
-        //NowChargeTime = 0.0f;
+        ChargePow = 0.0f;
+        NowChargeTime = 0.0f;
 
         // 盤面取得
         BanmenTf = BanmenObj.GetComponent<Transform>();
@@ -218,39 +218,58 @@ public class PlayerMove : MonoBehaviour
 
         if (!isPress)
         {
+            if (isKeyDown)
+            {
+                // オセロの生成座標
+                Vector3 OseroPos = transform.position;
+                OseroPos.y += 5.0f;
+
+                // オセロ生成
+                GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
+
+                // 色設定
+                osero.GetComponent<Osero>().SetOseroType(OseroType);
+
+                // サイズ設定
+                Vector3 OseroSize = osero.transform.localScale;
+                OseroSize.x = BanmenObj.YokoLength - OseroScaleDown;
+                OseroSize.y = 1.0f;
+                OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
+                osero.transform.localScale = OseroSize;
+
+                // 着地座標
+                Vector3 EndPos = new Vector3
+                    (
+                        OseroPos.x + PlayerAngle.x * MaxOseroMove * BanmenObj.YokoLength * ChargePow,
+                        0.0f, 
+                        OseroPos.z + PlayerAngle.y * MaxOseroMove * BanmenObj.TateLength * ChargePow
+                    );
+
+                osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos);
+
+                // チャージ終了
+                NowChargeTime = 0.0f;
+                ChargePow = 0.0f;
+            }
+
             isKeyDown = false;
         }
-        else if (!isKeyDown)
+        else
         {
             isKeyDown = true;
 
             // チャージ処理
-            //if (NowChargeTime >= ChargeSpeed)
-            //{
+            NowChargeTime += Time.deltaTime;
 
-            //}
-
-            // オセロの生成座標
-            Vector3 OseroPos = transform.position;
-            OseroPos.y += 5.0f;
-
-            // オセロ生成
-            GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
-
-            // 色設定
-            osero.GetComponent<Osero>().SetOseroType(OseroType);
-
-            // サイズ設定
-            Vector3 OseroSize = osero.transform.localScale;
-            OseroSize.x = BanmenObj.YokoLength - OseroScaleDown;
-            OseroSize.y = 1.0f;
-            OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
-            osero.transform.localScale = OseroSize;
-
-            // 着地座標
-            Vector3 EndPos = new Vector3(OseroPos.x + PlayerAngle.x * MaxOseroMove * BanmenObj.YokoLength, 0.0f, OseroPos.z + PlayerAngle.y * MaxOseroMove * BanmenObj.TateLength);
-
-            osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos);
+            if (NowChargeTime > ChargeSpeed)
+            {
+                ChargePow = 1.0f;
+            }
+            else
+            {
+                ChargePow = NowChargeTime / ChargeSpeed;
+            }
+            UnityEngine.Debug.Log(ChargePow);
         }
     }
 

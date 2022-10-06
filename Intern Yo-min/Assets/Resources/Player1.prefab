@@ -139,6 +139,7 @@ MonoBehaviour:
   MovePow: 8
   MaxMovePow: 50
   DownMovePow: 8
+  ChargeSpeed: 0.5
   MaxOseroMove: 3
   OseroGravity: 9.8
   ThrowingAngle: 45
