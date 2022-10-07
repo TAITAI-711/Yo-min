@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private GameObject OseroPrefab;
     private Transform BanmenTf;
     [SerializeField] private Material[] OseroMaterials = new Material[4];
+    [SerializeField] private UI_Osero UIOseroColorObj;
 
     public enum EnumPlayerType
     {
@@ -55,7 +56,7 @@ public class PlayerMove : MonoBehaviour
     [Header("[ オセロ設定 ]")]
     [Tooltip("オセロの最大飛距離マス数"), Range(1F, 9F)] 
     public float MaxOseroMove = 3.0f;    // オセロの最大飛距離マス数
-    [Tooltip("オセロの重力"), Range(1F, 100F)] 
+    [Tooltip("オセロの重力"), Range(1F, 200F)] 
     public float OseroGravity = 9.8f;    // オセロの重力
 
     [SerializeField, Range(5F, 85F), Tooltip("射出する角度")]
@@ -105,23 +106,26 @@ public class PlayerMove : MonoBehaviour
             + 0.1f; // 0.1f分余裕もたせる
 
         // オセロの種類
+        MeshRenderer Mr = gameObject.GetComponent<MeshRenderer>();
+
         switch (OseroType)
         {
             case EnumOseroType.White:
-                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[0];
+                Mr.material = OseroMaterials[0];
                 break;
             case EnumOseroType.Black:
-                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[1];
+                Mr.material = OseroMaterials[1];
                 break;
             case EnumOseroType.Blue:
-                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[2];
+                Mr.material = OseroMaterials[2];
                 break;
             case EnumOseroType.Red:
-                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[3];
+                Mr.material = OseroMaterials[3];
                 break;
             default:
                 break;
         }
+        UIOseroColorObj.UIOseroColorSet(Mr.material.color, OseroType);
 
         // 初期のプレイヤーの向き
         PlayerAngle = BanmenObj.transform.position - transform.position;
