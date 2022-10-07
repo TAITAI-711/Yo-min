@@ -114,7 +114,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &4019087756554107230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   MaxMovePow: 50
   DownMovePow: 0.05
   ChargeSpeed: 0.5
+  ReChargeTime: 0.5
   OseroShootType: 0
   MaxOseroMove: 4
   OseroGravity: 30

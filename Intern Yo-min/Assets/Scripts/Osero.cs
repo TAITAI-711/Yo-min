@@ -48,7 +48,10 @@ public class Osero : MonoBehaviour
         if (!isOseroSet)
         {
             Rb.AddForce(Gravity, ForceMode.Acceleration);
-        }           
+
+            if (transform.position.y < -50.0f)
+                Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

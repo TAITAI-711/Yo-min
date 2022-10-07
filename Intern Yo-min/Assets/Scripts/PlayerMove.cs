@@ -40,6 +40,8 @@ public class PlayerMove : MonoBehaviour
     public float DownMovePow = 0.05f;
     [Tooltip("プレイヤーのオセロを飛ばすチャージ速度(秒)"), Range(0.1F, 3F)]
     public float ChargeSpeed = 0.5f;
+    [Tooltip("オセロ飛ばしの再使用時間(秒)"), Range(0.0F, 3.0F)]
+    public float ReChargeTime = 0.5f;
     public enum EnumOseroShootType
     {
         Type1,
@@ -75,6 +77,7 @@ public class PlayerMove : MonoBehaviour
     // チャージ用変数
     private float ChargePow;
     private float NowChargeTime;
+    private float NowReChargeTime;
 
     // 入力キーの一回判定用
     bool isPress = false;           // 現在押されているか
@@ -87,16 +90,19 @@ public class PlayerMove : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         ChargePow = 0.0f;
         NowChargeTime = 0.0f;
+        NowReChargeTime = 0.0f;
 
         // 盤面取得
         BanmenTf = BanmenObj.GetComponent<Transform>();
 
         // 最大移動距離
         MaxMovePosX = BanmenTf.position.x + BanmenTf.localScale.x * 0.5f + 
-            gameObject.transform.localScale.x * 0.5f + 0.1f; // 0.1f分余裕もたせる
+            gameObject.transform.localScale.x * 0.5f + gameObject.transform.localScale.x * 2.0f
+            + 0.1f; // 0.1f分余裕もたせる
 
         MaxMovePosZ = BanmenTf.position.z + BanmenTf.localScale.z * 0.5f + 
-            gameObject.transform.localScale.z * 0.5f + 0.1f; // 0.1f分余裕もたせる
+            gameObject.transform.localScale.z * 0.5f + gameObject.transform.localScale.z * 2.0f
+            + 0.1f; // 0.1f分余裕もたせる
 
         // オセロの種類
         switch (OseroType)
@@ -261,6 +267,10 @@ public class PlayerMove : MonoBehaviour
     {
         isPress = false;
 
+        // 再使用時間更新
+        if (NowReChargeTime > 0.0f)
+            NowReChargeTime -= Time.deltaTime;
+
         switch (PlayerType)
         {
             case EnumPlayerType.Player1:
@@ -312,7 +322,7 @@ public class PlayerMove : MonoBehaviour
                 Vector3 EndPos = new Vector3
                     (
                         OseroPos.x + PlayerAngle.x * MaxOseroMove * BanmenObj.YokoLength * ChargePow,
-                        0.0f, 
+                        BanmenObj.transform.position.y + 0.5f, 
                         OseroPos.z + PlayerAngle.y * MaxOseroMove * BanmenObj.TateLength * ChargePow
                     );
 
@@ -321,11 +331,12 @@ public class PlayerMove : MonoBehaviour
                 // チャージ終了
                 NowChargeTime = 0.0f;
                 ChargePow = 0.0f;
+                NowReChargeTime = ReChargeTime;
             }
 
             isOldPress = false;
         }
-        else
+        else if (NowReChargeTime <= 0.0f)
         {
             isOldPress = true;
 
