@@ -15,7 +15,9 @@ public class PlayerMove : MonoBehaviour
         Player2,
         Player3,
         Player4,
-        Player5
+        Player5,
+        Player6,
+        Player7
     }
     [Header("[ プレイヤー設定 ]")]
     [Tooltip("プレイヤーのコントローラー番号")]
@@ -147,17 +149,25 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // プレイヤーの移動処理
-        PlayerMovePow();
+        if (GamePlayManager.Instance.isGamePlay)
+        {
+            // プレイヤーの移動処理
+            PlayerMovePow();
 
-        // プレイヤーの移動座標の固定処理
-        PlayerMoveMax();
+            // プレイヤーの移動座標の固定処理
+            PlayerMoveMax();
 
-        // プレイヤーがオセロを飛ばす向きの処理
-        PlayerShootAngle();
+            // プレイヤーがオセロを飛ばす向きの処理
+            PlayerShootAngle();
 
-        // オセロ飛ばす処理
-        PlayerShootOsero();
+            // オセロ飛ばす処理
+            PlayerShootOsero();
+        }
+        else
+        {
+            // プレイヤーの移動座標の固定処理
+            PlayerMoveMax();
+        }
     }
 
     // プレイヤーがオセロを飛ばす向きの処理
@@ -190,6 +200,14 @@ public class PlayerMove : MonoBehaviour
                         Vec.x = Input.GetAxis("Joystick_5_RightAxis_X");
                         Vec.y = -Input.GetAxis("Joystick_5_RightAxis_Y");
                         break;
+                    case EnumPlayerType.Player6:
+                        Vec.x = Input.GetAxis("Joystick_6_RightAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_6_RightAxis_Y");
+                        break;
+                    case EnumPlayerType.Player7:
+                        Vec.x = Input.GetAxis("Joystick_7_RightAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_7_RightAxis_Y");
+                        break;
                     default:
                         break;
                 }
@@ -219,6 +237,14 @@ public class PlayerMove : MonoBehaviour
                             Vec.x = Input.GetAxis("Joystick_5_LeftAxis_X");
                             Vec.y = -Input.GetAxis("Joystick_5_LeftAxis_Y");
                             break;
+                        case EnumPlayerType.Player6:
+                            Vec.x = Input.GetAxis("Joystick_6_LeftAxis_X");
+                            Vec.y = -Input.GetAxis("Joystick_6_LeftAxis_Y");
+                            break;
+                        case EnumPlayerType.Player7:
+                            Vec.x = Input.GetAxis("Joystick_7_LeftAxis_X");
+                            Vec.y = -Input.GetAxis("Joystick_7_LeftAxis_Y");
+                            break;
                         default:
                             break;
                     }
@@ -226,30 +252,38 @@ public class PlayerMove : MonoBehaviour
                 break;
             case EnumOseroShootType.Type3:
                 switch (PlayerType)
-                    {
-                        case EnumPlayerType.Player1:
-                            Vec.x = Input.GetAxis("Joystick_1_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_1_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player2:
-                            Vec.x = Input.GetAxis("Joystick_2_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_2_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player3:
-                            Vec.x = Input.GetAxis("Joystick_3_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_3_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player4:
-                            Vec.x = Input.GetAxis("Joystick_4_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_4_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player5:
-                            Vec.x = Input.GetAxis("Joystick_5_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_5_LeftAxis_Y");
-                            break;
-                        default:
-                            break;
-                    }
+                {
+                    case EnumPlayerType.Player1:
+                        Vec.x = Input.GetAxis("Joystick_1_LeftAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_1_LeftAxis_Y");
+                        break;
+                    case EnumPlayerType.Player2:
+                        Vec.x = Input.GetAxis("Joystick_2_LeftAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_2_LeftAxis_Y");
+                        break;
+                    case EnumPlayerType.Player3:
+                        Vec.x = Input.GetAxis("Joystick_3_LeftAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_3_LeftAxis_Y");
+                        break;
+                    case EnumPlayerType.Player4:
+                        Vec.x = Input.GetAxis("Joystick_4_LeftAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_4_LeftAxis_Y");
+                        break;
+                    case EnumPlayerType.Player5:
+                        Vec.x = Input.GetAxis("Joystick_5_LeftAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_5_LeftAxis_Y");
+                        break;
+                    case EnumPlayerType.Player6:
+                        Vec.x = Input.GetAxis("Joystick_6_LeftAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_6_LeftAxis_Y");
+                        break;
+                    case EnumPlayerType.Player7:
+                        Vec.x = Input.GetAxis("Joystick_7_LeftAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_7_LeftAxis_Y");
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
@@ -295,6 +329,14 @@ public class PlayerMove : MonoBehaviour
                 break;
             case EnumPlayerType.Player5:
                 if (Input.GetAxis("Joystick_5_Button_L2_R2") > 0)
+                    isPress = true;
+                break;
+            case EnumPlayerType.Player6:
+                if (Input.GetAxis("Joystick_6_Button_L2_R2") > 0)
+                    isPress = true;
+                break;
+            case EnumPlayerType.Player7:
+                if (Input.GetAxis("Joystick_7_Button_L2_R2") > 0)
                     isPress = true;
                 break;
             default:
@@ -355,7 +397,7 @@ public class PlayerMove : MonoBehaviour
             {
                 ChargePow = NowChargeTime / ChargeSpeed;
             }
-            UnityEngine.Debug.Log(ChargePow);
+            //UnityEngine.Debug.Log(ChargePow);
         }
     }
 
@@ -436,6 +478,14 @@ public class PlayerMove : MonoBehaviour
                     case EnumPlayerType.Player5:
                         Vec.x = Input.GetAxis("Joystick_5_LeftAxis_X");
                         Vec.y = -Input.GetAxis("Joystick_5_LeftAxis_Y");
+                        break;
+                    case EnumPlayerType.Player6:
+                        Vec.x = Input.GetAxis("Joystick_6_LeftAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_6_LeftAxis_Y");
+                        break;
+                    case EnumPlayerType.Player7:
+                        Vec.x = Input.GetAxis("Joystick_7_LeftAxis_X");
+                        Vec.y = -Input.GetAxis("Joystick_7_LeftAxis_Y");
                         break;
                     default:
                         break;

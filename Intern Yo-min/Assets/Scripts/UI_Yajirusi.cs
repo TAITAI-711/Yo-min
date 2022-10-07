@@ -42,7 +42,7 @@ public class UI_Yajirusi : MonoBehaviour
         float Angle = Calculation.TwoPointAngle360(Vector2.right, PlayerObj.PlayerAngle);
         Angle -= 180.0f;
         Angle *= 2.0f;
-        Debug.Log(Angle);
+        //Debug.Log(Angle);
         VecQuaternion Vq = Calculation.PointRotate(PlayerObj.transform.position, Pos, Angle, Vector3.up);
         transform.position = Vq.Pos;
 

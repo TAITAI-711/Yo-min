@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8674943875363425806}
   - component: {fileID: 5750055398316163499}
   - component: {fileID: 7505455085709899105}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Yajirusi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
