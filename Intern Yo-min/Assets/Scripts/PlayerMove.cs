@@ -76,9 +76,9 @@ public class PlayerMove : MonoBehaviour
     [HideInInspector] public Vector2 PlayerAngle;
 
     // チャージ用変数
-    private float ChargePow;
+    [HideInInspector] public float ChargePow;
     private float NowChargeTime;
-    private float NowReChargeTime;
+    [HideInInspector] public float NowReChargeTime;
 
     // 入力キーの一回判定用
     bool isPress = false;           // 現在押されているか
