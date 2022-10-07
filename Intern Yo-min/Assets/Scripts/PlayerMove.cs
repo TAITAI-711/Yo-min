@@ -60,7 +60,7 @@ public class PlayerMove : MonoBehaviour
     public float OseroGravity = 9.8f;    // オセロの重力
 
     [SerializeField, Range(5F, 85F), Tooltip("射出する角度")]
-    private float ThrowingAngle;
+    public float ThrowingAngle;
 
     private Rigidbody rb;
 
@@ -73,7 +73,7 @@ public class PlayerMove : MonoBehaviour
     private float MaxMovePosZ = 0;
 
     // プレイヤーの向き
-    private Vector2 PlayerAngle;
+    [HideInInspector] public Vector2 PlayerAngle;
 
     // チャージ用変数
     private float ChargePow;
