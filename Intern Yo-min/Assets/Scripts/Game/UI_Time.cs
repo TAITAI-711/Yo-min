@@ -25,33 +25,36 @@ public class UI_Time : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-            NowTime -= 10.0f;
-        if (NowTime > 0.0f)
+        if (GamePlayManager.Instance.isGamePlay)
         {
-            // ゲームの時間表示
-            if (((int)(NowTime % 60.0f)) < 10)
+            if (Input.GetKeyDown(KeyCode.W))
+                NowTime -= 10.0f;
+            if (NowTime > 0.0f)
             {
-                TimeObj.text = ((int)(NowTime / 60)).ToString() + ":" + "0" + ((int)(NowTime % 60.0f));
+                // ゲームの時間表示
+                if (((int)(NowTime % 60.0f)) < 10)
+                {
+                    TimeObj.text = ((int)(NowTime / 60)).ToString() + ":" + "0" + ((int)(NowTime % 60.0f));
+                }
+                else
+                {
+                    TimeObj.text = ((int)(NowTime / 60)).ToString() + ":" + ((int)(NowTime % 60.0f));
+                }
+
+                // 時間更新
+                NowTime -= Time.deltaTime;
             }
-            else
+
+            if (NowTime <= 0.0f)
             {
-                TimeObj.text = ((int)(NowTime / 60)).ToString() + ":" + ((int)(NowTime % 60.0f));
+                GamePlayManager.Instance.isGamePlay = false;
+                NowTime = 0.0f;
+
+                // ゲームの時間表示
+                //TimeObj.text = ((int)(NowTime / 60)).ToString() + ":" + ((int)(NowTime % 60.0f));
+                TimeObj.fontSize = 90;
+                TimeObj.text = "GameSet";
             }
-
-            // 時間更新
-            NowTime -= Time.deltaTime;
-        }
-
-        if (NowTime <= 0.0f && GamePlayManager.Instance.isGamePlay)
-        {
-            GamePlayManager.Instance.isGamePlay = false;
-            NowTime = 0.0f;
-
-            // ゲームの時間表示
-            //TimeObj.text = ((int)(NowTime / 60)).ToString() + ":" + ((int)(NowTime % 60.0f));
-            TimeObj.fontSize = 90;
-            TimeObj.text = "GameSet";
         }
     }
 }

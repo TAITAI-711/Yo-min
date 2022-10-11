@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 {
-    [ReadOnly] public bool isGamePlay = true;
+    [ReadOnly] public bool isGamePlay = false;
+    [ReadOnly] public bool isGamePadOK = false;
     public BanmenManager BanmenManagerObj = null;
+    public UI_GamePadSelect GamePadSelectObj = null;
 
 
     private void Awake()
@@ -15,12 +17,15 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
             return;
         }
         DontDestroyOnLoad(this.gameObject); // ÉVÅ[ÉìÇ™ïœÇÌÇ¡ÇƒÇ‡éÄÇ»Ç»Ç¢
+
+        isGamePlay = false;
+        isGamePadOK = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        isGamePlay = true;
+        
     }
 
     // Update is called once per frame

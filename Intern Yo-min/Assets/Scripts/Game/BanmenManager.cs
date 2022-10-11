@@ -8,7 +8,7 @@ public class BanmenManager : MonoBehaviour
 
     // Start is called before the first frame update
 
-    void Start()
+    private void Awake()
     {
         BanmenObj = GetComponentsInChildren<Banmen>();
 
@@ -18,5 +18,10 @@ public class BanmenManager : MonoBehaviour
         //{
         //    Debug.Log(obj);
         //}
+    }
+
+    void Start()
+    {
+        
     }
 }

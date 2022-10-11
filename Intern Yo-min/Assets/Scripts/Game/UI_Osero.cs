@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UI_Osero : MonoBehaviour
 {
     [SerializeField] private GameObject OseroNum;
-    [SerializeField] private BanmenManager BanmenManagerObj;
+    //[SerializeField] private BanmenManager BanmenManagerObj;
     private TextMeshProUGUI NumText;
 
     private PlayerMove.EnumOseroType OseroType = PlayerMove.EnumOseroType.White;
@@ -23,7 +23,7 @@ public class UI_Osero : MonoBehaviour
     void Update()
     {
         int num = 0;
-        foreach (var obj in BanmenManagerObj.BanmenObj)
+        foreach (var obj in GamePlayManager.Instance.BanmenManagerObj.BanmenObj)
         {
             num += obj.GetOseroNum(OseroType);
         }

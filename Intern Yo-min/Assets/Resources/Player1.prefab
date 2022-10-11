@@ -145,7 +145,7 @@ MonoBehaviour:
   ChargeSpeed: 0.5
   ReChargeTime: 0.5
   OseroShootType: 0
-  MaxOseroMove: 4
+  MaxOseroMove: 5
   OseroGravity: 100
   ThrowingAngle: 45
   PlayerAngle: {x: 0, y: 0}

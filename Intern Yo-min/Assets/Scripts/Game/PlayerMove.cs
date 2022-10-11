@@ -11,13 +11,10 @@ public class PlayerMove : MonoBehaviour
 
     public enum EnumPlayerType
     {
-        Player1,
+        Player1 = 0,
         Player2,
         Player3,
-        Player4,
-        Player5,
-        Player6,
-        Player7
+        Player4
     }
     [Header("[ プレイヤー設定 ]")]
     [Tooltip("プレイヤーのコントローラー番号")]
@@ -26,7 +23,7 @@ public class PlayerMove : MonoBehaviour
 
     public enum EnumOseroType
     {
-        White,
+        White = 0,
         Black,
         Blue,
         Red
@@ -47,7 +44,7 @@ public class PlayerMove : MonoBehaviour
     public float ReChargeTime = 0.5f;
     public enum EnumOseroShootType
     {
-        Type1,
+        Type1 = 0,
         Type2,
         Type3
     }
@@ -181,112 +178,20 @@ public class PlayerMove : MonoBehaviour
         switch (OseroShootType)
         {
             case EnumOseroShootType.Type1:
-                switch (PlayerType)
-                {
-                    case EnumPlayerType.Player1:
-                        Vec.x = Input.GetAxis("Joystick_1_RightAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_1_RightAxis_Y");
-                        break;
-                    case EnumPlayerType.Player2:
-                        Vec.x = Input.GetAxis("Joystick_2_RightAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_2_RightAxis_Y");
-                        break;
-                    case EnumPlayerType.Player3:
-                        Vec.x = Input.GetAxis("Joystick_3_RightAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_3_RightAxis_Y");
-                        break;
-                    case EnumPlayerType.Player4:
-                        Vec.x = Input.GetAxis("Joystick_4_RightAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_4_RightAxis_Y");
-                        break;
-                    case EnumPlayerType.Player5:
-                        Vec.x = Input.GetAxis("Joystick_5_RightAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_5_RightAxis_Y");
-                        break;
-                    case EnumPlayerType.Player6:
-                        Vec.x = Input.GetAxis("Joystick_6_RightAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_6_RightAxis_Y");
-                        break;
-                    case EnumPlayerType.Player7:
-                        Vec.x = Input.GetAxis("Joystick_7_RightAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_7_RightAxis_Y");
-                        break;
-                    default:
-                        break;
-                }
+
+                Vec.x = Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_RightAxis_X");
+                Vec.y = -Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_RightAxis_Y");
                 break;
             case EnumOseroShootType.Type2:
                 if (isPress)
                 {
-                    switch (PlayerType)
-                    {
-                        case EnumPlayerType.Player1:
-                            Vec.x = Input.GetAxis("Joystick_1_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_1_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player2:
-                            Vec.x = Input.GetAxis("Joystick_2_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_2_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player3:
-                            Vec.x = Input.GetAxis("Joystick_3_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_3_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player4:
-                            Vec.x = Input.GetAxis("Joystick_4_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_4_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player5:
-                            Vec.x = Input.GetAxis("Joystick_5_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_5_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player6:
-                            Vec.x = Input.GetAxis("Joystick_6_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_6_LeftAxis_Y");
-                            break;
-                        case EnumPlayerType.Player7:
-                            Vec.x = Input.GetAxis("Joystick_7_LeftAxis_X");
-                            Vec.y = -Input.GetAxis("Joystick_7_LeftAxis_Y");
-                            break;
-                        default:
-                            break;
-                    }
+                    Vec.x = Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_X");
+                    Vec.y = -Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_Y");
                 }
                 break;
             case EnumOseroShootType.Type3:
-                switch (PlayerType)
-                {
-                    case EnumPlayerType.Player1:
-                        Vec.x = Input.GetAxis("Joystick_1_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_1_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player2:
-                        Vec.x = Input.GetAxis("Joystick_2_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_2_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player3:
-                        Vec.x = Input.GetAxis("Joystick_3_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_3_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player4:
-                        Vec.x = Input.GetAxis("Joystick_4_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_4_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player5:
-                        Vec.x = Input.GetAxis("Joystick_5_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_5_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player6:
-                        Vec.x = Input.GetAxis("Joystick_6_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_6_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player7:
-                        Vec.x = Input.GetAxis("Joystick_7_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_7_LeftAxis_Y");
-                        break;
-                    default:
-                        break;
-                }
+                Vec.x = Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_X");
+                Vec.y = -Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_Y");
                 break;
             default:
                 break;
@@ -312,38 +217,9 @@ public class PlayerMove : MonoBehaviour
         if (NowReChargeTime > 0.0f)
             NowReChargeTime -= Time.deltaTime;
 
-        switch (PlayerType)
+        if (Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_Button_L2_R2") > 0)
         {
-            case EnumPlayerType.Player1:
-                if (Input.GetAxis("Joystick_1_Button_L2_R2") > 0)
-                    isPress = true;
-                break;
-            case EnumPlayerType.Player2:
-                if (Input.GetAxis("Joystick_2_Button_L2_R2") > 0)
-                    isPress = true;
-                break;
-            case EnumPlayerType.Player3:
-                if (Input.GetAxis("Joystick_3_Button_L2_R2") > 0)
-                    isPress = true;
-                break;
-            case EnumPlayerType.Player4:
-                if (Input.GetAxis("Joystick_4_Button_L2_R2") > 0)
-                    isPress = true;
-                break;
-            case EnumPlayerType.Player5:
-                if (Input.GetAxis("Joystick_5_Button_L2_R2") > 0)
-                    isPress = true;
-                break;
-            case EnumPlayerType.Player6:
-                if (Input.GetAxis("Joystick_6_Button_L2_R2") > 0)
-                    isPress = true;
-                break;
-            case EnumPlayerType.Player7:
-                if (Input.GetAxis("Joystick_7_Button_L2_R2") > 0)
-                    isPress = true;
-                break;
-            default:
-                break;
+            isPress = true;
         }
 
         if (!isPress)
@@ -460,41 +336,8 @@ public class PlayerMove : MonoBehaviour
                 if (OseroShootType == EnumOseroShootType.Type2 && isPress) 
                     break;
 
-                switch (PlayerType)
-                {
-                    case EnumPlayerType.Player1:
-                        Vec.x = Input.GetAxis("Joystick_1_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_1_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player2:
-                        Vec.x = Input.GetAxis("Joystick_2_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_2_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player3:
-                        Vec.x = Input.GetAxis("Joystick_3_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_3_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player4:
-                        Vec.x = Input.GetAxis("Joystick_4_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_4_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player5:
-                        Vec.x = Input.GetAxis("Joystick_5_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_5_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player6:
-                        Vec.x = Input.GetAxis("Joystick_6_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_6_LeftAxis_Y");
-                        break;
-                    case EnumPlayerType.Player7:
-                        Vec.x = Input.GetAxis("Joystick_7_LeftAxis_X");
-                        Vec.y = -Input.GetAxis("Joystick_7_LeftAxis_Y");
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
+                Vec.x = Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_X");
+                Vec.y = -Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_Y");
                 break;
         }
 
