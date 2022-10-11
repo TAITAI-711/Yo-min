@@ -89,14 +89,14 @@ public class Banmen : MonoBehaviour
         return Masu[X, Y];
     }
 
-    public int GetOseroNum(PlayerMove.EnumOseroType oseroType)
+    public int GetOseroNum(PlayerManager.EnumOseroType oseroType)
     {
         int Num = 0;
         foreach (var obj in Masu)
         {   
             if(obj.OseroObj != null)
             {
-                if (obj.OseroObj.GetOseroType() == oseroType)
+                if (obj.OseroObj.GetOseroType().OseroType == oseroType)
                 {
                     Num++;
                 }

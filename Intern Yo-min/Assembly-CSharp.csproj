@@ -108,6 +108,7 @@
     <Compile Include="Assets\Scripts\Logo\Logo.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelect.cs" />
     <Compile Include="Assets\Scripts\Game\UI_GamePadSelect.cs" />
+    <Compile Include="Assets\Scripts\Game\PlayerManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

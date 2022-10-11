@@ -5,8 +5,9 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 {
     [ReadOnly] public bool isGamePlay = false;
     [ReadOnly] public bool isGamePadOK = false;
-    public BanmenManager BanmenManagerObj = null;
-    public UI_GamePadSelect GamePadSelectObj = null;
+    [ReadOnly] public BanmenManager BanmenManagerObj = null;
+    [ReadOnly] public UI_GamePadSelect GamePadSelectObj = null;
+    [ReadOnly] public PlayerManager PlayerManagerObj = null;
 
 
     private void Awake()

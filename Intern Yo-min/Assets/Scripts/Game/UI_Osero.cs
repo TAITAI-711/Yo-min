@@ -9,7 +9,7 @@ public class UI_Osero : MonoBehaviour
     //[SerializeField] private BanmenManager BanmenManagerObj;
     private TextMeshProUGUI NumText;
 
-    private PlayerMove.EnumOseroType OseroType = PlayerMove.EnumOseroType.White;
+    [HideInInspector] public PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
     private int Num = 0;    // ï\é¶Ç∑ÇÈÉIÉZÉçÇÃå¬êî
 
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class UI_Osero : MonoBehaviour
         int num = 0;
         foreach (var obj in GamePlayManager.Instance.BanmenManagerObj.BanmenObj)
         {
-            num += obj.GetOseroNum(OseroType);
+            num += obj.GetOseroNum(PlayerOseroType.OseroType);
         }
 
         if (num != Num)
@@ -35,9 +35,9 @@ public class UI_Osero : MonoBehaviour
         }
     }
 
-    public void UIOseroColorSet(Color color, PlayerMove.EnumOseroType oseroType)
+    public void UIOseroColorSet(PlayerManager.EnumOseroType oseroType)
     {
-        this.GetComponent<Image>().color = color;
-        OseroType = oseroType;
+        PlayerOseroType.OseroType = oseroType;
+        this.GetComponent<Image>().color = PlayerOseroType.PlayerMaterial.color;
     }
 }

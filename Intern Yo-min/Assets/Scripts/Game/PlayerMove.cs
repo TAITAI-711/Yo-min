@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Unity.Collections;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -6,8 +7,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Banmen BanmenObj;
     [SerializeField] private GameObject OseroPrefab;
     private Transform BanmenTf;
-    [SerializeField] private Material[] OseroMaterials = new Material[4];
-    [SerializeField] private UI_Osero UIOseroColorObj;
+    //[SerializeField] private UI_Osero UIOseroColorObj;
 
     public enum EnumPlayerType
     {
@@ -21,16 +21,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     EnumPlayerType PlayerType = EnumPlayerType.Player1;
 
-    public enum EnumOseroType
-    {
-        White = 0,
-        Black,
-        Blue,
-        Red
-    }
-    [Tooltip("プレイヤーのオセロの色")]
-    [SerializeField]
-    EnumOseroType OseroType = EnumOseroType.White;
+    [ReadOnly] public PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
 
     [Tooltip("プレイヤーの移動量(何秒で最大速度に達するか)"), Range(0.05F, 3.0F)]
     public float MovePow = 0.2f;
@@ -107,25 +98,6 @@ public class PlayerMove : MonoBehaviour
         // オセロの種類
         MeshRenderer Mr = gameObject.GetComponent<MeshRenderer>();
 
-        switch (OseroType)
-        {
-            case EnumOseroType.White:
-                Mr.material = OseroMaterials[0];
-                break;
-            case EnumOseroType.Black:
-                Mr.material = OseroMaterials[1];
-                break;
-            case EnumOseroType.Blue:
-                Mr.material = OseroMaterials[2];
-                break;
-            case EnumOseroType.Red:
-                Mr.material = OseroMaterials[3];
-                break;
-            default:
-                break;
-        }
-        UIOseroColorObj.UIOseroColorSet(Mr.material.color, OseroType);
-
         // 初期のプレイヤーの向き
         PlayerAngle.x = 0.0f - transform.position.x;
         PlayerAngle.y = 0.0f - transform.position.z;
@@ -165,6 +137,9 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
+            // プレイヤーの移動量減少処理
+            PlayerMoveDown();
+
             // プレイヤーの移動座標の固定処理
             PlayerMoveMax();
         }
@@ -234,7 +209,7 @@ public class PlayerMove : MonoBehaviour
                 GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
 
                 // 色設定
-                osero.GetComponent<Osero>().SetOseroType(OseroType);
+                osero.GetComponent<Osero>().SetOseroType(PlayerOseroType);
 
                 // サイズ設定
                 Vector3 OseroSize = osero.transform.localScale;
@@ -326,7 +301,7 @@ public class PlayerMove : MonoBehaviour
         //    Vel.x += -Pow;
         //}
 
-        Vector2 Vec = new Vector2();
+        Vector2 Vec = new Vector2(0, 0);
 
         switch (OseroShootType)
         {
@@ -359,18 +334,27 @@ public class PlayerMove : MonoBehaviour
             if (Vel.x < -MaxMovePow) Vel.x = -MaxMovePow;
             if (Vel.z > MaxMovePow) Vel.z = MaxMovePow;
             if (Vel.z < -MaxMovePow) Vel.z = -MaxMovePow;
+
+            rb.velocity = Vel; // 移動量変更
         }
         // 入力していなかったら
         else
         {
-            if (Vel.magnitude < 0.01f) // 一定量以下は止まる
-            {
-                Vel = Vector3.zero;
-            }
-            else
-            {
-                Vel *= 1.0f - DownMovePow;
-            }
+            PlayerMoveDown();
+        }
+    }
+
+    private void PlayerMoveDown()
+    {
+        Vector3 Vel = rb.velocity;          // ベロシティ
+
+        if (Vel.magnitude < 0.01f) // 一定量以下は止まる
+        {
+            Vel = Vector3.zero;
+        }
+        else
+        {
+            Vel *= 1.0f - DownMovePow;
         }
 
         rb.velocity = Vel; // 移動量変更

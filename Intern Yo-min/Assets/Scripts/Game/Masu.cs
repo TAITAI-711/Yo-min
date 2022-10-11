@@ -38,7 +38,7 @@ public class Masu : MonoBehaviour
         }
 
         // ÉIÉZÉçÇÇ–Ç¡Ç≠ÇËï‘Ç∑èàóù
-        PlayerMove.EnumOseroType MyOseroType = OseroObj.GetOseroType();
+        PlayerManager.PlayerOseroTypeInfo MyOseroType = OseroObj.GetOseroType();
 
         //Debug.Log(MasuXY);
 
@@ -50,7 +50,7 @@ public class Masu : MonoBehaviour
                 //Debug.Log("âEÇ»Ç¢");
                 break;
             }
-            else if (BanmenObj.Masu[i, MasuXY.y].OseroObj.GetOseroType() == MyOseroType)
+            else if (BanmenObj.Masu[i, MasuXY.y].OseroObj.GetOseroType().OseroType == MyOseroType.OseroType)
             {
                 for (int Turn_i = MasuXY.x + 1; Turn_i < i; Turn_i++)
                 {
@@ -68,7 +68,7 @@ public class Masu : MonoBehaviour
                 //Debug.Log("ç∂Ç»Ç¢");
                 break;
             }
-            else if (BanmenObj.Masu[i, MasuXY.y].OseroObj.GetOseroType() == MyOseroType)
+            else if (BanmenObj.Masu[i, MasuXY.y].OseroObj.GetOseroType().OseroType == MyOseroType.OseroType)
             {
                 for (int Turn_i = MasuXY.x - 1; Turn_i > i; Turn_i--)
                 {
@@ -86,7 +86,7 @@ public class Masu : MonoBehaviour
                 //Debug.Log("â∫Ç»Ç¢");
                 break;
             }
-            else if (BanmenObj.Masu[MasuXY.x, j].OseroObj.GetOseroType() == MyOseroType)
+            else if (BanmenObj.Masu[MasuXY.x, j].OseroObj.GetOseroType().OseroType == MyOseroType.OseroType)
             {
                 for (int Turn_j = MasuXY.y + 1; Turn_j < j; Turn_j++)
                 {
@@ -105,7 +105,7 @@ public class Masu : MonoBehaviour
                 //Debug.Log(BanmenObj.Masu[MasuXY.x, j].MasuXY);
                 break;
             }
-            else if (BanmenObj.Masu[MasuXY.x, j].OseroObj.GetOseroType() == MyOseroType)
+            else if (BanmenObj.Masu[MasuXY.x, j].OseroObj.GetOseroType().OseroType == MyOseroType.OseroType)
             {
                 //Debug.Log(BanmenObj.Masu[MasuXY.x, j].MasuXY + "ì¸ÇÍë÷Ç¶");
                 for (int Turn_j = MasuXY.y - 1; Turn_j > j; Turn_j--)
@@ -130,7 +130,7 @@ public class Masu : MonoBehaviour
                 //Debug.Log("î≤ÇØÇΩnull");
                 break;
             }
-            else if (BanmenObj.Masu[MasuXY.x + i, MasuXY.y - i].OseroObj.GetOseroType() == MyOseroType)
+            else if (BanmenObj.Masu[MasuXY.x + i, MasuXY.y - i].OseroObj.GetOseroType().OseroType == MyOseroType.OseroType)
             {
                 for (int j = 1; j < i; j++)
                 {
@@ -153,7 +153,7 @@ public class Masu : MonoBehaviour
             {
                 break;
             }
-            else if (BanmenObj.Masu[MasuXY.x + i, MasuXY.y + i].OseroObj.GetOseroType() == MyOseroType)
+            else if (BanmenObj.Masu[MasuXY.x + i, MasuXY.y + i].OseroObj.GetOseroType().OseroType == MyOseroType.OseroType)
             {
                 for (int j = 1; j < i; j++)
                 {
@@ -174,7 +174,7 @@ public class Masu : MonoBehaviour
             {
                 break;
             }
-            else if (BanmenObj.Masu[MasuXY.x - i, MasuXY.y - i].OseroObj.GetOseroType() == MyOseroType)
+            else if (BanmenObj.Masu[MasuXY.x - i, MasuXY.y - i].OseroObj.GetOseroType().OseroType == MyOseroType.OseroType)
             {
                 for (int j = 1; j < i; j++)
                 {
@@ -195,7 +195,7 @@ public class Masu : MonoBehaviour
             {
                 break;
             }
-            else if (BanmenObj.Masu[MasuXY.x - i, MasuXY.y + i].OseroObj.GetOseroType() == MyOseroType)
+            else if (BanmenObj.Masu[MasuXY.x - i, MasuXY.y + i].OseroObj.GetOseroType().OseroType == MyOseroType.OseroType)
             {
                 for (int j = 1; j < i; j++)
                 {

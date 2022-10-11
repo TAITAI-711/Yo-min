@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static PlayerMove;
 
 public class Osero : MonoBehaviour
 {
-    [SerializeField] private Material[] OseroMaterials = new Material[4];
+    private MeshRenderer OseroMesh = null;
     private Banmen BanmenObj;       // 盤面オブジェクト
 
     private Vector3 Gravity;        // オセロの重力
@@ -16,7 +16,7 @@ public class Osero : MonoBehaviour
     //private Vector3 MovePow;        // 移動する量(マス目換算:0～3とか)
     private float Angle;            // 射出角度
 
-    private PlayerMove.EnumOseroType OseroType = PlayerMove.EnumOseroType.White;
+    [HideInInspector] public PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
 
     private Rigidbody Rb;
     private Collider Cd;
@@ -109,31 +109,20 @@ public class Osero : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
-    public void SetOseroType(PlayerMove.EnumOseroType oseroType)
+    public void SetOseroType(PlayerManager.PlayerOseroTypeInfo oseroType)
     {
-        OseroType = oseroType;
+        PlayerOseroType = oseroType;
 
-        switch (OseroType)
+        if (OseroMesh == null)
         {
-            case EnumOseroType.White:
-                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[0];
-                break;
-            case EnumOseroType.Black:
-                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[1];
-                break;
-            case EnumOseroType.Blue:
-                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[2];
-                break;
-            case EnumOseroType.Red:
-                gameObject.GetComponent<MeshRenderer>().material = OseroMaterials[3];
-                break;
-            default:
-                break;
+            OseroMesh = GetComponent<MeshRenderer>();
         }
+
+        OseroMesh.material = PlayerOseroType.PlayerMaterial;
     }
 
-    public EnumOseroType GetOseroType()
+    public PlayerManager.PlayerOseroTypeInfo GetOseroType()
     {
-        return OseroType;
+        return PlayerOseroType;
     }
 }
