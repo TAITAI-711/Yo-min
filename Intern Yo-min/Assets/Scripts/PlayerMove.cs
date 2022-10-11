@@ -130,8 +130,11 @@ public class PlayerMove : MonoBehaviour
         UIOseroColorObj.UIOseroColorSet(Mr.material.color, OseroType);
 
         // 初期のプレイヤーの向き
-        PlayerAngle = BanmenObj.transform.position - transform.position;
+        PlayerAngle.x = BanmenObj.transform.position.x - transform.position.x;
+        PlayerAngle.y = BanmenObj.transform.position.z - transform.position.z;
         PlayerAngle = PlayerAngle.normalized;
+
+        //UnityEngine.Debug.Log(PlayerAngle);
 
         // プレイヤー数取得
         //string[] cName = Input.GetJoystickNames();
