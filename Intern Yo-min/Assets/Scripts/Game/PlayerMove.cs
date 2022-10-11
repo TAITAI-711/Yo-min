@@ -130,8 +130,8 @@ public class PlayerMove : MonoBehaviour
         UIOseroColorObj.UIOseroColorSet(Mr.material.color, OseroType);
 
         // ‰Šú‚ÌƒvƒŒƒCƒ„[‚ÌŒü‚«
-        PlayerAngle.x = BanmenObj.transform.position.x - transform.position.x;
-        PlayerAngle.y = BanmenObj.transform.position.z - transform.position.z;
+        PlayerAngle.x = 0.0f - transform.position.x;
+        PlayerAngle.y = 0.0f - transform.position.z;
         PlayerAngle = PlayerAngle.normalized;
 
         //UnityEngine.Debug.Log(PlayerAngle);

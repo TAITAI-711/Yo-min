@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 {
-    public bool isGamePlay = true;
+    [ReadOnly] public bool isGamePlay = true;
+    public BanmenManager BanmenManagerObj = null;
 
 
     private void Awake()
