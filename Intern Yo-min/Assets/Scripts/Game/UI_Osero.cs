@@ -9,7 +9,7 @@ public class UI_Osero : MonoBehaviour
     //[SerializeField] private BanmenManager BanmenManagerObj;
     private TextMeshProUGUI NumText;
 
-    [HideInInspector] public PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
+    private PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
     private int Num = 0;    // ï\é¶Ç∑ÇÈÉIÉZÉçÇÃå¬êî
 
     // Start is called before the first frame update
@@ -35,9 +35,9 @@ public class UI_Osero : MonoBehaviour
         }
     }
 
-    public void UIOseroColorSet(PlayerManager.EnumOseroType oseroType)
+    public void SetPlayerOseroType(PlayerManager.PlayerOseroTypeInfo playerOseroType)
     {
-        PlayerOseroType.OseroType = oseroType;
+        PlayerOseroType = playerOseroType;
         this.GetComponent<Image>().color = PlayerOseroType.PlayerMaterial.color;
     }
 }

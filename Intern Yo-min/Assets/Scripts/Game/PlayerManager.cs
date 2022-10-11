@@ -69,9 +69,9 @@ public class PlayerManager : MonoBehaviour
             for (int i = 1; i <= GamePlayManager.Instance.GamePadSelectObj.PlayerNum; i++)
             {
                 PlayerMoveObj[i - 1].gameObject.SetActive(true);
-                PlayerMoveObj[i - 1].PlayerOseroType = PlayerOseroType[i - 1];
+                PlayerMoveObj[i - 1].SetPlayerOseroType(PlayerOseroType[i - 1]);
                 OseroUIObj[i - 1].gameObject.SetActive(true);
-                OseroUIObj[i - 1].PlayerOseroType = PlayerOseroType[i - 1];
+                OseroUIObj[i - 1].SetPlayerOseroType(PlayerOseroType[i - 1]);
             }
         }
     }

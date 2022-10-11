@@ -31,7 +31,7 @@ public class SceneChangeManager : SingletonMonoBehaviour<SceneChangeManager>
         
     }
 
-    // シーンの変更のみ
+    // シーンの変更
     // 引数1：次のシーンの名前
     // 引数2：フェードするか
     public void SceneChange(string nextSceneName, bool isFade)

@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     EnumPlayerType PlayerType = EnumPlayerType.Player1;
 
-    [ReadOnly] public PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
+    private PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
 
     [Tooltip("プレイヤーの移動量(何秒で最大速度に達するか)"), Range(0.05F, 3.0F)]
     public float MovePow = 0.2f;
@@ -73,6 +73,8 @@ public class PlayerMove : MonoBehaviour
     // 入力キーの一回判定用
     bool isPress = false;           // 現在押されているか
     private bool isOldPress = false; // 前のフレームで押したか
+
+    private MeshRenderer Mesh = null;
 
     // Start is called before the first frame update
     void Start()
@@ -346,7 +348,7 @@ public class PlayerMove : MonoBehaviour
 
     private void PlayerMoveDown()
     {
-        Vector3 Vel = rb.velocity;          // ベロシティ
+        Vector3 Vel = rb.velocity; // ベロシティ
 
         if (Vel.magnitude < 0.01f) // 一定量以下は止まる
         {
@@ -358,5 +360,17 @@ public class PlayerMove : MonoBehaviour
         }
 
         rb.velocity = Vel; // 移動量変更
+    }
+
+    public void SetPlayerOseroType(PlayerManager.PlayerOseroTypeInfo playerOseroType)
+    {
+        PlayerOseroType = playerOseroType;
+
+        if (Mesh == null)
+        {
+            Mesh = GetComponent<MeshRenderer>();
+        }
+
+        Mesh.material = PlayerOseroType.PlayerMaterial;
     }
 }
