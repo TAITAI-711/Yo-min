@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Linq;
 
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
 using UnityEditor;
 
 [CustomEditor(typeof(ObjectPositionSet))]
@@ -108,4 +108,4 @@ public class ObjectPositionSetEditor : Editor
     }
 }
 
-//#endif
+#endif

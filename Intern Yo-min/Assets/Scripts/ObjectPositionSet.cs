@@ -6,7 +6,7 @@ public class ObjectPositionSet : MonoBehaviour
 {
     // GameConfig.GridSize を1目盛りとした場合の、グリッド座標
     [SerializeField] public Vector2Int gridPos = Vector2Int.zero;
-    public static readonly float GridSize = 10.0f;
+    public static readonly float GridSize = 5.0f;
 
     /// <summary>
     /// グリッド移動量を指定して移動する

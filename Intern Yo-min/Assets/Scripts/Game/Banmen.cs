@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Banmen : MonoBehaviour
 {
@@ -13,6 +15,18 @@ public class Banmen : MonoBehaviour
     [HideInInspector] public float YokoLength;
 
     public Masu[,] Masu;
+
+    public bool isAutoSize = false;
+
+    private void OnValidate()
+    {
+        if (isAutoSize)
+        {
+            // •K—v‚ÈŽž‚Ü‚Å‚Æ‚è‚ ‚¦‚¸••ˆó
+            //gameObject.transform.localScale = new Vector3(Tate * 10.0f, 2.0f, Yoko * 10.0f);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
