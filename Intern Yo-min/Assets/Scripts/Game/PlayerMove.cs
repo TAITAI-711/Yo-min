@@ -42,6 +42,9 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("プレイヤーのオセロの飛ばし方")]
     public EnumOseroShootType OseroShootType = EnumOseroShootType.Type1;
 
+    [Tooltip("プレイヤー同士の衝突時の跳ね返り量"), Range(0.0F, 800.0F)]
+    public float PlayerCrashPow = 0.0f;
+
 
     [Header("[ オセロ設定 ]")]
     [Tooltip("オセロの最大飛距離マス数"), Range(1F, 9F)] 
@@ -74,7 +77,7 @@ public class PlayerMove : MonoBehaviour
     bool isPress = false;           // 現在押されているか
     private bool isOldPress = false; // 前のフレームで押したか
 
-    private MeshRenderer Mesh = null;
+    private MeshRenderer Mesh = null; // プレイヤーのメッシュレンダラー
 
     // Start is called before the first frame update
     void Start()
@@ -146,6 +149,29 @@ public class PlayerMove : MonoBehaviour
             PlayerMoveMax();
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // プレイヤー同士の衝突処理
+            if (PlayerCrashPow > 0.0f)
+            {
+                Vector3 vec;
+                vec.x = transform.position.x - collision.gameObject.transform.position.x;
+                vec.y = 0.0f;
+                vec.z = transform.position.z - collision.gameObject.transform.position.z;
+
+                vec.Normalize();
+
+                rb.velocity = Vector3.zero;
+                rb.AddForce(vec * PlayerCrashPow, ForceMode.VelocityChange);
+            }
+        }
+    }
+
+
+
 
     // プレイヤーがオセロを飛ばす向きの処理
     private void PlayerShootAngle()

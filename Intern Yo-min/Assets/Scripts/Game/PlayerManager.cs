@@ -26,6 +26,7 @@ public class PlayerManager : MonoBehaviour
         public EnumOseroType OseroType;
     }
 
+    [Header("[ プレイヤーの色設定 ]")]
     [Tooltip("プレイヤーとオセロの色設定")]
     public PlayerOseroTypeInfo[] PlayerOseroType = new PlayerOseroTypeInfo[4];
 
