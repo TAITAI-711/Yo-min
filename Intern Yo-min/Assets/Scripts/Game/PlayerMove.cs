@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -107,6 +108,12 @@ public class PlayerMove : MonoBehaviour
         PlayerAngle.x = 0.0f - transform.position.x;
         PlayerAngle.y = 0.0f - transform.position.z;
         PlayerAngle = PlayerAngle.normalized;
+
+        // è’ìÀîªíËè¡Ç∑
+        //if (PlayerCrashPow <= 0.0f)
+        //{
+        //    gameObject.layer = LayerMask.NameToLayer("Player_NoHit");
+        //}
 
         //UnityEngine.Debug.Log(PlayerAngle);
 
