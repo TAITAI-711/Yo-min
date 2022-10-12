@@ -16,7 +16,12 @@ public class Title : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             //Debug.Log("Ÿ‚ÌƒV[ƒ“");
-            SceneChangeManager.Instance.SceneChange("StageSelectScene", true);
+            SetNextScene();
         }
+    }
+
+    public void SetNextScene()
+    {
+        SceneChangeManager.Instance.SceneChange("StageSelectScene", true);
     }
 }
