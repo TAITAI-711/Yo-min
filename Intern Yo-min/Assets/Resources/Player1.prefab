@@ -139,11 +139,12 @@ MonoBehaviour:
   ReChargeTime: 0.5
   OseroShootType: 0
   PlayerCrashPow: 400
+  isPlayerRotate: 1
   MaxOseroMove: 5
   OseroGravity: 100
   ThrowingAngle: 45
   OseroRotate: 6
-  PlayerAngle: {x: 0, y: 0}
+  ShootAngle: {x: 0, y: 0}
   ChargePow: 0
   NowReChargeTime: 0
 --- !u!1001 &5407829615641116644
@@ -239,6 +240,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2939977720304764016, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2939977720304764016, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4951688521663072697, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}

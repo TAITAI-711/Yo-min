@@ -1,6 +1,3 @@
-using System.Diagnostics;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -46,6 +43,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField, Tooltip("プレイヤー同士の衝突時の跳ね返り量"), Range(0.0F, 800.0F)]
     private float PlayerCrashPow = 0.0f;
 
+    [SerializeField, Tooltip("プレイヤーが移動方向に合わせて回転するか")]
+    private bool isPlayerRotate = false;
+
 
     [Header("[ オセロ設定 ]")]
     [Tooltip("オセロの最大飛距離マス数"), Range(1F, 9F)] 
@@ -70,7 +70,7 @@ public class PlayerMove : MonoBehaviour
     private float MaxMovePosZ = 0;
 
     // プレイヤーの向き
-    [HideInInspector] public Vector2 PlayerAngle;
+    [HideInInspector] public Vector2 ShootAngle;   // 投げる向き
 
     // チャージ用変数
     [HideInInspector] public float ChargePow;
@@ -108,9 +108,9 @@ public class PlayerMove : MonoBehaviour
         MeshRenderer Mr = gameObject.GetComponent<MeshRenderer>();
 
         // 初期のプレイヤーの向き
-        PlayerAngle.x = 0.0f - transform.position.x;
-        PlayerAngle.y = 0.0f - transform.position.z;
-        PlayerAngle = PlayerAngle.normalized;
+        ShootAngle.x = 0.0f - transform.position.x;
+        ShootAngle.y = 0.0f - transform.position.z;
+        ShootAngle = ShootAngle.normalized;
 
         // 衝突判定消す
         //if (PlayerCrashPow <= 0.0f)
@@ -144,8 +144,11 @@ public class PlayerMove : MonoBehaviour
             // プレイヤーの移動座標の固定処理
             PlayerMoveMax();
 
-            // プレイヤーがオセロを飛ばす向きの処理
+            // プレイヤーがオセロを飛ばす向きの処理＆プレイヤーの向き
             PlayerShootAngle();
+            
+            // プレイヤーの回転処理
+            PlayerRotate();
 
             // オセロ飛ばす処理
             PlayerShootOsero();
@@ -160,6 +163,18 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    // プレイヤーの回転処理
+    private void PlayerRotate()
+    {
+        if (isPlayerRotate)
+        {
+            // 回転
+            Vector3 Vec = new Vector3(ShootAngle.x, 0.0f, ShootAngle.y);
+            transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vec);
+        }
+    }
+
+    // オブジェクトとの衝突
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -181,7 +196,6 @@ public class PlayerMove : MonoBehaviour
     }
 
 
-
     // プレイヤーがオセロを飛ばす向きの処理
     private void PlayerShootAngle()
     {
@@ -195,12 +209,6 @@ public class PlayerMove : MonoBehaviour
                 Vec.y = -Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_RightAxis_Y");
                 break;
             case EnumOseroShootType.Type2:
-                if (isPress)
-                {
-                    Vec.x = Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_X");
-                    Vec.y = -Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_Y");
-                }
-                break;
             case EnumOseroShootType.Type3:
                 Vec.x = Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_X");
                 Vec.y = -Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_LeftAxis_Y");
@@ -215,7 +223,7 @@ public class PlayerMove : MonoBehaviour
         if (Mathf.Abs(Vec.magnitude) > 0.7f)
         {
             //UnityEngine.Debug.Log(Vec.normalized);
-            PlayerAngle = Vec.normalized;
+            ShootAngle = Vec.normalized;
         }
     }
 
@@ -258,9 +266,9 @@ public class PlayerMove : MonoBehaviour
                 // 着地座標
                 Vector3 EndPos = new Vector3
                     (
-                        OseroPos.x + PlayerAngle.x * MaxOseroMove * BanmenObj.YokoLength * ChargePow,
+                        OseroPos.x + ShootAngle.x * MaxOseroMove * BanmenObj.YokoLength * ChargePow,
                         BanmenObj.transform.position.y + 0.5f, 
-                        OseroPos.z + PlayerAngle.y * MaxOseroMove * BanmenObj.TateLength * ChargePow
+                        OseroPos.z + ShootAngle.y * MaxOseroMove * BanmenObj.TateLength * ChargePow
                     );
 
                 osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate * 2.0f);

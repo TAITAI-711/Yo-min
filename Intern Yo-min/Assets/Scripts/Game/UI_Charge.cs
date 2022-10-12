@@ -9,6 +9,14 @@ public class UI_Charge : MonoBehaviour
 
     [SerializeField] private Slider SliderObj;
 
+    private Quaternion StartRotate;
+
+    private void Awake()
+    {
+        StartRotate = transform.localRotation;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +27,11 @@ public class UI_Charge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 Parent = transform.parent.transform.localRotation.eulerAngles;
+
+        // UIÇÃå¸Ç´èCê≥
+        transform.rotation = StartRotate;
+
         SliderObj.value = PlayerObj.ChargePow;
 
         if (PlayerObj.NowReChargeTime <= 0.0f)

@@ -39,7 +39,7 @@ public class UI_Yajirusi : MonoBehaviour
         float PosX = 2.0f * PlayerObj.transform.localScale.x;
         Pos.x += PosX; // âEÇäÓèÄÇ…Ç∏ÇÁÇ∑
 
-        float Angle = Calculation.TwoPointAngle360(Vector2.right, PlayerObj.PlayerAngle);
+        float Angle = Calculation.TwoPointAngle360(Vector2.right, PlayerObj.ShootAngle);
         Angle -= 180.0f;
         Angle *= 2.0f;
         //Debug.Log(Angle);
@@ -49,7 +49,7 @@ public class UI_Yajirusi : MonoBehaviour
         // âÒì]
         float rad = PlayerObj.ThrowingAngle * Mathf.Deg2Rad;
         //Vector3 Vec = new Vector3(PlayerObj.PlayerAngle.x, Mathf.Tan(rad), PlayerObj.PlayerAngle.y);
-        Vector3 Vec = new Vector3(PlayerObj.PlayerAngle.x, 0.0f, PlayerObj.PlayerAngle.y);
+        Vector3 Vec = new Vector3(PlayerObj.ShootAngle.x, 0.0f, PlayerObj.ShootAngle.y);
 
         transform.rotation = Quaternion.FromToRotation(Vector3.up, Vec);
     }
