@@ -13,8 +13,11 @@ public class StageSelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ステージ選択で分岐させる
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            // SceneChangeManager.Instance.SceneChange("Stage_1", true);
+            // SceneChangeManager.Instance.SceneChange("Stage_2", true);
             //Debug.Log("次のシーン");
             SceneChangeManager.Instance.SceneChange("GameScene", true);
         }
