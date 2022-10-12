@@ -75,8 +75,8 @@ public class Osero : MonoBehaviour
     //    }
     //}
 
-    // オセロを動かす処理(盤面, 重力, 射出角度, 開始座標, 着地座標)
-    public void Move(Banmen banmenObj, float gravity, float throwingAngle, Vector3 startPos, Vector3 endPos)
+    // オセロを動かす処理(盤面, 重力, 射出角度, 開始座標, 着地座標, 回転量(1秒に1回転で1))
+    public void Move(Banmen banmenObj, float gravity, float throwingAngle, Vector3 startPos, Vector3 endPos, float Rotate)
     {
         BanmenObj = banmenObj;
         Gravity.y = -gravity;
@@ -90,6 +90,9 @@ public class Osero : MonoBehaviour
         Cd = gameObject.GetComponent<Collider>();
         Cd.isTrigger = false;
 
+        // 回転速度の上限廃止
+        Rb.maxAngularVelocity = 100;
+
         // レイヤー変更
         //gameObject.layer = LayerMask.NameToLayer("HitOsero");
 
@@ -98,6 +101,22 @@ public class Osero : MonoBehaviour
 
         // オセロ射出
         Rb.AddForce(Vel * Rb.mass, ForceMode.Impulse);
+
+        // オセロ回転処理
+        Vector3 vec;
+        vec.x = (EndPos.x - StartPos.x);
+        vec.y = 0.0f;
+        vec.z = (EndPos.z - StartPos.z);
+
+        Vector2 Rotatevec;
+        Rotatevec.x = vec.x * -Mathf.Cos(Mathf.PI * -0.5f) - vec.z * Mathf.Sin(Mathf.PI * -0.5f);
+        Rotatevec.y = vec.x * Mathf.Sin(Mathf.PI * -0.5f) + vec.z * Mathf.Cos(Mathf.PI * -0.5f);
+
+        vec.x = Rotatevec.x;
+        vec.z = Rotatevec.y;
+        vec.Normalize();
+
+        Rb.AddRelativeTorque(vec * Mathf.PI * Rotate, ForceMode.VelocityChange);
     }
 
     public void OseroSet(Vector3 OseroSetPosition)

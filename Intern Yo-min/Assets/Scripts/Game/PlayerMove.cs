@@ -43,8 +43,8 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("プレイヤーのオセロの飛ばし方")]
     public EnumOseroShootType OseroShootType = EnumOseroShootType.Type1;
 
-    [Tooltip("プレイヤー同士の衝突時の跳ね返り量"), Range(0.0F, 800.0F)]
-    public float PlayerCrashPow = 0.0f;
+    [SerializeField, Tooltip("プレイヤー同士の衝突時の跳ね返り量"), Range(0.0F, 800.0F)]
+    private float PlayerCrashPow = 0.0f;
 
 
     [Header("[ オセロ設定 ]")]
@@ -55,6 +55,9 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField, Range(5F, 85F), Tooltip("射出する角度")]
     public float ThrowingAngle;
+
+    [SerializeField, Tooltip("オセロの回転量(1.0fで1秒間に1回転)"), Range(0.0F, 10.0F)]
+    private float OseroRotate = 0.0f;
 
     private Rigidbody rb;
 
@@ -179,7 +182,6 @@ public class PlayerMove : MonoBehaviour
 
 
 
-
     // プレイヤーがオセロを飛ばす向きの処理
     private void PlayerShootAngle()
     {
@@ -261,7 +263,7 @@ public class PlayerMove : MonoBehaviour
                         OseroPos.z + PlayerAngle.y * MaxOseroMove * BanmenObj.TateLength * ChargePow
                     );
 
-                osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos);
+                osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate * 2.0f);
 
                 // チャージ終了
                 NowChargeTime = 0.0f;

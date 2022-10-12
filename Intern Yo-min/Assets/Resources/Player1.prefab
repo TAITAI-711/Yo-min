@@ -142,6 +142,7 @@ MonoBehaviour:
   MaxOseroMove: 5
   OseroGravity: 100
   ThrowingAngle: 45
+  OseroRotate: 6
   PlayerAngle: {x: 0, y: 0}
   ChargePow: 0
   NowReChargeTime: 0

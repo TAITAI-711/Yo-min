@@ -128,8 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052ccc7b60a597c45831b3926af3350e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OseroMaterials:
-  - {fileID: 2100000, guid: 5ec4964c6a7faa446801ebd0c126c5e6, type: 2}
-  - {fileID: 2100000, guid: 8f1788a95ddadbb4ba20c4131ee9a581, type: 2}
-  - {fileID: 2100000, guid: 13e3e31bb073bea43acc3508a6938736, type: 2}
-  - {fileID: 2100000, guid: 853a8cff5f324eb4aba0521c4e0552c8, type: 2}
+  PlayerOseroType:
+    PlayerMaterial: {fileID: 0}
+    OseroType: 0
