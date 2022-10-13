@@ -96,7 +96,8 @@ public class UI_GamePadSelect : MonoBehaviour
                                     if (NowPlayerNum > PlayerNum)
                                     {
                                         GamePlayManager.Instance.isGamePadOK = true;
-                                        GamePlayManager.Instance.isGamePlay = true;
+                                        GamePlayManager.Instance.isStartCount = true;
+                                        //GamePlayManager.Instance.isGamePlay = true;
 
                                         gameObject.SetActive(false);
                                     }

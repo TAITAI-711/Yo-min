@@ -45,9 +45,10 @@ public class UI_Time : MonoBehaviour
                 NowTime -= Time.deltaTime;
             }
 
-            if (NowTime <= 0.0f)
+            if (GamePlayManager.Instance.isGamePlay && NowTime <= 0.0f)
             {
                 GamePlayManager.Instance.isGamePlay = false;
+                GamePlayManager.Instance.isGameEnd = true;
                 NowTime = 0.0f;
 
                 // ƒQ[ƒ€‚ÌŽžŠÔ•\Ž¦
@@ -56,5 +57,10 @@ public class UI_Time : MonoBehaviour
                 TimeObj.text = "GameSet";
             }
         }
+    }
+
+    public float GetNowTime()
+    {
+        return NowTime;
     }
 }

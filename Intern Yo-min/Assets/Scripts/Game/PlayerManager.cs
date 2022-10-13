@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public PlayerMove[] PlayerMoveObj;
     [HideInInspector] public UI_Osero[] UI_OseroObj;
     [HideInInspector] private UI_OseroPanel UI_OseroPanelObj;
+    [HideInInspector] public UI_GameTime UI_GameTimeObj;
 
     [System.Serializable]
     public enum EnumOseroType
@@ -48,6 +49,7 @@ public class PlayerManager : MonoBehaviour
         PlayerMoveObj = GetComponentsInChildren<PlayerMove>();
         UI_OseroObj = GetComponentsInChildren<UI_Osero>();
         UI_OseroPanelObj = GetComponentInChildren<UI_OseroPanel>();
+        UI_GameTimeObj = GetComponentInChildren<UI_GameTime>();
     }
 
     // Start is called before the first frame update

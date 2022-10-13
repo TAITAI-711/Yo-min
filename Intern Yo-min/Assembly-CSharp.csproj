@@ -116,6 +116,8 @@
     <Compile Include="Assets\Scripts\Game\Floor.cs" />
     <Compile Include="Assets\Scripts\Game\FloorManager.cs" />
     <Compile Include="Assets\Scripts\Game\PlayerMoveMax.cs" />
+    <Compile Include="Assets\Scripts\Game\UI_StartCount.cs" />
+    <Compile Include="Assets\Scripts\Game\UI_GameTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
