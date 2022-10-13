@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public class PlayerManager : MonoBehaviour
         Red = 0,
         Blue,
         Yellow,
-        Purple
+        Purple,
+        Black,
+        White,
+        Green
     }
 
     [System.Serializable]
@@ -25,6 +29,9 @@ public class PlayerManager : MonoBehaviour
 
         [Tooltip("プレイヤーのオセロの色")]
         public EnumOseroType OseroType;
+
+        [Tooltip("プレイヤーのオセロのUI")]
+        public Sprite UI_OseroImage;
     }
 
     [Header("[ プレイヤーの色設定 ]")]

@@ -18,7 +18,10 @@ public class Banmen : MonoBehaviour
 
     private void OnValidate()
     {
-        gameObject.transform.localScale = new Vector3(Tate * 10.0f, GamePlayManager.MasuScaleY, Yoko * 10.0f);
+        gameObject.transform.localScale = new Vector3(
+            Yoko * GamePlayManager.MasuScaleXZ, 
+            GamePlayManager.MasuScaleY, 
+            Tate * GamePlayManager.MasuScaleXZ);
 
         Vector3 Pos = transform.position;
         Pos.y = GamePlayManager.MasuScaleY * 0.5f;

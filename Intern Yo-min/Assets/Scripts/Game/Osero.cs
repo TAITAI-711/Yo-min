@@ -54,6 +54,16 @@ public class Osero : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        HitBanmen(collision);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        HitBanmen(collision);
+    }
+
+    private void HitBanmen(Collision collision)
+    {
         if (collision.gameObject.CompareTag("Banmen"))
         {
             //Debug.Log("盤面と当たった");
@@ -63,9 +73,9 @@ public class Osero : MonoBehaviour
 
             // 盤面の内側なら
             if (transform.position.x <= collision.gameObject.transform.position.x + collision.gameObject.transform.localScale.x * 0.5f &&
-                transform.position.x >= collision.gameObject.transform.position.x - collision.gameObject.transform.localScale.x * 0.5f &&
-                transform.position.z <= collision.gameObject.transform.position.z + collision.gameObject.transform.localScale.z * 0.5f &&
-                transform.position.z >= collision.gameObject.transform.position.z - collision.gameObject.transform.localScale.z * 0.5f)
+            transform.position.x >= collision.gameObject.transform.position.x - collision.gameObject.transform.localScale.x * 0.5f &&
+            transform.position.z <= collision.gameObject.transform.position.z + collision.gameObject.transform.localScale.z * 0.5f &&
+            transform.position.z >= collision.gameObject.transform.position.z - collision.gameObject.transform.localScale.z * 0.5f)
             {
                 Masu masu = collision.gameObject.GetComponent<Banmen>().GetMasu(transform.position);
                 masu.SetOsero(this);
