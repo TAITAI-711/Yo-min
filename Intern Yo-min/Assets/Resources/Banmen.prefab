@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5378911356774614722}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -150}
-  m_LocalScale: {x: 100, y: 2, z: 100}
+  m_LocalPosition: {x: 0, y: 2.3, z: -150}
+  m_LocalScale: {x: 100, y: 4.6, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,11 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63931742ee973ad488ceae8d460787a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MasuPrefab: {fileID: 3329503098532617140, guid: 55b9a8cb75695ff46ac51fde911e1de1, type: 3}
+  MasuPrefab: {fileID: 4450539059861020682, guid: 664fbd2f0fdf779498297cb09e2aca04, type: 3}
   Tate: 9
   Yoko: 9
   TateLength: 0
   YokoLength: 0
+  isAutoSize: 0
 --- !u!114 &5378911356774614725
 MonoBehaviour:
   m_ObjectHideFlags: 0

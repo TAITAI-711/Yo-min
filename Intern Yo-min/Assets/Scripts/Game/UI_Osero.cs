@@ -38,6 +38,6 @@ public class UI_Osero : MonoBehaviour
     public void SetPlayerOseroType(PlayerManager.PlayerOseroTypeInfo playerOseroType)
     {
         PlayerOseroType = playerOseroType;
-        this.GetComponent<Image>().color = PlayerOseroType.PlayerMaterial.color;
+        //this.GetComponent<Image>().color = PlayerOseroType.PlayerMaterial.color;
     }
 }

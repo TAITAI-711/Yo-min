@@ -8,6 +8,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     [ReadOnly] public BanmenManager BanmenManagerObj = null;
     [ReadOnly] public UI_GamePadSelect GamePadSelectObj = null;
     [ReadOnly] public PlayerManager PlayerManagerObj = null;
+    [ReadOnly] public static readonly float MasuScaleY = 4.6f;
 
 
     private void Awake()

@@ -248,7 +248,7 @@ public class PlayerMove : MonoBehaviour
             {
                 // オセロの生成座標
                 Vector3 OseroPos = transform.position;
-                OseroPos.y += 5.0f;
+                OseroPos.y += 6.0f;
 
                 // オセロ生成
                 GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
@@ -257,11 +257,11 @@ public class PlayerMove : MonoBehaviour
                 osero.GetComponent<Osero>().SetOseroType(PlayerOseroType);
 
                 // サイズ設定
-                Vector3 OseroSize = osero.transform.localScale;
-                OseroSize.x = BanmenObj.YokoLength - OseroScaleDown;
-                OseroSize.y = 1.0f;
-                OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
-                osero.transform.localScale = OseroSize;
+                //Vector3 OseroSize = osero.transform.localScale;
+                //OseroSize.x = BanmenObj.YokoLength - OseroScaleDown;
+                //OseroSize.y = 1.0f;
+                //OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
+                //osero.transform.localScale = OseroSize;
 
                 // 着地座標
                 Vector3 EndPos = new Vector3
@@ -271,7 +271,7 @@ public class PlayerMove : MonoBehaviour
                         OseroPos.z + ShootAngle.y * MaxOseroMove * BanmenObj.TateLength * ChargePow
                     );
 
-                osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate * 2.0f);
+                osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate);
 
                 // チャージ終了
                 NowChargeTime = 0.0f;

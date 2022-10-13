@@ -14,7 +14,9 @@ public class ObjectPositionSet : MonoBehaviour
     public void Move(Vector2Int vec2)
     {
         gridPos += vec2;
-        transform.position = GetGlobalPosition(gridPos);
+        Vector3 Pos = GetGlobalPosition(gridPos);
+        Pos.y = transform.position.y;
+        transform.position = Pos;
     }
 
     /// <summary>

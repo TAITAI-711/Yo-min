@@ -23,6 +23,7 @@ public class ObjectPositionSetEditor : Editor
     private void OnSceneGUI()
     {
         //Debug.Log("OnSceneGUI");
+
         Tools.current = Tool.None;
 
         Center = GetCenterOfInstances(instances);

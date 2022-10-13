@@ -59,8 +59,19 @@ public class Osero : MonoBehaviour
         if (collision.gameObject.CompareTag("Banmen"))
         {
             //Debug.Log("盤面と当たった");
-            Masu masu = BanmenObj.GetMasu(transform.position);
-            masu.SetOsero(this);
+
+            // 盤面より高いなら
+            //if (transform.position.y >= collision.gameObject.transform.position.y - GamePlayManager.MasuScaleY * 0.5f)
+
+            // 盤面の内側なら
+            if (transform.position.x <= collision.gameObject.transform.position.x + collision.gameObject.transform.localScale.x * 0.5f &&
+                transform.position.x >= collision.gameObject.transform.position.x - collision.gameObject.transform.localScale.x * 0.5f &&
+                transform.position.z <= collision.gameObject.transform.position.z + collision.gameObject.transform.localScale.z * 0.5f &&
+                transform.position.z >= collision.gameObject.transform.position.z - collision.gameObject.transform.localScale.z * 0.5f)
+            {
+                Masu masu = BanmenObj.GetMasu(transform.position);
+                masu.SetOsero(this);
+            }
 
             //Destroy(gameObject);
         }
@@ -116,7 +127,7 @@ public class Osero : MonoBehaviour
         vec.z = Rotatevec.y;
         vec.Normalize();
 
-        Rb.AddRelativeTorque(vec * Mathf.PI * Rotate, ForceMode.VelocityChange);
+        Rb.AddRelativeTorque(vec * Mathf.PI * 2.0f * Rotate, ForceMode.VelocityChange);
     }
 
     public void OseroSet(Vector3 OseroSetPosition)

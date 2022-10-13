@@ -16,15 +16,13 @@ public class Banmen : MonoBehaviour
 
     public Masu[,] Masu;
 
-    public bool isAutoSize = false;
-
     private void OnValidate()
     {
-        if (isAutoSize)
-        {
-            // 必要な時までとりあえず封印
-            //gameObject.transform.localScale = new Vector3(Tate * 10.0f, 2.0f, Yoko * 10.0f);
-        }
+        gameObject.transform.localScale = new Vector3(Tate * 10.0f, GamePlayManager.MasuScaleY, Yoko * 10.0f);
+
+        Vector3 Pos = transform.position;
+        Pos.y = GamePlayManager.MasuScaleY * 0.5f;
+        gameObject.transform.position = Pos;
     }
 
     // Start is called before the first frame update
@@ -37,7 +35,10 @@ public class Banmen : MonoBehaviour
         // 計算用変数
 
         // 開始位置(X, Z)
-        Vector3 StartPos = new Vector3(gameObject.transform.position.x + -gameObject.transform.localScale.x * 0.5f, gameObject.transform.position.y + gameObject.transform.localScale.y * 0.5f, gameObject.transform.position.z + gameObject.transform.localScale.z * 0.5f);
+        Vector3 StartPos = new Vector3(
+            gameObject.transform.position.x + -gameObject.transform.localScale.x * 0.5f, 
+            gameObject.transform.position.y + -GamePlayManager.MasuScaleY * 0.5f, 
+            gameObject.transform.position.z + gameObject.transform.localScale.z * 0.5f);
         TateLength = gameObject.transform.localScale.z / (float)Tate;
         YokoLength = gameObject.transform.localScale.x / (float)Yoko;
 
@@ -53,20 +54,23 @@ public class Banmen : MonoBehaviour
                 Masu[i, j].MasuXY = new Vector2Int(i, j);
 
                 // サイズ設定
-                Vector3 MasuSize = Masu[i, j].transform.localScale;
-                MasuSize.x = YokoLength;
-                MasuSize.y = 1.0f;
-                MasuSize.z = TateLength;
-                Masu[i, j].transform.localScale = MasuSize;
+                //Vector3 MasuSize = Masu[i, j].transform.localScale;
+                //MasuSize.x = 1.0f;
+                //MasuSize.y = 1.0f;
+                //MasuSize.z = 1.0f;
+                //Masu[i, j].transform.localScale = MasuSize;
 
                 // 位置設定
                 Vector3 MasuPos = Masu[i, j].transform.position;
                 MasuPos.x = StartPos.x + (YokoLength * (i + 1) - YokoLength * 0.5f);
-                MasuPos.y = StartPos.y + 0.5f;
+                MasuPos.y = StartPos.y;
                 MasuPos.z = StartPos.z + -(TateLength * (j + 1) - TateLength * 0.5f);
                 Masu[i, j].transform.position = MasuPos;
             }
         }
+
+
+        GetComponent<MeshRenderer>().enabled = false;
     }
 
     // Update is called once per frame

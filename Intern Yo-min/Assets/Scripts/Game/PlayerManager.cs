@@ -10,10 +10,10 @@ public class PlayerManager : MonoBehaviour
     [System.Serializable]
     public enum EnumOseroType
     {
-        White = 0,
-        Black,
+        Red = 0,
         Blue,
-        Red
+        Yellow,
+        Purple
     }
 
     [System.Serializable]

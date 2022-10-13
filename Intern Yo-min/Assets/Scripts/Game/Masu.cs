@@ -26,7 +26,7 @@ public class Masu : MonoBehaviour
         if (OseroObj == null)
         {
             OseroObj = osero;
-            OseroObj.OseroSet(transform.position);
+            OseroObj.OseroSet(transform.position + new Vector3(0, GamePlayManager.MasuScaleY + 1.0f, 0));
         }
         else
         {
