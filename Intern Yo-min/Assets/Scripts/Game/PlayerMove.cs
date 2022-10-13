@@ -61,9 +61,6 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody rb;
 
-    // オセロの大きさ少し小さくする用変数
-    private float OseroScaleDown = 0.2f;
-
 
     // 最大移動範囲用変数
     private float MaxMovePosX = 0;
@@ -252,9 +249,11 @@ public class PlayerMove : MonoBehaviour
 
                 // オセロ生成
                 GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
+                Osero OseroObj = osero.GetComponent<Osero>();
+                GamePlayManager.Instance.FloorObj.SetFieldOsero(OseroObj);
 
                 // 色設定
-                osero.GetComponent<Osero>().SetOseroType(PlayerOseroType);
+                OseroObj.SetOseroType(PlayerOseroType);
 
                 // サイズ設定
                 //Vector3 OseroSize = osero.transform.localScale;
@@ -271,7 +270,7 @@ public class PlayerMove : MonoBehaviour
                         OseroPos.z + ShootAngle.y * MaxOseroMove * BanmenObj.TateLength * ChargePow
                     );
 
-                osero.GetComponent<Osero>().Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate);
+                OseroObj.Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate);
 
                 // チャージ終了
                 NowChargeTime = 0.0f;

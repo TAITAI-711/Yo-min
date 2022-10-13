@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [HideInInspector] PlayerMove[] PlayerMoveObj;
-    [HideInInspector] UI_Osero[] OseroUIObj;
+    [HideInInspector] public PlayerMove[] PlayerMoveObj;
+    [HideInInspector] public UI_Osero[] UI_OseroObj;
+    [HideInInspector] private UI_OseroPanel UI_OseroPanelObj;
 
     [System.Serializable]
     public enum EnumOseroType
@@ -38,7 +39,8 @@ public class PlayerManager : MonoBehaviour
         GamePlayManager.Instance.PlayerManagerObj = this;
 
         PlayerMoveObj = GetComponentsInChildren<PlayerMove>();
-        OseroUIObj = GetComponentsInChildren<UI_Osero>();
+        UI_OseroObj = GetComponentsInChildren<UI_Osero>();
+        UI_OseroPanelObj = GetComponentInChildren<UI_OseroPanel>();
     }
 
     // Start is called before the first frame update
@@ -55,7 +57,7 @@ public class PlayerManager : MonoBehaviour
         // 使用オセロカラーのUI表示
         for (int i = 0; i < PlayerMoveObj.Length; i++)
         {
-            OseroUIObj[i].gameObject.SetActive(false);
+            UI_OseroObj[i].gameObject.SetActive(false);
         }
     }
 
@@ -71,9 +73,11 @@ public class PlayerManager : MonoBehaviour
             {
                 PlayerMoveObj[i - 1].gameObject.SetActive(true);
                 PlayerMoveObj[i - 1].SetPlayerOseroType(PlayerOseroType[i - 1]);
-                OseroUIObj[i - 1].gameObject.SetActive(true);
-                OseroUIObj[i - 1].SetPlayerOseroType(PlayerOseroType[i - 1]);
+                UI_OseroObj[i - 1].gameObject.SetActive(true);
+                UI_OseroObj[i - 1].SetPlayerOseroType(PlayerOseroType[i - 1]);
             }
+
+            UI_OseroPanelObj.SetUIPanel(GamePlayManager.Instance.GamePadSelectObj.PlayerNum);
         }
     }
 }

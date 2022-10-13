@@ -50,7 +50,7 @@ public class Osero : MonoBehaviour
             Rb.AddForce(Gravity, ForceMode.Acceleration);
 
             if (transform.position.y < -50.0f)
-                Destroy(gameObject);
+                SetDestroy();
         }
     }
 
@@ -75,6 +75,12 @@ public class Osero : MonoBehaviour
 
             //Destroy(gameObject);
         }
+    }
+
+    public void SetDestroy()
+    {
+        if (!isOseroSet)
+            Destroy(gameObject);
     }
 
     //private void OnTriggerExit(Collider collider)
