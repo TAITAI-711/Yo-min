@@ -8,12 +8,10 @@ using UnityEngine.UIElements;
 public class Osero : MonoBehaviour
 {
     private MeshRenderer OseroMesh = null;
-    private Banmen BanmenObj;       // 盤面オブジェクト
 
     private Vector3 Gravity;        // オセロの重力
     private Vector3 StartPos;       // オセロの開始座標
     private Vector3 EndPos;         // オセロの着地座標
-    //private Vector3 MovePow;        // 移動する量(マス目換算:0～3とか)
     private float Angle;            // 射出角度
 
     [HideInInspector] public PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
@@ -69,7 +67,7 @@ public class Osero : MonoBehaviour
                 transform.position.z <= collision.gameObject.transform.position.z + collision.gameObject.transform.localScale.z * 0.5f &&
                 transform.position.z >= collision.gameObject.transform.position.z - collision.gameObject.transform.localScale.z * 0.5f)
             {
-                Masu masu = BanmenObj.GetMasu(transform.position);
+                Masu masu = collision.gameObject.GetComponent<Banmen>().GetMasu(transform.position);
                 masu.SetOsero(this);
             }
 
@@ -92,10 +90,9 @@ public class Osero : MonoBehaviour
     //    }
     //}
 
-    // オセロを動かす処理(盤面, 重力, 射出角度, 開始座標, 着地座標, 回転量(1秒に1回転で1))
-    public void Move(Banmen banmenObj, float gravity, float throwingAngle, Vector3 startPos, Vector3 endPos, float Rotate)
+    // オセロを動かす処理(重力, 射出角度, 開始座標, 着地座標, 回転量(1秒に1回転で1))
+    public void Move(float gravity, float throwingAngle, Vector3 startPos, Vector3 endPos, float Rotate)
     {
-        BanmenObj = banmenObj;
         Gravity.y = -gravity;
         Angle = throwingAngle;
         StartPos = startPos;

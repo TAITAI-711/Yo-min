@@ -114,6 +114,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Game\UI_OseroPanel.cs" />
     <Compile Include="Assets\Scripts\Game\Floor.cs" />
+    <Compile Include="Assets\Scripts\Game\FloorManager.cs" />
+    <Compile Include="Assets\Scripts\Game\PlayerMoveMax.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

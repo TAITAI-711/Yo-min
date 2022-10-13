@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private Banmen BanmenObj;
     [SerializeField] private GameObject OseroPrefab;
-    private Transform BanmenTf;
-    //[SerializeField] private UI_Osero UIOseroColorObj;
 
     public enum EnumPlayerType
     {
@@ -61,11 +58,6 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody rb;
 
-
-    // 最大移動範囲用変数
-    private float MaxMovePosX = 0;
-    private float MaxMovePosZ = 0;
-
     // プレイヤーの向き
     [HideInInspector] public Vector2 ShootAngle;   // 投げる向き
 
@@ -89,20 +81,6 @@ public class PlayerMove : MonoBehaviour
         NowChargeTime = 0.0f;
         NowReChargeTime = 0.0f;
 
-        // 盤面取得
-        BanmenTf = BanmenObj.GetComponent<Transform>();
-
-        // 最大移動距離
-        MaxMovePosX = BanmenTf.position.x + BanmenTf.localScale.x * 0.5f + 
-            gameObject.transform.localScale.x * 0.5f + gameObject.transform.localScale.x * 2.0f
-            + 0.1f; // 0.1f分余裕もたせる
-
-        MaxMovePosZ = BanmenTf.position.z + BanmenTf.localScale.z * 0.5f + 
-            gameObject.transform.localScale.z * 0.5f + gameObject.transform.localScale.z * 2.0f
-            + 0.1f; // 0.1f分余裕もたせる
-
-        // オセロの種類
-        MeshRenderer Mr = gameObject.GetComponent<MeshRenderer>();
 
         // 初期のプレイヤーの向き
         ShootAngle.x = 0.0f - transform.position.x;
@@ -250,7 +228,7 @@ public class PlayerMove : MonoBehaviour
                 // オセロ生成
                 GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
                 Osero OseroObj = osero.GetComponent<Osero>();
-                GamePlayManager.Instance.FloorObj.SetFieldOsero(OseroObj);
+                GamePlayManager.Instance.FloorManagerObj.FloorObj.SetFieldOsero(OseroObj);
 
                 // 色設定
                 OseroObj.SetOseroType(PlayerOseroType);
@@ -265,12 +243,12 @@ public class PlayerMove : MonoBehaviour
                 // 着地座標
                 Vector3 EndPos = new Vector3
                     (
-                        OseroPos.x + ShootAngle.x * MaxOseroMove * BanmenObj.YokoLength * ChargePow,
-                        BanmenObj.transform.position.y + 0.5f, 
-                        OseroPos.z + ShootAngle.y * MaxOseroMove * BanmenObj.TateLength * ChargePow
+                        OseroPos.x + ShootAngle.x * MaxOseroMove * GamePlayManager.MasuScaleXZ * ChargePow,
+                        GamePlayManager.MasuScaleY, 
+                        OseroPos.z + ShootAngle.y * MaxOseroMove * GamePlayManager.MasuScaleXZ * ChargePow
                     );
 
-                OseroObj.Move(BanmenObj, OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate);
+                OseroObj.Move(OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate);
 
                 // チャージ終了
                 NowChargeTime = 0.0f;
@@ -305,18 +283,15 @@ public class PlayerMove : MonoBehaviour
         // 移動制限
         Vector3 Pos = gameObject.transform.position; // 位置
 
+        Vector3 MaxPos = GamePlayManager.Instance.FloorManagerObj.PlayerMoveMaxObj.PlayerMoveMaxScale * 0.5f;
 
-        if (Pos.x > MaxMovePosX)
-            Pos.x = MaxMovePosX;
+        MaxPos.x -= transform.localScale.x * 0.5f;
+        MaxPos.y -= transform.localScale.y * 0.5f;
+        MaxPos.z -= transform.localScale.z * 0.5f;
 
-        if (Pos.x < -MaxMovePosX)
-            Pos.x = -MaxMovePosX;
-
-        if (Pos.z > MaxMovePosZ)
-            Pos.z = MaxMovePosZ;
-
-        if (Pos.z < -MaxMovePosZ)
-            Pos.z = -MaxMovePosZ;
+        Pos.x = Mathf.Clamp(Pos.x, -MaxPos.x, MaxPos.x);
+        Pos.y = Mathf.Clamp(Pos.y, -MaxPos.y, MaxPos.y);
+        Pos.z = Mathf.Clamp(Pos.z, -MaxPos.z, MaxPos.z);
 
         gameObject.transform.position = Pos;
     }
@@ -404,6 +379,7 @@ public class PlayerMove : MonoBehaviour
         rb.velocity = Vel; // 移動量変更
     }
 
+    // プレイヤーのオセロのタイプセット
     public void SetPlayerOseroType(PlayerManager.PlayerOseroTypeInfo playerOseroType)
     {
         PlayerOseroType = playerOseroType;

@@ -6,11 +6,6 @@ public class Floor : MonoBehaviour
 {
     [HideInInspector] private List<Osero> OseroObj = new List<Osero>();
 
-    private void Awake()
-    {
-        GamePlayManager.Instance.FloorObj = this;
-    }
-
 
     public void SetFieldOsero(Osero osero)
     {
