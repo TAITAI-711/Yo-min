@@ -43,6 +43,14 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         {
             PlaySound("Test", true);
         }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            PauseSoundAll();
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            PauseRestartSoundAll();
+        }
     }
 
     // サウンドの再生開始
@@ -89,12 +97,42 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         audioSource[(int)Enum_AudioType.SE].Stop();
     }
 
-    // すべての再生停止
+    // すべてのサウンドの再生停止
     public void StopSoundAll()
     {
         foreach (var obj in audioSource)
         {
             obj.Stop();
+        }
+    }
+
+    // すべてのサウンドの再生一時停止
+    public void PauseSoundAll()
+    {
+        foreach (var obj in audioSource)
+        {
+            obj.Pause();
+        }
+    }
+
+    // BGMの再生一時停止
+    public void PauseSoundBGM()
+    {
+        audioSource[(int)Enum_AudioType.BGM].Pause();
+    }
+
+    // SEの再生一時停止
+    public void PauseSoundSE()
+    {
+        audioSource[(int)Enum_AudioType.SE].Pause();
+    }
+
+    // すべてのサウンドの再生一時停止解除
+    public void PauseRestartSoundAll()
+    {
+        foreach (var obj in audioSource)
+        {
+            obj.UnPause();
         }
     }
 }
