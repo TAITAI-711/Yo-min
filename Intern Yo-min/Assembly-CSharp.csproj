@@ -59,6 +59,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\Scripts\Game\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Game\UI_GameTime.cs" />
     <Compile Include="Assets\Scripts\Title\Title.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\Game\Calculation.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
+    <Compile Include="Assets\Scripts\Game\UI_OseroPanel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\ObjectPositionSet.cs" />
@@ -102,8 +104,12 @@
     <Compile Include="Assets\Scripts\Game\UI_Time.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\Game\SingletonMonoBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Game\FloorManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\Scripts\Game\UI_StartCount.cs" />
+    <Compile Include="Assets\Scripts\Game\PlayerMoveMax.cs" />
+    <Compile Include="Assets\Scripts\Game\Floor.cs" />
     <Compile Include="Assets\Scripts\Game\GamePlayManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
@@ -112,12 +118,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Scripts\Game\BanmenManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\Scripts\Game\UI_OseroPanel.cs" />
-    <Compile Include="Assets\Scripts\Game\Floor.cs" />
-    <Compile Include="Assets\Scripts\Game\FloorManager.cs" />
-    <Compile Include="Assets\Scripts\Game\PlayerMoveMax.cs" />
-    <Compile Include="Assets\Scripts\Game\UI_StartCount.cs" />
-    <Compile Include="Assets\Scripts\Game\UI_GameTime.cs" />
+    <Compile Include="Assets\Scripts\Game\SoundManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
