@@ -29,7 +29,7 @@ public class UI_StartCount : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (GamePlayManager.Instance.isStartCount && NowCount >= 0)
         {
@@ -55,7 +55,7 @@ public class UI_StartCount : MonoBehaviour
                 }
             }
 
-            NowTime += Time.deltaTime;
+            NowTime += Time.fixedDeltaTime;
 
             if (NowTime >= 1.0f)
             {

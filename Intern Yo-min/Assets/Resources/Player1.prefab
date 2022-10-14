@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11cf871913712b478506cfe49a5e803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BanmenObj: {fileID: 0}
   OseroPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
   PlayerType: 0
   MovePow: 0.2
@@ -137,8 +136,8 @@ MonoBehaviour:
   DownMovePow: 0.05
   ChargeSpeed: 0.5
   ReChargeTime: 0.5
-  OseroShootType: 0
-  PlayerCrashPow: 400
+  OseroShootType: 1
+  PlayerCrashPow: 300
   isPlayerRotate: 1
   MaxOseroMove: 5
   OseroGravity: 100

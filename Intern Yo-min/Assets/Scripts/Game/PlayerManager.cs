@@ -71,7 +71,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!isOnce && GamePlayManager.Instance.isGamePadOK)
         {
@@ -86,7 +86,8 @@ public class PlayerManager : MonoBehaviour
                 UI_OseroObj[i - 1].SetPlayerOseroType(PlayerOseroType[i - 1]);
             }
 
-            UI_OseroPanelObj.SetUIPanel(GamePlayManager.Instance.GamePadSelectObj.PlayerNum);
+            if (UI_OseroPanelObj != null)
+                UI_OseroPanelObj.SetUIPanel(GamePlayManager.Instance.GamePadSelectObj.PlayerNum);
         }
     }
 }

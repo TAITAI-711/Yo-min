@@ -27,6 +27,10 @@ public class UI_Charge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GamePlayManager.Instance.isPause)
+            return;
+
+
         Vector3 Parent = transform.parent.transform.localRotation.eulerAngles;
 
         // UI‚ÌŒü‚«C³

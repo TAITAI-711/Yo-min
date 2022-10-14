@@ -7,6 +7,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     [ReadOnly] public bool isGamePadOK = false;
     [ReadOnly] public bool isStartCount = false;
     [ReadOnly] public bool isGameEnd = false;
+    [ReadOnly] public bool isPause = false;
     [ReadOnly] public BanmenManager BanmenManagerObj = null;
     [ReadOnly] public UI_GamePadSelect GamePadSelectObj = null;
     [ReadOnly] public PlayerManager PlayerManagerObj = null;
@@ -35,7 +36,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         
     }

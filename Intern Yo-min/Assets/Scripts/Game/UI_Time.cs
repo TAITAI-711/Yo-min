@@ -23,12 +23,10 @@ public class UI_Time : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (GamePlayManager.Instance.isGamePlay)
         {
-            if (Input.GetKeyDown(KeyCode.W))
-                NowTime -= 10.0f;
             if (NowTime > 0.0f)
             {
                 // ゲームの時間表示
@@ -42,7 +40,7 @@ public class UI_Time : MonoBehaviour
                 }
 
                 // 時間更新
-                NowTime -= Time.deltaTime;
+                NowTime -= Time.fixedDeltaTime;
             }
 
             if (GamePlayManager.Instance.isGamePlay && NowTime <= 0.0f)

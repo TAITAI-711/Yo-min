@@ -31,6 +31,9 @@ public class UI_Yajirusi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GamePlayManager.Instance.isPause)
+            return;
+
         // プレイヤーの方向UI変更処理
 
         // 座標

@@ -22,6 +22,9 @@ public class UI_Osero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GamePlayManager.Instance.isPause)
+            return;
+
         int num = 0;
         foreach (var obj in GamePlayManager.Instance.BanmenManagerObj.BanmenObj)
         {

@@ -34,7 +34,6 @@ public class UI_GamePadSelect : MonoBehaviour
             // プレイヤーの人数決め
             if (NowPlayerNum <= 0)
             {
-
                 // 人数の入力受付
                 if (Input.GetAxis("Joystick_0_LeftAxis_X") != 0)
                 {

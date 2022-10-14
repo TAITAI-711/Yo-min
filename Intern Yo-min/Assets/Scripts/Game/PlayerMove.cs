@@ -111,6 +111,9 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GamePlayManager.Instance.isPause)
+            return;
+
         if (GamePlayManager.Instance.isGamePlay)
         {
             // プレイヤーの移動処理
@@ -137,6 +140,7 @@ public class PlayerMove : MonoBehaviour
             PlayerMoveMax();
         }
     }
+
 
     // プレイヤーの回転処理
     private void PlayerRotate()
