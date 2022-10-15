@@ -14,7 +14,7 @@ public class StageSelect : MonoBehaviour
     void Update()
     {
         // ステージ選択で分岐させる
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Joystick_0_Button_B"))
         {
             // SceneChangeManager.Instance.SceneChange("Stage_1", true);
             // SceneChangeManager.Instance.SceneChange("Stage_2", true);

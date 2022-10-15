@@ -44,5 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb09a66762227df42a62a9fc97e4ec39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGamePlay: 1
+  isGamePlay: 0
+  isGamePadOK: 0
+  isStartCount: 0
+  isGameEnd: 0
+  isPause: 0
   BanmenManagerObj: {fileID: 0}
+  GamePadSelectObj: {fileID: 0}
+  PlayerManagerObj: {fileID: 0}
+  FloorManagerObj: {fileID: 0}

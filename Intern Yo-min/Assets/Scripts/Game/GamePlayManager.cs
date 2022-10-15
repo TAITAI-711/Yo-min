@@ -1,5 +1,6 @@
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 {
@@ -20,7 +21,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     {
         if (this != Instance)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
             return;
         }
         DontDestroyOnLoad(this.gameObject); // ÉVÅ[ÉìÇ™ïœÇÌÇ¡ÇƒÇ‡éÄÇ»Ç»Ç¢
@@ -39,5 +40,14 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     private void FixedUpdate()
     {
         
+    }
+
+    public void Reset()
+    {
+        isGamePlay = false;
+        isGamePadOK = false;
+        isStartCount = false;
+        isGameEnd = false;
+        isPause = false;
     }
 }

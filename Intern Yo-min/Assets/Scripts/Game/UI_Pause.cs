@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UI_Pause : MonoBehaviour
 {
     [SerializeField] private GameObject UI_PausePanelObj;
+    [SerializeField] private GameObject FirstSelectObj;
 
     private void Awake()
     {
@@ -23,21 +25,45 @@ public class UI_Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Joystick_0_Button_Start") && GamePlayManager.Instance.isGamePlay)
+        if (Input.GetButtonDown("Joystick_0_Button_Start") && (GamePlayManager.Instance.isGamePlay || GamePlayManager.Instance.isGameEnd))
         {
-            GamePlayManager.Instance.isPause = !GamePlayManager.Instance.isPause;
-
-            // ポーズ処理
-            if (GamePlayManager.Instance.isPause)
-            {
-                Time.timeScale = 0.0f;
-                UI_PausePanelObj.SetActive(true);
-            }
-            else
-            {
-                Time.timeScale = 1.0f;
-                UI_PausePanelObj.SetActive(false);
-            }
+            Pause();    // ポーズ処理
         }
+    }
+
+
+    // ポーズ処理
+    private void Pause()
+    {
+        GamePlayManager.Instance.isPause = !GamePlayManager.Instance.isPause;
+
+        if (GamePlayManager.Instance.isPause)
+        {
+            Time.timeScale = 0.0f;
+            UI_PausePanelObj.SetActive(true);
+            EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(FirstSelectObj);
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(null);
+            UI_PausePanelObj.SetActive(false);
+        }
+    }
+
+
+    public void Button_UnPause()
+    {
+        Pause(); // ポーズ処理
+    }
+
+    public void Button_StageSelect()
+    {
+        SceneChangeManager.Instance.SceneChange("StageSelectScene", true);
+    }
+
+    public void Button_Title()
+    {
+        SceneChangeManager.Instance.SceneChange("TitleScene", true);
     }
 }

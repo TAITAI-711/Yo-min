@@ -11,7 +11,7 @@ public class SceneChangeManager : SingletonMonoBehaviour<SceneChangeManager>
     {
         if (this != Instance)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
             return;
         }
 
@@ -39,8 +39,17 @@ public class SceneChangeManager : SingletonMonoBehaviour<SceneChangeManager>
         NextSceneName = nextSceneName;
 
         if (isFade)
+        {
             FadeManager.Instance.FadeStart(NextSceneName, FADE_KIND.FADE_SCENECHANGE);
+        }            
         else
+        {
             SceneManager.LoadScene(NextSceneName);
+
+            Time.timeScale = 1.0f;
+
+            if (GamePlayManager.Instance != null)
+                GamePlayManager.Instance.Reset();
+        }
     }
 }

@@ -22,6 +22,14 @@ public class UI_Time : MonoBehaviour
         TimeObj = GetComponent<TextMeshProUGUI>();
     }
 
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+            NowTime -= 10.0f;
+    }
+
+
     // Update is called once per frame
     void FixedUpdate()
     {

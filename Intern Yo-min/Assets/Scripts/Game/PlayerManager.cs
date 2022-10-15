@@ -46,6 +46,8 @@ public class PlayerManager : MonoBehaviour
     {
         GamePlayManager.Instance.PlayerManagerObj = this;
 
+        isOnce = false;
+
         PlayerMoveObj = GetComponentsInChildren<PlayerMove>();
         UI_OseroObj = GetComponentsInChildren<UI_Osero>();
         UI_OseroPanelObj = GetComponentInChildren<UI_OseroPanel>();

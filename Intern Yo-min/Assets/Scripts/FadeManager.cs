@@ -45,7 +45,7 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
     {
         if (this != Instance)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
             return;
         }
 
@@ -113,8 +113,8 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
                         break;
                 }
                 
-                //NowTime += Time.unscaledDeltaTime; // ŠÔ‰ÁZ
-                NowTime += Time.deltaTime; // ŠÔ‰ÁZ
+                NowTime += Time.unscaledDeltaTime; // ŠÔ‰ÁZ
+                //NowTime += Time.deltaTime; // ŠÔ‰ÁZ(‚±‚Á‚¿‚¶‚áƒ_ƒ)
 
                 if (FadeColor.a >= 1.0f)
                 {
@@ -135,8 +135,8 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
                         break;
                 }
 
-                //NowTime += Time.unscaledDeltaTime; // ŠÔ‰ÁZ
-                NowTime += Time.deltaTime; // ŠÔ‰ÁZ
+                NowTime += Time.unscaledDeltaTime; // ŠÔ‰ÁZ
+                //NowTime += Time.deltaTime; // ŠÔ‰ÁZ(‚±‚Á‚¿‚¶‚áƒ_ƒ)
 
                 if (FadeColor.a <= 0.0f)
                 {

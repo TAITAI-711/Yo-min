@@ -13,7 +13,7 @@ public class Logo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Joystick_0_Button_B"))
         {
             //Debug.Log("éüÇÃÉVÅ[Éì");
             SceneChangeManager.Instance.SceneChange("TitleScene", true);
