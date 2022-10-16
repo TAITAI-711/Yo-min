@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("プレイヤーの移動量(何秒で最大速度に達するか)"), Range(0.05F, 3.0F)]
     public float MovePow = 0.2f;
     [Tooltip("プレイヤーの最大移動量(1秒間に動く距離)"), Range(10.0F, 150.0F)]
-    public float MaxMovePow = 10.0f;
+    public float MaxMovePow = 50.0f;
     [Tooltip("プレイヤーの移動量減少値(入力していない時の抵抗値)"), Range(0.0001F, 0.05F)]
     public float DownMovePow = 0.05f;
     [Tooltip("プレイヤーのオセロを飛ばすチャージ速度(秒)"), Range(0.1F, 3F)]
@@ -38,25 +38,26 @@ public class PlayerMove : MonoBehaviour
     public EnumOseroShootType OseroShootType = EnumOseroShootType.Type1;
 
     [SerializeField, Tooltip("プレイヤー同士の衝突時の跳ね返り量"), Range(0.0F, 800.0F)]
-    private float PlayerCrashPow = 0.0f;
+    private float PlayerCrashPow = 200.0f;
 
     [SerializeField, Tooltip("プレイヤーが移動方向に合わせて回転するか")]
-    private bool isPlayerRotate = false;
+    private bool isPlayerRotate = true;
 
 
     [Header("[ オセロ設定 ]")]
     [Tooltip("オセロの最大飛距離マス数"), Range(1F, 9F)] 
-    public float MaxOseroMove = 3.0f;    // オセロの最大飛距離マス数
+    public float MaxOseroMove = 5.0f;    // オセロの最大飛距離マス数
     [Tooltip("オセロの重力"), Range(1F, 200F)] 
-    public float OseroGravity = 9.8f;    // オセロの重力
+    public float OseroGravity = 100.0f;    // オセロの重力
 
     [SerializeField, Range(5F, 85F), Tooltip("射出する角度")]
-    public float ThrowingAngle;
+    public float ThrowingAngle = 45.0f;
 
     [SerializeField, Tooltip("オセロの回転量(1.0fで1秒間に1回転)"), Range(0.0F, 10.0F)]
-    private float OseroRotate = 0.0f;
+    private float OseroRotate = 6.0f;
 
     private Rigidbody rb;
+    private Collider cd;
 
     // プレイヤーの向き
     [HideInInspector] public Vector2 ShootAngle;   // 投げる向き
@@ -71,21 +72,29 @@ public class PlayerMove : MonoBehaviour
     private bool isOldPress = false; // 前のフレームで押したか
 
     private MeshRenderer Mesh = null; // プレイヤーのメッシュレンダラー
+    private SkinnedMeshRenderer SMesh = null; // プレイヤーのスキンメッシュレンダラー
+
+    private Animator AnimatorObj = null; // プレイヤーのアニメーター
 
     // Start is called before the first frame update
     void Start()
     {
         // 初期化
         rb = gameObject.GetComponent<Rigidbody>();
+        cd = gameObject.GetComponent<Collider>();
         ChargePow = 0.0f;
         NowChargeTime = 0.0f;
         NowReChargeTime = 0.0f;
+
+        AnimatorObj = GetComponent<Animator>();
 
 
         // 初期のプレイヤーの向き
         ShootAngle.x = 0.0f - transform.position.x;
         ShootAngle.y = 0.0f - transform.position.z;
         ShootAngle = ShootAngle.normalized;
+
+        PlayerRotate();
 
         // 衝突判定消す
         //if (PlayerCrashPow <= 0.0f)
@@ -149,7 +158,7 @@ public class PlayerMove : MonoBehaviour
         {
             // 回転
             Vector3 Vec = new Vector3(ShootAngle.x, 0.0f, ShootAngle.y);
-            transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vec);
+            transform.rotation = Quaternion.LookRotation(Vec);
         }
     }
 
@@ -199,7 +208,7 @@ public class PlayerMove : MonoBehaviour
         //UnityEngine.Debug.Log(Vec);
 
         //スティックの入力が一定以上ない場合は反映されない
-        if (Mathf.Abs(Vec.magnitude) > 0.7f)
+        if (Mathf.Abs(Vec.magnitude) > 0.6f)
         {
             //UnityEngine.Debug.Log(Vec.normalized);
             ShootAngle = Vec.normalized;
@@ -225,45 +234,18 @@ public class PlayerMove : MonoBehaviour
         {
             if (isOldPress)
             {
-                // オセロの生成座標
-                Vector3 OseroPos = transform.position;
-                OseroPos.y += 6.0f;
-
-                // オセロ生成
-                GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
-                Osero OseroObj = osero.GetComponent<Osero>();
-                GamePlayManager.Instance.FloorManagerObj.FloorObj.SetFieldOsero(OseroObj);
-
-                // 色設定
-                OseroObj.SetOseroType(PlayerOseroType);
-
-                // サイズ設定
-                //Vector3 OseroSize = osero.transform.localScale;
-                //OseroSize.x = BanmenObj.YokoLength - OseroScaleDown;
-                //OseroSize.y = 1.0f;
-                //OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
-                //osero.transform.localScale = OseroSize;
-
-                // 着地座標
-                Vector3 EndPos = new Vector3
-                    (
-                        OseroPos.x + ShootAngle.x * MaxOseroMove * GamePlayManager.MasuScaleXZ * ChargePow,
-                        GamePlayManager.MasuScaleY, 
-                        OseroPos.z + ShootAngle.y * MaxOseroMove * GamePlayManager.MasuScaleXZ * ChargePow
-                    );
-
-                OseroObj.Move(OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate);
-
-                // チャージ終了
-                NowChargeTime = 0.0f;
-                ChargePow = 0.0f;
-                NowReChargeTime = ReChargeTime;
+                if (AnimatorObj != null)
+                    AnimatorObj.SetBool("isThrow", true);
             }
 
             isOldPress = false;
         }
         else if (NowReChargeTime <= 0.0f)
         {
+            if (AnimatorObj != null && AnimatorObj.GetBool("isThrow"))
+                return;
+
+
             isOldPress = true;
 
             // チャージ処理
@@ -281,6 +263,47 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    public void OseroThrow()
+    {
+        // オセロの生成座標
+        Vector3 OseroPos = transform.position;
+        OseroPos.y += 18.0f;
+
+        // オセロ生成
+        GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
+        Osero OseroObj = osero.GetComponent<Osero>();
+        GamePlayManager.Instance.FloorManagerObj.FloorObj.SetFieldOsero(OseroObj);
+
+        // 色設定
+        OseroObj.SetOseroType(PlayerOseroType);
+
+        // サイズ設定
+        //Vector3 OseroSize = osero.transform.localScale;
+        //OseroSize.x = BanmenObj.YokoLength - OseroScaleDown;
+        //OseroSize.y = 1.0f;
+        //OseroSize.z = BanmenObj.TateLength - OseroScaleDown;
+        //osero.transform.localScale = OseroSize;
+
+        // 着地座標
+        Vector3 EndPos = new Vector3
+            (
+                OseroPos.x + ShootAngle.x * MaxOseroMove * GamePlayManager.MasuScaleXZ * ChargePow,
+                GamePlayManager.MasuScaleY,
+                OseroPos.z + ShootAngle.y * MaxOseroMove * GamePlayManager.MasuScaleXZ * ChargePow
+            );
+
+        // オセロ飛ばす
+        OseroObj.Move(OseroGravity, ThrowingAngle, OseroPos, EndPos, OseroRotate);
+
+        // チャージ終了
+        NowChargeTime = 0.0f;
+        ChargePow = 0.0f;
+        NowReChargeTime = ReChargeTime;
+
+        if (AnimatorObj != null)
+            AnimatorObj.SetBool("isThrow", false);
+    }
+
     // プレイヤーの移動座標の固定処理
     private void PlayerMoveMax()
     {
@@ -289,9 +312,9 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 MaxPos = GamePlayManager.Instance.FloorManagerObj.PlayerMoveMaxObj.PlayerMoveMaxScale * 0.5f;
 
-        MaxPos.x -= transform.localScale.x * 0.5f;
-        MaxPos.y -= transform.localScale.y * 0.5f;
-        MaxPos.z -= transform.localScale.z * 0.5f;
+        MaxPos.x -= cd.bounds.size.x * 0.5f;
+        MaxPos.y -= cd.bounds.size.y * 0.5f;
+        MaxPos.z -= cd.bounds.size.z * 0.5f;
 
         Pos.x = Mathf.Clamp(Pos.x, -MaxPos.x, MaxPos.x);
         Pos.y = Mathf.Clamp(Pos.y, -MaxPos.y, MaxPos.y);
@@ -343,8 +366,8 @@ public class PlayerMove : MonoBehaviour
         //Debug.Log("Y:" + -Input.GetAxis("Joystick_1_LeftAxis_Y"));
 
 
-        // 入力していたら
-        if (Vec.x != 0 || Vec.y != 0)
+        //スティックの入力が一定以上ない場合は反映されない
+        if (Mathf.Abs(Vec.magnitude) > 0.6f)
         {
             Vec.Normalize();
 
@@ -388,11 +411,14 @@ public class PlayerMove : MonoBehaviour
     {
         PlayerOseroType = playerOseroType;
 
-        if (Mesh == null)
+        if ((Mesh = GetComponent<MeshRenderer>()) != null)
         {
-            Mesh = GetComponent<MeshRenderer>();
+            Mesh.material = PlayerOseroType.PlayerMaterial;
         }
 
-        Mesh.material = PlayerOseroType.PlayerMaterial;
+        if ((SMesh = GetComponentInChildren<SkinnedMeshRenderer>()) != null)
+        {
+            SMesh.material = PlayerOseroType.PlayerMaterial;
+        }
     }
 }

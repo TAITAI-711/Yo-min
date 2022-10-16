@@ -25,11 +25,17 @@ public class PlayerManager : MonoBehaviour
     [System.Serializable]
     public struct PlayerOseroTypeInfo
     {
-        [Tooltip("プレイヤーのオセロマテリアル")]
+        [Tooltip("プレイヤーのマテリアル")]
         public Material PlayerMaterial;
+
+
+        [Tooltip("プレイヤーのオセロマテリアル")]
+        public Material OseroMaterial;
+
 
         [Tooltip("プレイヤーのオセロの色")]
         public EnumOseroType OseroType;
+
 
         [Tooltip("プレイヤーのオセロのUI")]
         public Sprite UI_OseroImage;

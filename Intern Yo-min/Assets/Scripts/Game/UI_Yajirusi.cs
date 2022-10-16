@@ -7,6 +7,9 @@ public class UI_Yajirusi : MonoBehaviour
 {
     private PlayerMove PlayerObj;
 
+    private static float YajirusiLengthOfsetX = 8.0f;
+    private static float YajirusiLengthOfsetY = 6.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,22 +41,26 @@ public class UI_Yajirusi : MonoBehaviour
 
         // ç¿ïW
         //Vector3 Pos = PlayerObj.transform.position + new Vector3(0.0f, 2.0f, 0.0f) * PlayerObj.transform.localScale.y;
-        Vector3 Pos = PlayerObj.transform.position;
-        float PosX = 2.0f * PlayerObj.transform.localScale.x;
-        Pos.x += PosX; // âEÇäÓèÄÇ…Ç∏ÇÁÇ∑
+
+
+        Vector3 OriginPos = PlayerObj.transform.position + new Vector3(0, YajirusiLengthOfsetY, 0); // è„Ç…äÓèÄÇÇ∏ÇÁÇ∑
+        Vector3 TargetPos = OriginPos + new Vector3(YajirusiLengthOfsetX, 0, 0); // âEÇ…Ç∏ÇÁÇ∑
 
         float Angle = Calculation.TwoPointAngle360(Vector2.right, PlayerObj.ShootAngle);
         Angle -= 180.0f;
         Angle *= 2.0f;
+
         //Debug.Log(Angle);
-        VecQuaternion Vq = Calculation.PointRotate(PlayerObj.transform.position, Pos, Angle, Vector3.up);
+
+        VecQuaternion Vq = Calculation.PointRotate(OriginPos, TargetPos, Angle, Vector3.up);
         transform.position = Vq.Pos;
 
         // âÒì]
-        float rad = PlayerObj.ThrowingAngle * Mathf.Deg2Rad;
+        //float rad = PlayerObj.ThrowingAngle * Mathf.Deg2Rad;
         //Vector3 Vec = new Vector3(PlayerObj.PlayerAngle.x, Mathf.Tan(rad), PlayerObj.PlayerAngle.y);
-        Vector3 Vec = new Vector3(PlayerObj.ShootAngle.x, 0.0f, PlayerObj.ShootAngle.y);
 
-        transform.rotation = Quaternion.FromToRotation(Vector3.up, Vec);
+
+        Vector3 Vec = new Vector3(PlayerObj.ShootAngle.x, 0.0f, PlayerObj.ShootAngle.y);
+        transform.rotation = Quaternion.LookRotation(Vector3.up, Vec);
     }
 }

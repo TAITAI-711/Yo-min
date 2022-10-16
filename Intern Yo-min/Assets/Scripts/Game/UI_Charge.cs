@@ -21,7 +21,6 @@ public class UI_Charge : MonoBehaviour
     void Start()
     {
         PlayerObj = GetComponentInParent<PlayerMove>();
-        //SliderObj = GetComponent<Slider>();
     }
 
     // Update is called once per frame
@@ -31,7 +30,6 @@ public class UI_Charge : MonoBehaviour
             return;
 
 
-        Vector3 Parent = transform.parent.transform.localRotation.eulerAngles;
 
         // UI‚ÌŒü‚«C³
         transform.rotation = StartRotate;

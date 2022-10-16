@@ -161,7 +161,7 @@ public class Osero : MonoBehaviour
             OseroMesh = GetComponent<MeshRenderer>();
         }
 
-        OseroMesh.material = PlayerOseroType.PlayerMaterial;
+        OseroMesh.material = PlayerOseroType.OseroMaterial;
     }
 
     public PlayerManager.PlayerOseroTypeInfo GetOseroType()
