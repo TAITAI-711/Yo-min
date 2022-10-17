@@ -2573,7 +2573,7 @@ Transform:
   m_GameObject: {fileID: 736655654}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.3, z: 0}
-  m_LocalScale: {x: 90, y: 4.6, z: 90}
+  m_LocalScale: {x: 110, y: 4.6, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 614711760}
@@ -2592,8 +2592,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MasuPrefab: {fileID: 4450539059861020682, guid: 664fbd2f0fdf779498297cb09e2aca04, type: 3}
-  Tate: 9
-  Yoko: 9
+  Tate: 5
+  Yoko: 11
   TateLength: 0
   YokoLength: 0
 --- !u!114 &736655660
