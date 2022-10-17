@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OseroPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
-  PlayerType: 0
+  PlayerType: 3
   MovePow: 0.2
   MaxMovePow: 50
   DownMovePow: 0.05
@@ -1701,7 +1701,7 @@ PrefabInstance:
       objectReference: {fileID: 805321618}
     - target: {fileID: 4695615363830053421, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4951688521663072697, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1961,7 +1961,7 @@ PrefabInstance:
       objectReference: {fileID: 805321618}
     - target: {fileID: 4695615363830053421, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4951688521663072697, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5269,7 +5269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OseroPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
-  PlayerType: 0
+  PlayerType: 2
   MovePow: 0.2
   MaxMovePow: 50
   DownMovePow: 0.05
@@ -5826,7 +5826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OseroPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
-  PlayerType: 0
+  PlayerType: 1
   MovePow: 0.2
   MaxMovePow: 50
   DownMovePow: 0.05
@@ -6953,7 +6953,7 @@ PrefabInstance:
       objectReference: {fileID: 805321618}
     - target: {fileID: 4695615363830053421, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4951688521663072697, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7735,6 +7735,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: walk (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5534417145874685896, guid: 3872045f758f1e146a73bc8d9e071d03, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6348102773639155910, guid: 3872045f758f1e146a73bc8d9e071d03, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6738861570337579858, guid: 3872045f758f1e146a73bc8d9e071d03, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7751,6 +7759,10 @@ PrefabInstance:
     - target: {fileID: 3212895283335996746, guid: 1ab5c57ac2a660241887439233168c57, type: 3}
       propertyPath: m_Name
       value: EventSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212895283335996746, guid: 1ab5c57ac2a660241887439233168c57, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3212895283335996853, guid: 1ab5c57ac2a660241887439233168c57, type: 3}
       propertyPath: m_RootOrder
