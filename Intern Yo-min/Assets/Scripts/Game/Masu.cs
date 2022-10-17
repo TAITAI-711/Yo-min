@@ -18,7 +18,10 @@ public class Masu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (OseroObj != null)
+        {
+            OseroObj.OseroSet(transform.position + new Vector3(0, GamePlayManager.MasuScaleY + OseroObj.transform.localScale.y, 0));
+        }
     }
 
     public void SetOsero(Osero osero)
@@ -204,5 +207,10 @@ public class Masu : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void SetParent(Transform ParentTransform)
+    {
+        transform.parent = ParentTransform;
     }
 }

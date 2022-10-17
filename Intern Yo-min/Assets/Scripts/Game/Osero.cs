@@ -69,10 +69,11 @@ public class Osero : MonoBehaviour
             //Debug.Log("盤面と当たった");
 
             // 盤面より高いなら
-            //if (transform.position.y >= collision.gameObject.transform.position.y - GamePlayManager.MasuScaleY * 0.5f)
+            //if (transform.position.y >= collision.gameObject.transform.position.y + GamePlayManager.MasuScaleY)
 
             // 盤面の内側なら
-            if (transform.position.x <= collision.gameObject.transform.position.x + collision.gameObject.transform.localScale.x * 0.5f &&
+            if (transform.position.y >= collision.gameObject.transform.position.y + GamePlayManager.MasuScaleY &&
+            transform.position.x <= collision.gameObject.transform.position.x + collision.gameObject.transform.localScale.x * 0.5f &&
             transform.position.x >= collision.gameObject.transform.position.x - collision.gameObject.transform.localScale.x * 0.5f &&
             transform.position.z <= collision.gameObject.transform.position.z + collision.gameObject.transform.localScale.z * 0.5f &&
             transform.position.z >= collision.gameObject.transform.position.z - collision.gameObject.transform.localScale.z * 0.5f)
