@@ -72,7 +72,7 @@ public class Osero : MonoBehaviour
             //if (transform.position.y >= collision.gameObject.transform.position.y + GamePlayManager.MasuScaleY)
 
             // 盤面の内側なら
-            if (transform.position.y >= collision.gameObject.transform.position.y + GamePlayManager.MasuScaleY &&
+            if (transform.position.y >= collision.gameObject.transform.position.y + GamePlayManager.MasuScaleY * 0.5f &&
             transform.position.x <= collision.gameObject.transform.position.x + collision.gameObject.transform.localScale.x * 0.5f &&
             transform.position.x >= collision.gameObject.transform.position.x - collision.gameObject.transform.localScale.x * 0.5f &&
             transform.position.z <= collision.gameObject.transform.position.z + collision.gameObject.transform.localScale.z * 0.5f &&

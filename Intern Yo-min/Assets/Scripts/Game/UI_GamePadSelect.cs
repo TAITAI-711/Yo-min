@@ -98,6 +98,13 @@ public class UI_GamePadSelect : MonoBehaviour
                                         GamePlayManager.Instance.isStartCount = true;
                                         //GamePlayManager.Instance.isGamePlay = true;
 
+                                        GamePlayManager.Instance.Players = new GamePlayManager.PlayerInfo[PlayerNum];
+                                        for (int k = 0; k < PlayerNum; k++)
+                                        {
+                                            GamePlayManager.Instance.Players[k].OseroNum = 0;
+                                            GamePlayManager.Instance.Players[k].OseroType = (PlayerManager.EnumOseroType)k;
+                                        }
+
                                         gameObject.SetActive(false);
                                     }
                                     break;

@@ -12,7 +12,7 @@ public class UI_Time : MonoBehaviour
     [Tooltip("1ƒQ[ƒ€‚ÌŠÔ(•b)"), Range(30.0F, 180.0F)]
     public float GameTime = 120.0f;
 
-    private float NowTime = 0.0f;
+    public float NowTime = 0.0f;
 
     // Start is called before the first frame update
     void Start()

@@ -49,7 +49,7 @@ public class SceneChangeManager : SingletonMonoBehaviour<SceneChangeManager>
             Time.timeScale = 1.0f;
 
             if (GamePlayManager.Instance != null)
-                GamePlayManager.Instance.Reset();
+                GamePlayManager.Instance.GameReset();
         }
     }
 }

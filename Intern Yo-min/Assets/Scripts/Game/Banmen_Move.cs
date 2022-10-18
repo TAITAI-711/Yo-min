@@ -49,6 +49,9 @@ public class Banmen_Move : Banmen
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!GamePlayManager.Instance.isGamePlay)
+            return;
+
         if (NowStopTime <= 0.0f)
         {
             // ‘OˆÚ“®

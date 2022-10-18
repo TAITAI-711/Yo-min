@@ -1,6 +1,7 @@
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static PlayerManager;
 
 public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 {
@@ -17,6 +18,14 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     [ReadOnly] public static readonly float MasuScaleXZ = 10.0f;
 
 
+    public struct PlayerInfo
+    {
+        public int OseroNum;          // プレイヤーのオセロの枚数保存用
+        public EnumOseroType OseroType;    // プレイヤーのオセロの種類
+    }
+    public PlayerInfo[] Players;
+
+
     private void Awake()
     {
         if (this != Instance)
@@ -26,8 +35,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         }
         DontDestroyOnLoad(this.gameObject); // シーンが変わっても死なない
 
-        isGamePlay = false;
-        isGamePadOK = false;
+        GameReset();
     }
 
     // Start is called before the first frame update
@@ -42,12 +50,34 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         
     }
 
-    public void Reset()
+    public void GameReset()
     {
         isGamePlay = false;
         isGamePadOK = false;
         isStartCount = false;
         isGameEnd = false;
         isPause = false;
+    }
+
+    public void AllReset()
+    {
+        GameReset();
+
+        Players = null;
+    }
+
+    // リザルト前にプレイヤーのオセロの数保存処理
+    public void PlayerOseroNumSet()
+    {
+        for (int i = 0; i < PlayerManagerObj.UI_OseroObj.Length; i++)
+        {
+            for (int j = 0; j < Players.Length; j++)
+            {
+                if (PlayerManagerObj.UI_OseroObj[i].PlayerOseroType.OseroType == Players[j].OseroType)
+                {
+                    Players[i].OseroNum = PlayerManagerObj.UI_OseroObj[i].Num;
+                }
+            }
+        }
     }
 }

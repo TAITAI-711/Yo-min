@@ -189,6 +189,7 @@ public class PlayerMove : MonoBehaviour
     {
         Vector2 Vec = new Vector2(0, 0);
 
+        // オセロの投げ方
         switch (OseroShootType)
         {
             case EnumOseroShootType.Type1:
@@ -207,8 +208,8 @@ public class PlayerMove : MonoBehaviour
 
         //UnityEngine.Debug.Log(Vec);
 
-        //スティックの入力が一定以上ない場合は反映されない
-        if (Mathf.Abs(Vec.magnitude) > 0.6f)
+        //スティックの入力が一定以上ない場合は反映されない　＆　投げてない
+        if (Mathf.Abs(Vec.magnitude) > 0.6f && !AnimatorObj.GetBool("isThrow"))
         {
             //UnityEngine.Debug.Log(Vec.normalized);
             ShootAngle = Vec.normalized;
@@ -221,27 +222,33 @@ public class PlayerMove : MonoBehaviour
     {
         isPress = false;
 
-        // 再使用時間更新
+        // リチャージ時間更新
         if (NowReChargeTime > 0.0f)
             NowReChargeTime -= Time.deltaTime;
 
+        // Rトリガー入力
         if (Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_Button_L2_R2") > 0)
         {
             isPress = true;
         }
 
+        // 入力ない
         if (!isPress)
         {
+            // 1回前おしてた
             if (isOldPress)
             {
+                // 投げる
                 if (AnimatorObj != null)
                     AnimatorObj.SetBool("isThrow", true);
             }
 
             isOldPress = false;
         }
+        // 押してる　＆　リチャージ完了
         else if (NowReChargeTime <= 0.0f)
         {
+            // 投げ途中ならチャージしない
             if (AnimatorObj != null && AnimatorObj.GetBool("isThrow"))
                 return;
 
@@ -366,8 +373,8 @@ public class PlayerMove : MonoBehaviour
         //Debug.Log("Y:" + -Input.GetAxis("Joystick_1_LeftAxis_Y"));
 
 
-        //スティックの入力が一定以上ない場合は反映されない
-        if (Mathf.Abs(Vec.magnitude) > 0.6f)
+        //スティックの入力が一定以上ない場合は反映されない　＆　なげてない
+        if (Mathf.Abs(Vec.magnitude) > 0.6f && !AnimatorObj.GetBool("isThrow"))
         {
             Vec.Normalize();
 
