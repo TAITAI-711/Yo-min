@@ -76,8 +76,11 @@ public class PlayerMove : MonoBehaviour
 
     private Animator AnimatorObj = null; // プレイヤーのアニメーター
 
-    // Start is called before the first frame update
-    void Start()
+    // 氷ギミック用
+    private float StartDownMovePow; // 初期移動減少量
+
+
+    private void Awake()
     {
         // 初期化
         rb = gameObject.GetComponent<Rigidbody>();
@@ -95,6 +98,9 @@ public class PlayerMove : MonoBehaviour
         ShootAngle = ShootAngle.normalized;
 
         PlayerRotate();
+
+        // 初期移動速度減少量
+        StartDownMovePow = DownMovePow;
 
         // 衝突判定消す
         //if (PlayerCrashPow <= 0.0f)
@@ -182,6 +188,40 @@ public class PlayerMove : MonoBehaviour
             }
         }
     }
+
+    // ギミック衝突
+
+    private void OnTriggerEnter(Collider other)
+    {
+        HitGimmick_Ice(other);
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        HitGimmick_Ice(other);
+    }
+    // 氷処理
+    private void HitGimmick_Ice(Collider other)
+    {
+        if (other.gameObject.CompareTag("Gimmick_Ice"))
+        {
+            if (transform.position.x <= other.gameObject.transform.position.x + other.gameObject.transform.localScale.x &&
+                transform.position.x >= other.gameObject.transform.position.x - other.gameObject.transform.localScale.x &&
+                transform.position.z <= other.gameObject.transform.position.z + other.gameObject.transform.localScale.z &&
+                transform.position.z >= other.gameObject.transform.position.z - other.gameObject.transform.localScale.z)
+            {
+                float Pow = (1.0f - other.GetComponent<Gimmick_Ice>().IcePow) * StartDownMovePow;
+
+                DownMovePow = Pow;
+
+                if (PlayerType == EnumPlayerType.Player2)
+                {
+                    Debug.Log("当たってる");
+                    Debug.Log(DownMovePow);
+                } 
+            }
+        }
+    }
+
 
 
     // プレイヤーがオセロを飛ばす向きの処理
@@ -397,6 +437,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    // プレイヤーの移動量減少処理
     private void PlayerMoveDown()
     {
         Vector3 Vel = rb.velocity; // ベロシティ
