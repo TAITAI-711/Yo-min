@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
     public float MovePow = 0.2f;
     [Tooltip("プレイヤーの最大移動量(1秒間に動く距離)"), Range(10.0F, 150.0F)]
     public float MaxMovePow = 50.0f;
-    [Tooltip("プレイヤーの移動量減少値(入力していない時の抵抗値)"), Range(0.0001F, 0.05F)]
+    [Tooltip("プレイヤーの移動量減少値(入力していない時の抵抗値)"), Range(0.0001F, 0.2F)]
     public float DownMovePow = 0.05f;
     [Tooltip("プレイヤーのオセロを飛ばすチャージ速度(秒)"), Range(0.1F, 3F)]
     public float ChargeSpeed = 0.5f;
@@ -79,6 +79,10 @@ public class PlayerMove : MonoBehaviour
     // 氷ギミック用
     private float StartDownMovePow; // 初期移動減少量
 
+    // プレイヤーの入力のみ
+    //private Vector2 PlayerMoveAngleVec = Vector2.zero;
+    //private Vector2 PlayerShootAngleVec = Vector2.zero;
+
 
     private void Awake()
     {
@@ -123,12 +127,15 @@ public class PlayerMove : MonoBehaviour
         //UnityEngine.Debug.Log(currentConnectionCount);
     }
 
-    // Update is called once per frame
+    // 移動
     void Update()
     {
-        if (GamePlayManager.Instance.isPause)
-            return;
+        
+    }
 
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         if (GamePlayManager.Instance.isGamePlay)
         {
             // プレイヤーの移動処理
@@ -213,11 +220,11 @@ public class PlayerMove : MonoBehaviour
 
                 DownMovePow = Pow;
 
-                if (PlayerType == EnumPlayerType.Player2)
-                {
-                    Debug.Log("当たってる");
-                    Debug.Log(DownMovePow);
-                } 
+                //if (PlayerType == EnumPlayerType.Player2)
+                //{
+                //    Debug.Log("当たってる");
+                //    Debug.Log(DownMovePow);
+                //} 
             }
         }
     }
@@ -264,7 +271,7 @@ public class PlayerMove : MonoBehaviour
 
         // リチャージ時間更新
         if (NowReChargeTime > 0.0f)
-            NowReChargeTime -= Time.deltaTime;
+            NowReChargeTime -= Time.fixedDeltaTime;
 
         // Rトリガー入力
         if (Input.GetAxis(GamePlayManager.Instance.GamePadSelectObj.GamePadName_Player[(int)PlayerType] + "_Button_L2_R2") > 0)
@@ -296,7 +303,7 @@ public class PlayerMove : MonoBehaviour
             isOldPress = true;
 
             // チャージ処理
-            NowChargeTime += Time.deltaTime;
+            NowChargeTime += Time.fixedDeltaTime;
 
             if (NowChargeTime > ChargeSpeed)
             {
@@ -419,8 +426,8 @@ public class PlayerMove : MonoBehaviour
             Vec.Normalize();
 
             // 移動量加える
-            Vel.x += Pow * Vec.x * Time.deltaTime;
-            Vel.z += Pow * Vec.y * Time.deltaTime;
+            Vel.x += Pow * Vec.x * Time.fixedDeltaTime;
+            Vel.z += Pow * Vec.y * Time.fixedDeltaTime;
 
             // 最大移動量超えたら戻す
             if (Vel.x > MaxMovePow) Vel.x = MaxMovePow;

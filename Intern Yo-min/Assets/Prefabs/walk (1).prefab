@@ -1123,7 +1123,7 @@ MonoBehaviour:
   PlayerType: 0
   MovePow: 0.2
   MaxMovePow: 50
-  DownMovePow: 0.05
+  DownMovePow: 0.2
   ChargeSpeed: 0.5
   ReChargeTime: 0.5
   OseroShootType: 1
@@ -1513,7 +1513,7 @@ GameObject:
   - component: {fileID: 6268619763512722239}
   - component: {fileID: 8149944397064812533}
   - component: {fileID: 1815742973373612695}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Yajirusi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1904,11 +1904,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 468736584620257257, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 665522822895548480, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1110250186091571327, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Name
@@ -1916,11 +1916,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1110250186091571327, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1948805839572962656, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2939977720304764016, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Pivot.x
@@ -2024,7 +2024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3215293124507048978, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4523137661944115530, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Camera
@@ -2036,7 +2036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849500626917105499, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4951688521663072697, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2044,7 +2044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9173188475048777438, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39f52e509b424a5408f55d0895e0c156, type: 3}
