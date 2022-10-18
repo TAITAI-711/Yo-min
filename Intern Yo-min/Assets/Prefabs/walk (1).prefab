@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11cf871913712b478506cfe49a5e803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OseroPrefab: {fileID: 6098090975948006582, guid: a26cb1d0f111a53429f4a5aa618e5c31, type: 3}
+  OseroPrefab: {fileID: 4909094836362948853, guid: 55d67ff4a67d57046b3fc9b73be5757d, type: 3}
   PlayerType: 0
   MovePow: 0.2
   MaxMovePow: 50

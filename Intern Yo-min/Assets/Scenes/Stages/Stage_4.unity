@@ -2448,31 +2448,31 @@ MonoBehaviour:
   UI_GameTimeObj: {fileID: 0}
   PlayerOseroType:
   - PlayerMaterial: {fileID: 2100000, guid: 65807b6a787348748a8422fdc48e44d1, type: 2}
-    OseroMaterial: {fileID: 2100000, guid: 853a8cff5f324eb4aba0521c4e0552c8, type: 2}
+    OseroMaterial: {fileID: 2100000, guid: f36b6c48196729145a163a616d9fe1bb, type: 2}
     OseroType: 0
     UI_OseroImage: {fileID: 21300000, guid: f80e66b1e9cdc0a4c91d4132ebf837cc, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: 0b9d692954a72b8478b0567fbe820d70, type: 2}
-    OseroMaterial: {fileID: 2100000, guid: 13e3e31bb073bea43acc3508a6938736, type: 2}
+    OseroMaterial: {fileID: 2100000, guid: 848b07473daedbb42bd49c9488f218db, type: 2}
     OseroType: 1
     UI_OseroImage: {fileID: 21300000, guid: 482c3ec099f64094fa36c2f8d4aa0002, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: 424f6a09c53c41944a1963eade8f0124, type: 2}
-    OseroMaterial: {fileID: 2100000, guid: 47e0cb689031ce6429e349e5d8c643b9, type: 2}
+    OseroMaterial: {fileID: 2100000, guid: 1d614db34eb7e7d42a533b8868ab46db, type: 2}
     OseroType: 2
     UI_OseroImage: {fileID: 21300000, guid: 87ac1254da032b84d93be22389e240c3, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: ffe78d7852d62fc47a7f5a17bf2fe29f, type: 2}
-    OseroMaterial: {fileID: 2100000, guid: 16d7841bbed0ad24990f628a5d91bd31, type: 2}
+    OseroMaterial: {fileID: 2100000, guid: aac9bc8999f952b43a0f8c6d64247d0c, type: 2}
     OseroType: 3
     UI_OseroImage: {fileID: 21300000, guid: c71df922fea7b4249b4bdad8696569b9, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: 8f1788a95ddadbb4ba20c4131ee9a581, type: 2}
-    OseroMaterial: {fileID: 2100000, guid: 8f1788a95ddadbb4ba20c4131ee9a581, type: 2}
+    OseroMaterial: {fileID: 2100000, guid: 17692ca762cc5e14c8db3b29f88584d4, type: 2}
     OseroType: 4
     UI_OseroImage: {fileID: 21300000, guid: 353e1090adba8bc4c979d117febecc3b, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: 5ec4964c6a7faa446801ebd0c126c5e6, type: 2}
-    OseroMaterial: {fileID: 2100000, guid: 5ec4964c6a7faa446801ebd0c126c5e6, type: 2}
+    OseroMaterial: {fileID: 2100000, guid: 86e8c201b20a3dd4c82b000251d7d123, type: 2}
     OseroType: 5
     UI_OseroImage: {fileID: 21300000, guid: cefc0ce23c1c9e741bf85734ee423ab2, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: 9ce553a96a698204ea95812abf2b6f40, type: 2}
-    OseroMaterial: {fileID: 2100000, guid: 9ce553a96a698204ea95812abf2b6f40, type: 2}
+    OseroMaterial: {fileID: 2100000, guid: 7736644523864794d9b6146f6677cceb, type: 2}
     OseroType: 6
     UI_OseroImage: {fileID: 21300000, guid: 23bb2bd8c93a82448bbb6326b4cded05, type: 3}
 --- !u!114 &8701178654310034600

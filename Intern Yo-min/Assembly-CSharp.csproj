@@ -123,6 +123,7 @@
     <Compile Include="Assets\Scripts\Game\BanmenManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Game\Gimmick_Ice.cs" />
+    <Compile Include="Assets\Scripts\Game\Gimmick_Wind.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
