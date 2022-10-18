@@ -16,7 +16,7 @@ public class Banmen : MonoBehaviour
 
     public Masu[,] Masu;
 
-    private void OnValidate()
+    protected virtual void OnValidate()
     {
         gameObject.transform.localScale = new Vector3(
             Yoko * GamePlayManager.MasuScaleXZ, 
@@ -29,7 +29,7 @@ public class Banmen : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         //Yoko = Tate;
 
@@ -55,6 +55,7 @@ public class Banmen : MonoBehaviour
                 Masu[i, j] = Obj.GetComponent<Masu>();
                 Masu[i, j].BanmenObj = this;
                 Masu[i, j].MasuXY = new Vector2Int(i, j);
+                Masu[i, j].SetParent(this.transform);
 
                 // ÉTÉCÉYê›íË
                 //Vector3 MasuSize = Masu[i, j].transform.localScale;

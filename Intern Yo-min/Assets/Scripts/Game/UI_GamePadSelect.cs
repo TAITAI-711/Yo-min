@@ -82,7 +82,7 @@ public class UI_GamePadSelect : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Joystick_0_Button_B"))
                         {
-                            for (int j = 1; j <= 7; j++)
+                            for (int j = 1; j <= 10; j++)
                             {
                                 string NowGamePadName = "Joystick_" + j.ToString() + "_Button_B";
 
