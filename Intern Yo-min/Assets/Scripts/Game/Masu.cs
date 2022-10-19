@@ -40,6 +40,7 @@ public class Masu : MonoBehaviour
             //OseroObj.OseroSet(transform.position);
         }
 
+        // 設置エフェクト
         EffectManager.Instance.SetEffect("Test", transform.position + new Vector3(0, GamePlayManager.MasuScaleY + OseroObj.transform.localScale.y, 0), Quaternion.identity, 2.0f);
 
         // オセロをひっくり返す処理
