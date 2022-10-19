@@ -1,3 +1,4 @@
+using Unity.Collections;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -56,6 +57,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField, Tooltip("オセロの回転量(1.0fで1秒間に1回転)"), Range(0.0F, 10.0F)]
     private float OseroRotate = 6.0f;
 
+
     private Rigidbody rb;
     private Collider cd;
 
@@ -78,6 +80,7 @@ public class PlayerMove : MonoBehaviour
 
     // 氷ギミック用
     private float StartDownMovePow; // 初期移動減少量
+
 
     // プレイヤーの入力のみ
     //private Vector2 PlayerMoveAngleVec = Vector2.zero;
@@ -383,6 +386,7 @@ public class PlayerMove : MonoBehaviour
         // 力を加える処理
         Vector3 Vel = rb.velocity;          // ベロシティ
         float Pow = MaxMovePow / MovePow;   // 1秒間で加える量
+        Vector3 MaxMove = new Vector3(MaxMovePow, 0.0f, MaxMovePow);
 
         //if (Input.GetKey(KeyCode.W))
         //{
@@ -419,21 +423,94 @@ public class PlayerMove : MonoBehaviour
         //Debug.Log("X:" + Input.GetAxis("Joystick_1_LeftAxis_X"));
         //Debug.Log("Y:" + -Input.GetAxis("Joystick_1_LeftAxis_Y"));
 
-
         //スティックの入力が一定以上ない場合は反映されない　＆　なげてない
         if (Mathf.Abs(Vec.magnitude) > 0.6f && !AnimatorObj.GetBool("isThrow"))
         {
             Vec.Normalize();
 
             // 移動量加える
-            Vel.x += Pow * Vec.x * Time.fixedDeltaTime;
-            Vel.z += Pow * Vec.y * Time.fixedDeltaTime;
+            Vector3 MoveVel = new Vector3(Vec.x, 0.0f, Vec.y) * Pow * Time.fixedDeltaTime;
 
-            // 最大移動量超えたら戻す
-            if (Vel.x > MaxMovePow) Vel.x = MaxMovePow;
-            if (Vel.x < -MaxMovePow) Vel.x = -MaxMovePow;
-            if (Vel.z > MaxMovePow) Vel.z = MaxMovePow;
-            if (Vel.z < -MaxMovePow) Vel.z = -MaxMovePow;
+            // 風なし
+            if (GamePlayManager.Instance.Gimmick_WindObj == null || GamePlayManager.Instance.Gimmick_WindObj.WindInfo.Wind_Type == Gimmick_Wind.Enum_Wind_Type.None)
+            {
+                // 移動量増加
+                Vel += MoveVel;
+
+                // 最大移動量超えたら戻す
+                if (Vel.x > MaxMovePow) Vel.x = MaxMovePow;
+                if (Vel.x < -MaxMovePow) Vel.x = -MaxMovePow;
+                if (Vel.z > MaxMovePow) Vel.z = MaxMovePow;
+                if (Vel.z < -MaxMovePow) Vel.z = -MaxMovePow;
+            }
+            // 風あり
+            else
+            {
+                //+風方向に力加える
+
+                Gimmick_Wind.Wind_Info WindInfo = GamePlayManager.Instance.Gimmick_WindObj.WindInfo;
+
+                // 風移動増加量
+                if (!Mathf.Approximately(WindInfo.WindVec.x, 0))
+                {
+                    // X
+                    if (Mathf.Approximately(Mathf.Sign(WindInfo.WindVec.x), Mathf.Sign(MoveVel.x)))
+                    {
+                        MoveVel.x = MoveVel.x * WindInfo.PlayerMovePowUp;
+                    }
+                    else
+                    {
+                        MoveVel.x = MoveVel.x * WindInfo.PlayerMovePowDown;
+                    }
+                }
+                if (!Mathf.Approximately(WindInfo.WindVec.z, 0))
+                {
+                    // Z
+                    if (Mathf.Approximately(Mathf.Sign(WindInfo.WindVec.z), Mathf.Sign(MoveVel.z)))
+                    {
+                        MoveVel.z = MoveVel.z * WindInfo.PlayerMovePowUp;
+                    }
+                    else
+                    {
+                        MoveVel.z = MoveVel.z * WindInfo.PlayerMovePowDown;
+                    }
+                }
+
+                // 移動量増加
+                Vel += MoveVel;
+
+                // 風最大移動量
+                if (!Mathf.Approximately(WindInfo.WindVec.x, 0))
+                {
+                    // X
+                    if (Mathf.Approximately(Mathf.Sign(WindInfo.WindVec.x), Mathf.Sign(Vel.x)))
+                    {
+                        MaxMove.x = MaxMove.x * WindInfo.PlayerMovePowUp;
+                    }
+                    else
+                    {
+                        MaxMove.x = MaxMove.x * WindInfo.PlayerMovePowDown;
+                    }
+                }
+                if (!Mathf.Approximately(WindInfo.WindVec.z, 0))
+                {
+                    // Z
+                    if (Mathf.Approximately(Mathf.Sign(WindInfo.WindVec.z), Mathf.Sign(Vel.z)))
+                    {
+                        MaxMove.z = MaxMove.z * WindInfo.PlayerMovePowUp;
+                    }
+                    else
+                    {
+                        MaxMove.z = MaxMove.z * WindInfo.PlayerMovePowDown;
+                    }
+                }
+
+                // 最大移動量超えたら戻す
+                if (Vel.x > MaxMove.x) Vel.x = MaxMove.x;
+                if (Vel.x < -MaxMove.x) Vel.x = -MaxMove.x;
+                if (Vel.z > MaxMove.z) Vel.z = MaxMove.z;
+                if (Vel.z < -MaxMove.z) Vel.z = -MaxMove.z;
+            }
 
             rb.velocity = Vel; // 移動量変更
         }
@@ -457,9 +534,15 @@ public class PlayerMove : MonoBehaviour
         {
             Vel *= 1.0f - DownMovePow;
         }
-
         rb.velocity = Vel; // 移動量変更
     }
+
+    //// ギミックの力によるプレイヤーの移動
+    //private void WindPlayerMove()
+    //{
+
+    //}
+
 
     // プレイヤーのオセロのタイプセット
     public void SetPlayerOseroType(PlayerManager.PlayerOseroTypeInfo playerOseroType)

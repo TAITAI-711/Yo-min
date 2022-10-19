@@ -15,7 +15,7 @@ public class UI_Time : MonoBehaviour
     public float NowTime = 0.0f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         NowTime = GameTime;
 

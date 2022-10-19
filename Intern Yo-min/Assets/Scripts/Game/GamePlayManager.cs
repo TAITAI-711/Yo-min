@@ -14,6 +14,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     [ReadOnly] public UI_GamePadSelect GamePadSelectObj = null;
     [ReadOnly] public PlayerManager PlayerManagerObj = null;
     [ReadOnly] public FloorManager FloorManagerObj = null;
+    [ReadOnly] public Gimmick_Wind Gimmick_WindObj = null;
     [ReadOnly] public static readonly float MasuScaleY = 4.6f;
     [ReadOnly] public static readonly float MasuScaleXZ = 10.0f;
 
