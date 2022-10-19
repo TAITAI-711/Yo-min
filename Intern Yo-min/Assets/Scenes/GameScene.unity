@@ -1911,6 +1911,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EffectManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7426497692559219025, guid: 9c17299cab0f1e54bb3289ff07a8376f, type: 3}
+      propertyPath: EffectObj.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7426497692559219025, guid: 9c17299cab0f1e54bb3289ff07a8376f, type: 3}
+      propertyPath: EffectObj.Array.data[0].EffectObj
+      value: 
+      objectReference: {fileID: 6257044063349824563, guid: f44e1675d28867b41bae73a1ea077a2d, type: 3}
+    - target: {fileID: 7426497692559219025, guid: 9c17299cab0f1e54bb3289ff07a8376f, type: 3}
+      propertyPath: EffectObj.Array.data[0].EffectName
+      value: Test
+      objectReference: {fileID: 0}
     - target: {fileID: 7426497692559219026, guid: 9c17299cab0f1e54bb3289ff07a8376f, type: 3}
       propertyPath: m_RootOrder
       value: 11

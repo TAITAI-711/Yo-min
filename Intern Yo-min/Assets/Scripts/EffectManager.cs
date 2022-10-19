@@ -23,13 +23,14 @@ public class EffectManager : SingletonMonoBehaviour<EffectManager>
     }
 
 
-    public void SetEffect(string EffectName, Vector3 Pos, Quaternion Rot)
+    public void SetEffect(string EffectName, Vector3 Pos, Quaternion Rot, float Size)
     {
         for (int i = 0; i < EffectObj.Length; ++i)
         {
             if (EffectObj[i].EffectName == EffectName)
             {
                 GameObject Effect = Instantiate(EffectObj[i].EffectObj, Pos, Rot);
+                Effect.transform.localScale *= Size;
                 ParticleSystem[] particles;
                 particles = Effect.gameObject.GetComponentsInChildren<ParticleSystem>();
 

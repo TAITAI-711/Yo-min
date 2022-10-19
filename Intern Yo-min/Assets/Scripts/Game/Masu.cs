@@ -40,6 +40,8 @@ public class Masu : MonoBehaviour
             //OseroObj.OseroSet(transform.position);
         }
 
+        EffectManager.Instance.SetEffect("Test", transform.position + new Vector3(0, GamePlayManager.MasuScaleY + OseroObj.transform.localScale.y, 0), Quaternion.identity, 2.0f);
+
         // ƒIƒZƒ‚ğ‚Ğ‚Á‚­‚è•Ô‚·ˆ—
         PlayerManager.PlayerOseroTypeInfo MyOseroType = OseroObj.GetOseroType();
 
