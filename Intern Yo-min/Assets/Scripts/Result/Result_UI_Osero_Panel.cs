@@ -87,10 +87,27 @@ public class Result_UI_Osero_Panel : MonoBehaviour
             }
 
             // 順位表示
-            if (OseroNum == PlayerObjs[i].OseroNum &&
-                UI_OseroObjs[i].GetRankText() != PlayerObjs[i].RankNum.ToString())
+            if (OseroNum == PlayerObjs[i].OseroNum)
             {
-                UI_OseroObjs[i].SetRankText(PlayerObjs[i].RankNum.ToString() + "位");
+                string StText = "st";
+                switch (PlayerObjs[i].RankNum)
+                {
+                    case 1:
+                        StText = "st";
+                        break;
+                    case 2:
+                        StText = "nd";
+                        break;
+                    case 3:
+                        StText = "rd";
+                        break;
+                    case 4:
+                        StText = "th";
+                        break;
+                    default:
+                        break;
+                }
+                UI_OseroObjs[i].SetRankText(PlayerObjs[i].RankNum.ToString() + StText);
 
                 // アニメーション再生
                 if (PlayerObjs[i].RankNum == 1)
@@ -113,7 +130,7 @@ public class Result_UI_Osero_Panel : MonoBehaviour
             // 準備完了ボタン表示
             for (int i = 0; i < PlayerObjs.Length; i++)
             {
-                UI_OseroObjs[i].SetOKText("Bボタンを\n押してください");
+                UI_OseroObjs[i].SetOKText("PRESS B");
             }
         }
     }
