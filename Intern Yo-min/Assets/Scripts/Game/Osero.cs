@@ -14,7 +14,7 @@ public class Osero : MonoBehaviour
     private Vector3 EndPos;         // オセロの着地座標
     private float Angle;            // 射出角度
 
-    [HideInInspector] public PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
+    [HideInInspector] public GamePlayManager.PlayerOseroTypeInfo PlayerOseroType;
 
     private Rigidbody Rb;
     private Collider Cd;
@@ -160,7 +160,7 @@ public class Osero : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
-    public void SetOseroType(PlayerManager.PlayerOseroTypeInfo oseroType)
+    public void SetOseroType(GamePlayManager.PlayerOseroTypeInfo oseroType)
     {
         PlayerOseroType = oseroType;
 
@@ -172,7 +172,7 @@ public class Osero : MonoBehaviour
         OseroMesh.material = PlayerOseroType.OseroMaterial;
     }
 
-    public PlayerManager.PlayerOseroTypeInfo GetOseroType()
+    public GamePlayManager.PlayerOseroTypeInfo GetOseroType()
     {
         return PlayerOseroType;
     }

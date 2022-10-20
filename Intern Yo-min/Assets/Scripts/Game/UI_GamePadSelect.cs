@@ -12,7 +12,7 @@ public class UI_GamePadSelect : MonoBehaviour
     [ReadOnly] public int PlayerNum = 2;
     private int NowPlayerNum = 0;
 
-    [ReadOnly] public string[] GamePadName_Player = new string[4];
+    [ReadOnly] private string[] GamePadName_Player = new string[4];
 
 
     private void Awake()
@@ -102,7 +102,16 @@ public class UI_GamePadSelect : MonoBehaviour
                                         for (int k = 0; k < PlayerNum; k++)
                                         {
                                             GamePlayManager.Instance.Players[k].OseroNum = 0;
-                                            GamePlayManager.Instance.Players[k].OseroType = (PlayerManager.EnumOseroType)k;
+                                            GamePlayManager.Instance.Players[k].GamePadName_Player = GamePadName_Player[k];
+                                            //GamePlayManager.Instance.Players[k].MaterialInfo.OseroType = (PlayerManager.EnumOseroType)k;
+
+                                            for (int OseroTypeCnt = 0; OseroTypeCnt < GamePlayManager.Instance.PlayerOseroType.Length; OseroTypeCnt++)
+                                            {
+                                                if (GamePlayManager.Instance.PlayerOseroType[OseroTypeCnt].OseroType == (GamePlayManager.EnumOseroType)k)
+                                                {
+                                                    GamePlayManager.Instance.Players[k].PlayerOseroType = GamePlayManager.Instance.PlayerOseroType[OseroTypeCnt];
+                                                }
+                                            }
                                         }
 
                                         gameObject.SetActive(false);

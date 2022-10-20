@@ -7,44 +7,8 @@ public class PlayerManager : MonoBehaviour
 {
     [HideInInspector] public PlayerMove[] PlayerMoveObj;
     [HideInInspector] public UI_Osero[] UI_OseroObj;
-    [HideInInspector] private UI_OseroPanel UI_OseroPanelObj;
+    //[HideInInspector] private UI_OseroPanel UI_OseroPanelObj;
     [HideInInspector] public UI_GameTime UI_GameTimeObj;
-
-    [System.Serializable]
-    public enum EnumOseroType
-    {
-        Red = 0,
-        Blue,
-        Yellow,
-        Purple,
-        Black,
-        White,
-        Green
-    }
-
-    [System.Serializable]
-    public struct PlayerOseroTypeInfo
-    {
-        [Tooltip("プレイヤーのマテリアル")]
-        public Material PlayerMaterial;
-
-
-        [Tooltip("プレイヤーのオセロマテリアル")]
-        public Material OseroMaterial;
-
-
-        [Tooltip("プレイヤーのオセロの色")]
-        public EnumOseroType OseroType;
-
-
-        [Tooltip("プレイヤーのオセロのUI")]
-        public Sprite UI_OseroImage;
-    }
-
-    [Header("[ プレイヤーの色設定 ]")]
-    [Tooltip("プレイヤーとオセロの色設定")]
-    public PlayerOseroTypeInfo[] PlayerOseroType = new PlayerOseroTypeInfo[4];
-
 
     private bool isOnce = false;
 
@@ -56,7 +20,7 @@ public class PlayerManager : MonoBehaviour
 
         PlayerMoveObj = GetComponentsInChildren<PlayerMove>();
         UI_OseroObj = GetComponentsInChildren<UI_Osero>();
-        UI_OseroPanelObj = GetComponentInChildren<UI_OseroPanel>();
+        //UI_OseroPanelObj = GetComponentInChildren<UI_OseroPanel>();
         UI_GameTimeObj = GetComponentInChildren<UI_GameTime>();
     }
 
@@ -86,16 +50,16 @@ public class PlayerManager : MonoBehaviour
             isOnce = true;
 
             // プレイヤーの色設定
-            for (int i = 1; i <= GamePlayManager.Instance.GamePadSelectObj.PlayerNum; i++)
+            for (int i = 1; i <= GamePlayManager.Instance.Players.Length; i++)
             {
                 PlayerMoveObj[i - 1].gameObject.SetActive(true);
-                PlayerMoveObj[i - 1].SetPlayerOseroType(PlayerOseroType[i - 1]);
+                PlayerMoveObj[i - 1].SetPlayerOseroType(GamePlayManager.Instance.Players[i - 1].PlayerOseroType);
                 UI_OseroObj[i - 1].gameObject.SetActive(true);
-                UI_OseroObj[i - 1].SetPlayerOseroType(PlayerOseroType[i - 1]);
+                UI_OseroObj[i - 1].SetPlayerOseroType(GamePlayManager.Instance.Players[i - 1].PlayerOseroType);
             }
 
-            if (UI_OseroPanelObj != null)
-                UI_OseroPanelObj.SetUIPanel(GamePlayManager.Instance.GamePadSelectObj.PlayerNum);
+            //if (UI_OseroPanelObj != null)
+            //    UI_OseroPanelObj.SetUIPanel(GamePlayManager.Instance.Players.Length);
         }
     }
 }

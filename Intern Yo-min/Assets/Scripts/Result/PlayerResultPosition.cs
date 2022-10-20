@@ -4,35 +4,43 @@ using UnityEngine;
 
 public class PlayerResultPosition : MonoBehaviour
 {
-    [Header("テスト用のプレイヤー位置整列")]
-    [SerializeField] private Vector3 PlayerPosMin;
-    [SerializeField] private Vector3 PlayerPosMax;
+    private Vector3 PlayerPosMin;
+    private Vector3 PlayerPosMax;
 
-    private ResultPlayer[] Player;
+    //private void OnValidate()
+    //{
+    //    Player = GetComponentsInChildren<ResultPlayer>();
 
-    private void OnValidate()
+    //    if (Player.Length <= 1)
+    //        return;
+
+    //    for (int i = 0; i < Player.Length; i++)
+    //    {
+    //        Player[i].gameObject.transform.position = PlayerPosMin + (PlayerPosMax - PlayerPosMin) * ((float)i / (Player.Length - 1));
+    //        //Debug.Log(PlayerPosMin + (PlayerPosMax - PlayerPosMin) * ((float)i / (Player.Length - 1)));
+    //    }
+    //}
+
+
+    private void Start()
     {
-        Player = GetComponentsInChildren<ResultPlayer>();
+        ResultPlayer[] Players = ResultManager.Instance.ResultPlayers;
 
-        if (Player.Length <= 1)
-            return;
-
-        for (int i = 0; i < Player.Length; i++)
+        foreach (var Obj in Players)
         {
-            Player[i].gameObject.transform.position = PlayerPosMin + (PlayerPosMax - PlayerPosMin) * ((float)i / (Player.Length - 1));
-            //Debug.Log(PlayerPosMin + (PlayerPosMax - PlayerPosMin) * ((float)i / (Player.Length - 1)));
+            Obj.gameObject.SetActive(false);
         }
-    }
+
+        for (int i = 0; i < GamePlayManager.Instance.Players.Length; i++)
+        {
+            Players[i].gameObject.SetActive(true);
+        }
 
 
-    private void Awake()
-    {
-        Player = GetComponentsInChildren<ResultPlayer>();
-
-        if (Player.Length <= 1)
+        if (GamePlayManager.Instance.Players.Length <= 1)
             return;
 
-        switch (Player.Length)
+        switch (GamePlayManager.Instance.Players.Length)
         {
             case 2:
                 PlayerPosMin = new Vector3(-8, 0, 0);
@@ -50,9 +58,10 @@ public class PlayerResultPosition : MonoBehaviour
                 break;
         }
 
-        for (int i = 0; i < Player.Length; i++)
+        for (int i = 0; i < GamePlayManager.Instance.Players.Length; i++)
         {
-            Player[i].gameObject.transform.position = PlayerPosMin + (PlayerPosMax - PlayerPosMin) * ((float)i / (Player.Length - 1));
+            Players[i].gameObject.transform.position = PlayerPosMin + (PlayerPosMax - PlayerPosMin) * ((float)i / (GamePlayManager.Instance.Players.Length - 1));
+            ResultManager.Instance.Result_UI_Oseros[i].SetPosition(Players[i].gameObject.transform.position);
         }
     }
 

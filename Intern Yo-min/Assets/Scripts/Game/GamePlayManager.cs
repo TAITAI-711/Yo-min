@@ -1,7 +1,6 @@
+using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using static PlayerManager;
 
 public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 {
@@ -18,11 +17,49 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     [ReadOnly] public static readonly float MasuScaleY = 4.6f;
     [ReadOnly] public static readonly float MasuScaleXZ = 10.0f;
 
+    [System.Serializable]
+    public enum EnumOseroType
+    {
+        Red = 0,
+        Blue,
+        Yellow,
+        Purple,
+        Black,
+        White,
+        Green
+    }
 
+    [System.Serializable]
+    public struct PlayerOseroTypeInfo
+    {
+        [Tooltip("プレイヤーのマテリアル")]
+        public Material PlayerMaterial;
+
+
+        [Tooltip("プレイヤーのオセロマテリアル")]
+        public Material OseroMaterial;
+
+
+        [Tooltip("プレイヤーのオセロの色")]
+        public EnumOseroType OseroType;
+
+
+        [Tooltip("プレイヤーのオセロのUI")]
+        public Sprite UI_OseroImage;
+    }
+
+    [Header("[ プレイヤーの色設定 ]")]
+    [Tooltip("プレイヤーとオセロの色設定")]
+    [ReadOnly] public PlayerOseroTypeInfo[] PlayerOseroType = new PlayerOseroTypeInfo[4];
+
+
+    [System.Serializable]
     public struct PlayerInfo
     {
-        public int OseroNum;          // プレイヤーのオセロの枚数保存用
-        public EnumOseroType OseroType;    // プレイヤーのオセロの種類
+        public int OseroNum;          // プレイヤーのオセロの枚数保存用  
+        public PlayerOseroTypeInfo PlayerOseroType; // プレイヤーのオセロの種類
+        public string GamePadName_Player;   // プレイヤーのゲームパッド名
+        public int RankNum; // 順位
     }
     public PlayerInfo[] Players;
 
@@ -37,6 +74,23 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         DontDestroyOnLoad(this.gameObject); // シーンが変わっても死なない
 
         GameReset();
+
+        //============
+        // デバッグ用
+        //============
+        Players = new PlayerInfo[4];
+        for (int i = 0; i < Players.Length; i++)
+        {
+            Players[i].OseroNum = 20 * (i + 1);
+            Players[i].RankNum = Players.Length - i;
+
+            Players[i].PlayerOseroType = PlayerOseroType[i];
+
+            Players[i].GamePadName_Player = "Joystick_0";
+        }
+        //============
+        // ここまで
+        //============
     }
 
     // Start is called before the first frame update
@@ -70,13 +124,34 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     // リザルト前にプレイヤーのオセロの数保存処理
     public void PlayerOseroNumSet()
     {
+        // オセロの数保存
         for (int i = 0; i < PlayerManagerObj.UI_OseroObj.Length; i++)
         {
             for (int j = 0; j < Players.Length; j++)
             {
-                if (PlayerManagerObj.UI_OseroObj[i].PlayerOseroType.OseroType == Players[j].OseroType)
+                if (PlayerManagerObj.UI_OseroObj[i].PlayerOseroType.OseroType == Players[j].PlayerOseroType.OseroType)
                 {
                     Players[i].OseroNum = PlayerManagerObj.UI_OseroObj[i].Num;
+                }
+            }
+        }
+
+        // 順位付け
+        List<int> Ranks = new List<int>();
+
+        for (int i = 0; i < Players.Length; i++)
+        {
+            Ranks.Add(Players[i].OseroNum);
+        }
+        Ranks.Sort((a, b) => b - a);
+
+        for (int i = 0; i < Players.Length; i++)
+        {
+            for (int j = 0; j < Players.Length; j++)
+            {
+                if (Ranks[i] == Players[j].OseroNum)
+                {
+                    Players[j].RankNum = i + 1;
                 }
             }
         }

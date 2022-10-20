@@ -111,7 +111,7 @@ public class Banmen : MonoBehaviour
         return Masu[X, Y];
     }
 
-    public int GetOseroNum(PlayerManager.EnumOseroType oseroType)
+    public int GetOseroNum(GamePlayManager.EnumOseroType oseroType)
     {
         int Num = 0;
         foreach (var obj in Masu)

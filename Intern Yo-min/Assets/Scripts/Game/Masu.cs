@@ -44,7 +44,7 @@ public class Masu : MonoBehaviour
         EffectManager.Instance.SetEffect("Test", transform.position + new Vector3(0, GamePlayManager.MasuScaleY + OseroObj.transform.localScale.y, 0), Quaternion.identity, 2.0f);
 
         // ÉIÉZÉçÇÇ–Ç¡Ç≠ÇËï‘Ç∑èàóù
-        PlayerManager.PlayerOseroTypeInfo MyOseroType = OseroObj.GetOseroType();
+        GamePlayManager.PlayerOseroTypeInfo MyOseroType = OseroObj.GetOseroType();
 
         //Debug.Log(MasuXY);
 

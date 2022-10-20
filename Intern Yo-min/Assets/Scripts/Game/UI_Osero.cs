@@ -9,7 +9,7 @@ public class UI_Osero : MonoBehaviour
     //[SerializeField] private BanmenManager BanmenManagerObj;
     private TextMeshProUGUI NumText;
 
-    [HideInInspector] public PlayerManager.PlayerOseroTypeInfo PlayerOseroType;
+    [HideInInspector] public GamePlayManager.PlayerOseroTypeInfo PlayerOseroType;
     public int Num = 0;    // ï\é¶Ç∑ÇÈÉIÉZÉçÇÃå¬êî
 
     private static float UI_OseroDisappearTime = 30.0f;
@@ -42,7 +42,7 @@ public class UI_Osero : MonoBehaviour
             NumText.text = "?";
     }
 
-    public void SetPlayerOseroType(PlayerManager.PlayerOseroTypeInfo playerOseroType)
+    public void SetPlayerOseroType(GamePlayManager.PlayerOseroTypeInfo playerOseroType)
     {
         PlayerOseroType = playerOseroType;
         this.GetComponent<Image>().sprite = PlayerOseroType.UI_OseroImage;
