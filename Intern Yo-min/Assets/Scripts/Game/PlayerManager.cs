@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         GamePlayManager.Instance.PlayerManagerObj = this;
+        GamePlayManager.Instance.OldGameStageName = SceneManager.GetActiveScene().name;
 
         isOnce = false;
 

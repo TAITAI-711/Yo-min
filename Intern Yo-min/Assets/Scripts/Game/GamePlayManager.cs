@@ -17,6 +17,8 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     [ReadOnly] public static readonly float MasuScaleY = 4.6f;
     [ReadOnly] public static readonly float MasuScaleXZ = 10.0f;
 
+    [ReadOnly] public string OldGameStageName = "";
+
     [System.Serializable]
     public enum EnumOseroType
     {
@@ -88,6 +90,8 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 
             Players[i].GamePadName_Player = "Joystick_0";
         }
+
+        OldGameStageName = "GameScene";
         //============
         // Ç±Ç±Ç‹Ç≈
         //============
@@ -125,15 +129,9 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     public void PlayerOseroNumSet()
     {
         // ÉIÉZÉçÇÃêîï€ë∂
-        for (int i = 0; i < PlayerManagerObj.UI_OseroObj.Length; i++)
+        for (int i = 0; i < Players.Length; i++)
         {
-            for (int j = 0; j < Players.Length; j++)
-            {
-                if (PlayerManagerObj.UI_OseroObj[i].PlayerOseroType.OseroType == Players[j].PlayerOseroType.OseroType)
-                {
-                    Players[i].OseroNum = PlayerManagerObj.UI_OseroObj[i].Num;
-                }
-            }
+            Players[i].OseroNum = PlayerManagerObj.UI_OseroObj[i].Num;
         }
 
         // èáà ïtÇØ
@@ -145,7 +143,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         }
         Ranks.Sort((a, b) => b - a);
 
-        for (int i = 0; i < Players.Length; i++)
+        for (int i = 0; i < Ranks.Count; i++)
         {
             for (int j = 0; j < Players.Length; j++)
             {

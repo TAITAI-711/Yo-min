@@ -8,7 +8,7 @@ public class UI_Pause : MonoBehaviour
     [SerializeField] private GameObject UI_PausePanelObj;
     [SerializeField] private GameObject FirstSelectObj;
 
-    private void Awake()
+    protected void Awake()
     {
         if (UI_PausePanelObj == null)
             UI_PausePanelObj = GetComponentInChildren<GameObject>();
@@ -17,13 +17,13 @@ public class UI_Pause : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
 
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (Input.GetButtonDown("Joystick_0_Button_Start") && (GamePlayManager.Instance.isGamePlay || GamePlayManager.Instance.isGameEnd))
         {
@@ -33,8 +33,9 @@ public class UI_Pause : MonoBehaviour
 
 
     // ポーズ処理
-    private void Pause()
+    protected void Pause()
     {
+        Debug.Log("ぽーずよばれた");
         GamePlayManager.Instance.isPause = !GamePlayManager.Instance.isPause;
 
         if (GamePlayManager.Instance.isPause)
@@ -65,5 +66,10 @@ public class UI_Pause : MonoBehaviour
     public void Button_Title()
     {
         SceneChangeManager.Instance.SceneChange("TitleScene", true);
+    }
+
+    public void Button_GamePlayAgain()
+    {
+        SceneChangeManager.Instance.SceneChange(GamePlayManager.Instance.OldGameStageName, true);
     }
 }
