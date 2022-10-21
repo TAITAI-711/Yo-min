@@ -6798,21 +6798,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &7726511318062322141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7726511318062322143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b0d1e6bf15afa845899638659083799, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerMoveObj: []
-  UI_OseroObj: []
-  UI_GameTimeObj: {fileID: 0}
 --- !u!4 &7726511318062322142
 Transform:
   m_ObjectHideFlags: 0
@@ -6842,7 +6827,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7726511318062322142}
-  - component: {fileID: 7726511318062322141}
+  - component: {fileID: 7726511318062322144}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -6850,6 +6835,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7726511318062322144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726511318062322143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e05fbf45a72b3a4c8d7fd12466b12eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerMoveObj: []
+  UI_OseroObj: []
+  UI_GameTimeObj: {fileID: 0}
 --- !u!1001 &7726511318216762480
 PrefabInstance:
   m_ObjectHideFlags: 0

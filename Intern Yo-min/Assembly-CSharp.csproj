@@ -138,6 +138,7 @@
     <Compile Include="Assets\Scripts\StageSelect\StageSelectEnd.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelectManager.cs" />
     <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectGamePad.cs" />
+    <Compile Include="Assets\Scripts\StageSelect\StageSelectPlayerManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

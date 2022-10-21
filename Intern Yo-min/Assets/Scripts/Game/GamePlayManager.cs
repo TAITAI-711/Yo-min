@@ -9,11 +9,18 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     [ReadOnly] public bool isStartCount = false;
     [ReadOnly] public bool isGameEnd = false;
     [ReadOnly] public bool isPause = false;
-    [ReadOnly] public UI_GamePadSelect GamePadSelectObj = null;
     [ReadOnly] public static readonly float MasuScaleY = 4.6f;
     [ReadOnly] public static readonly float MasuScaleXZ = 10.0f;
 
     [ReadOnly] public string OldGameStageName = "GameScene";
+
+    public enum EnumPlayerType
+    {
+        Player1 = 0,
+        Player2,
+        Player3,
+        Player4
+    }
 
     [System.Serializable]
     public enum EnumOseroType
@@ -58,8 +65,11 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         public PlayerOseroTypeInfo PlayerOseroType; // プレイヤーのオセロの種類
         public string GamePadName_Player;   // プレイヤーのゲームパッド名
         public int RankNum; // 順位
+        public EnumPlayerType PlayerType;   // 操作プレイヤー番号
     }
     public PlayerInfo[] Players;
+
+    public string MenuSelectPlayerName = "Joystick_0";
 
 
     private void Awake()
@@ -76,7 +86,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         //============
         // デバッグ用
         //============
-        Players = new PlayerInfo[4];
+        Players = new PlayerInfo[0];
         for (int i = 0; i < Players.Length; i++)
         {
             Players[i].OseroNum = 20 * (i + 1);
@@ -87,6 +97,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
             Players[i].GamePadName_Player = "Joystick_0";
         }
 
+        MenuSelectPlayerName = "Joystick_0";
         OldGameStageName = "GameScene";
         //============
         // ここまで
@@ -108,7 +119,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     public void GameReset()
     {
         isGamePlay = false;
-        isGamePadOK = false;
+        //isGamePadOK = false;
         isStartCount = false;
         isGameEnd = false;
         isPause = false;
@@ -118,6 +129,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     {
         GameReset();
 
+        isGamePadOK = false;
         Players = null;
     }
 

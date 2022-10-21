@@ -4,30 +4,24 @@ using UnityEngine;
 
 public class UI_GamePadSelect : MonoBehaviour
 {
-    protected TextMeshProUGUI GamePadSelectUI;
+    private TextMeshProUGUI GamePadSelectUI;
 
     protected bool isPress = false;
 
 
-    public int PlayerNum = 2;
-    protected int NowPlayerNum = 0;
+    private int PlayerNum = 2;
+    private int NowPlayerNum = 0;
 
     protected string[] GamePadName_Player = new string[4];
 
 
     private void Awake()
     {
-        GamePlayManager.Instance.GamePadSelectObj = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         GamePadSelectUI = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (!GamePlayManager.Instance.isGamePadOK)
         {

@@ -1,17 +1,11 @@
 using Unity.Collections;
 using UnityEngine;
+using static GamePlayManager;
 
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private GameObject OseroPrefab;
 
-    public enum EnumPlayerType
-    {
-        Player1 = 0,
-        Player2,
-        Player3,
-        Player4
-    }
     [Header("[ プレイヤー設定 ]")]
     [Tooltip("プレイヤーのコントローラー番号")]
     [SerializeField]

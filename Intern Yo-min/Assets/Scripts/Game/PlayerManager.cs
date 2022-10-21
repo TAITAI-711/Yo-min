@@ -13,7 +13,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 
     private bool isOnce = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (this != Instance)
         {
@@ -32,7 +32,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         //Debug.Log(PlayerMoveObj.Length);
 
@@ -43,14 +43,14 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         }
 
         // 使用オセロカラーのUI表示
-        for (int i = 0; i < PlayerMoveObj.Length; i++)
+        for (int i = 0; i < UI_OseroObj.Length; i++)
         {
             UI_OseroObj[i].gameObject.SetActive(false);
         }
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (!isOnce && GamePlayManager.Instance.isGamePadOK)
         {
