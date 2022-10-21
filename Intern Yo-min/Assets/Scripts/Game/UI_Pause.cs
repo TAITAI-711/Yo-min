@@ -35,7 +35,7 @@ public class UI_Pause : MonoBehaviour
     // ポーズ処理
     protected void Pause()
     {
-        Debug.Log("ぽーずよばれた");
+        //Debug.Log("ぽーずよばれた");
         GamePlayManager.Instance.isPause = !GamePlayManager.Instance.isPause;
 
         if (GamePlayManager.Instance.isPause)

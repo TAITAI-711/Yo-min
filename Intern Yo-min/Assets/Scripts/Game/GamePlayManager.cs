@@ -141,7 +141,8 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         {
             Ranks.Add(Players[i].OseroNum);
         }
-        Ranks.Sort((a, b) => b - a);
+        //Ranks.Sort((a, b) => b - a);
+        Ranks.Sort();
 
         for (int i = 0; i < Ranks.Count; i++)
         {
@@ -149,7 +150,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
             {
                 if (Ranks[i] == Players[j].OseroNum)
                 {
-                    Players[j].RankNum = i + 1;
+                    Players[j].RankNum = Ranks.Count - i;
                 }
             }
         }
