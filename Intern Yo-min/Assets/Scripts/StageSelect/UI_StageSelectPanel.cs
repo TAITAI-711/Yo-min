@@ -12,7 +12,6 @@ public class UI_StageSelectPanel : MonoBehaviour
     private int NowSelectNum = 0;
     private int OldSelectNum = 0;
 
-
     private void Awake()
     {
         UI_StageObj = gameObject.GetComponentsInChildren<UI_Stage>();
@@ -64,6 +63,13 @@ public class UI_StageSelectPanel : MonoBehaviour
             UI_StageObj[OldSelectNum].gameObject.transform.localPosition = new Vector3(2000, 0, 0);
 
             OldSelectNum = NowSelectNum;
+        }
+
+        if (Input.GetButtonDown("Joystick_0_Button_B"))
+        {
+            StageSelectManager.Instance.NextSceneName = UI_StageObj[NowSelectNum].StageSceneName;
+
+            StageSelectManager.Instance.isStageSelect = true;
         }
     }
 }

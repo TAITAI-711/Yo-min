@@ -17,7 +17,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     [ReadOnly] public static readonly float MasuScaleY = 4.6f;
     [ReadOnly] public static readonly float MasuScaleXZ = 10.0f;
 
-    [ReadOnly] public string OldGameStageName = "";
+    [ReadOnly] public string OldGameStageName = "GameScene";
 
     [System.Serializable]
     public enum EnumOseroType
