@@ -4,40 +4,59 @@ using System.Net.NetworkInformation;
 using UnityEngine;
 using static GamePlayManager;
 
-public class UI_StageSelectGamePad : UI_GamePadSelect
+public class UI_StageSelectGamePadManager : SingletonMonoBehaviour<UI_StageSelectGamePadManager>
 {
-    private class GamePadInfo
+    [System.Serializable]
+    public class GamePadInfo
     {
         public GamePadInfo()
         {
             PadName = "";
-            NowSelectOseroType = EnumOseroType.Red;
             isOK = false;
             isStickOnce = false;
         }
         public string PadName;
-        public EnumOseroType NowSelectOseroType;
+        public PlayerOseroTypeInfo NowSelectPlayerOseroType;
         public EnumPlayerType PlayerType;   // 操作プレイヤー番号
         public bool isOK;
         public bool isStickOnce;
     }
 
-    private List<GamePadInfo> GamePadList = new List<GamePadInfo>();
+    public List<GamePadInfo> GamePadList = new List<GamePadInfo>();
+
+    private float ButtonOnceTime = 0.1f;    // プレイヤー１がステージ選択と色決定を同時にやらない用時間
+
+    private void Awake()
+    {
+        if (this != Instance)
+        {
+            Destroy(this);
+            return;
+        }
+
+        GamePlayManager.Instance.Players = null;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         GamePadList.Add(new GamePadInfo());
         GamePadList[0].PadName = GamePlayManager.Instance.MenuSelectPlayerName;
-        GamePadList[0].NowSelectOseroType = EnumOseroType.Red;
+        GamePadList[0].NowSelectPlayerOseroType = GamePlayManager.Instance.PlayerOseroType[0];
         GamePadList[0].PlayerType = EnumPlayerType.Player1;
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
         if (!StageSelectManager.Instance.isStageSelect)
             return;
+
+        if (ButtonOnceTime > 0.0f)
+        {
+            ButtonOnceTime -= Time.deltaTime;
+            return;
+        }
 
         // 色変え
         for (int i = 0; i < GamePadList.Count; i++)
@@ -84,19 +103,25 @@ public class UI_StageSelectGamePad : UI_GamePadSelect
             {
                 for (int i = 1; i <= 10; i++)
                 {
+                    bool isSameName = false;
+
                     for (int j = 0; j < GamePadList.Count; j++)
                     {
                         if (GamePadList[j].PadName == "Joystick_" + i.ToString())
-                            continue;
+                        {
+                            isSameName = true;
+                            break;
+                        }
                     }
+
+                    if (isSameName)
+                        continue;
 
                     string NowGamePadName = "Joystick_" + i.ToString() + "_Button_B";
 
                     if (Input.GetButtonDown(NowGamePadName))
                     {
                         AddGamePad(i);
-
-                        break;
                     }
                 }
             }
@@ -122,7 +147,7 @@ public class UI_StageSelectGamePad : UI_GamePadSelect
 
                 for (int j = 0; j < GamePlayManager.Instance.PlayerOseroType.Length; j++)
                 {
-                    if (GamePlayManager.Instance.PlayerOseroType[j].OseroType == GamePadList[i].NowSelectOseroType)
+                    if (GamePlayManager.Instance.PlayerOseroType[j].OseroType == GamePadList[i].NowSelectPlayerOseroType.OseroType)
                     {
                         PInfo.PlayerOseroType = GamePlayManager.Instance.PlayerOseroType[j];
                         break;
@@ -140,6 +165,8 @@ public class UI_StageSelectGamePad : UI_GamePadSelect
         {
             GamePlayManager.Instance.Players[i] = playerInfos[i];
         }
+
+        playerInfos.Clear();
     }
 
     // ゲームパッドの追加
@@ -156,7 +183,7 @@ public class UI_StageSelectGamePad : UI_GamePadSelect
     // オセロのタイプ変更
     private void ChangeOseroType(int GamePadListNum, bool isFront)
     {
-        int NowColorType = (int)GamePadList[GamePadListNum].NowSelectOseroType;
+        int NowColorType = (int)GamePadList[GamePadListNum].NowSelectPlayerOseroType.OseroType;
 
         for (int i = 0; i < GamePlayManager.Instance.PlayerOseroType.Length; i++)
         {
@@ -175,7 +202,7 @@ public class UI_StageSelectGamePad : UI_GamePadSelect
 
             for (int j = 0; j < GamePadList.Count; j++)
             {
-                if (GamePlayManager.Instance.PlayerOseroType[NowColorType].OseroType == GamePadList[j].NowSelectOseroType)
+                if (GamePlayManager.Instance.PlayerOseroType[NowColorType].OseroType == GamePadList[j].NowSelectPlayerOseroType.OseroType)
                 {
                     isSameType = true;
                     break;
@@ -184,7 +211,8 @@ public class UI_StageSelectGamePad : UI_GamePadSelect
             if (isSameType)
                 continue;
 
-            GamePadList[GamePadListNum].NowSelectOseroType = GamePlayManager.Instance.PlayerOseroType[NowColorType].OseroType;
+            GamePadList[GamePadListNum].NowSelectPlayerOseroType = GamePlayManager.Instance.PlayerOseroType[NowColorType];
+            break;
         }
     }
 

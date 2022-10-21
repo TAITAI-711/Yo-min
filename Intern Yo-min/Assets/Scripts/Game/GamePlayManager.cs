@@ -6,7 +6,6 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 {
     [ReadOnly] public bool isGamePlay = false;
     [ReadOnly] public bool isGamePadOK = false;
-    [ReadOnly] public bool isStartCount = false;
     [ReadOnly] public bool isGameEnd = false;
     [ReadOnly] public bool isPause = false;
     [ReadOnly] public static readonly float MasuScaleY = 4.6f;
@@ -94,7 +93,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 
             Players[i].PlayerOseroType = PlayerOseroType[i];
 
-            Players[i].GamePadName_Player = "Joystick_0";
+            Players[i].GamePadName_Player = "Joystick_1";
         }
 
         MenuSelectPlayerName = "Joystick_0";
@@ -120,7 +119,6 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     {
         isGamePlay = false;
         //isGamePadOK = false;
-        isStartCount = false;
         isGameEnd = false;
         isPause = false;
     }

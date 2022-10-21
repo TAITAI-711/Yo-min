@@ -2,26 +2,38 @@ using TMPro;
 using Unity.Collections;
 using UnityEngine;
 
-public class UI_GamePadSelect : MonoBehaviour
+public class UI_GamePadManager : SingletonMonoBehaviour<UI_GamePadManager>
 {
     private TextMeshProUGUI GamePadSelectUI;
 
-    protected bool isPress = false;
+    private bool isPress = false;
 
 
     private int PlayerNum = 2;
     private int NowPlayerNum = 0;
 
-    protected string[] GamePadName_Player = new string[4];
+    private string[] GamePadName_Player = new string[4];
 
 
     private void Awake()
     {
+        if (this != Instance)
+        {
+            Destroy(this);
+            return;
+        }
+
         GamePadSelectUI = GetComponent<TextMeshProUGUI>();
     }
 
+    private void Start()
+    {
+        if (GamePlayManager.Instance.isGamePadOK)
+            GamePadSelectUI.enabled = false;
+    }
+
     // Update is called once per frame
-    protected virtual void Update()
+    private void Update()
     {
         if (!GamePlayManager.Instance.isGamePadOK)
         {
@@ -89,7 +101,6 @@ public class UI_GamePadSelect : MonoBehaviour
                                     if (NowPlayerNum > PlayerNum)
                                     {
                                         GamePlayManager.Instance.isGamePadOK = true;
-                                        GamePlayManager.Instance.isStartCount = true;
                                         //GamePlayManager.Instance.isGamePlay = true;
 
                                         GamePlayManager.Instance.Players = new GamePlayManager.PlayerInfo[PlayerNum];

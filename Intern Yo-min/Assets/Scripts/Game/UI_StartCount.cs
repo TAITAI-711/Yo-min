@@ -31,7 +31,7 @@ public class UI_StartCount : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (GamePlayManager.Instance.isStartCount && NowCount >= 0)
+        if (GamePlayManager.Instance.isGamePadOK && NowCount >= 0)
         {
             if (!isOnce)
             {

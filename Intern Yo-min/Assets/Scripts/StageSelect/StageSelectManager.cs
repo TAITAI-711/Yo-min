@@ -9,12 +9,32 @@ public class StageSelectManager : SingletonMonoBehaviour<StageSelectManager>
 
     private bool OldisStageSelect = false;
 
+    private bool isOnce = false;
+
     private void Awake()
     {
         if (this != Instance)
         {
             Destroy(this.gameObject);
             return;
+        }
+    }
+
+
+    private void Update()
+    {
+        if (GamePlayManager.Instance.isPause)
+            return;
+
+        if (!isOnce && GamePlayManager.Instance.Players != null && 
+            GamePlayManager.Instance.Players.Length >= 2 && 
+            Input.GetButtonDown(GamePlayManager.Instance.Players[0].GamePadName_Player + "_Button_Select"))
+        {
+            isOnce = true;
+
+            GamePlayManager.Instance.isGamePadOK = true;
+
+            SceneChangeManager.Instance.SceneChange(NextSceneName, true);
         }
     }
 

@@ -6607,7 +6607,7 @@ GameObject:
   - component: {fileID: 7726511317668330591}
   - component: {fileID: 7726511317668330589}
   - component: {fileID: 7726511317668330590}
-  - component: {fileID: 7726511317668330588}
+  - component: {fileID: 7726511317668330592}
   m_Layer: 5
   m_Name: GamePadSelectUI
   m_TagString: Untagged
@@ -6615,19 +6615,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7726511317668330588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7726511317668330584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa27ab9c4bd3eb847aea454720354c33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerNum: 2
 --- !u!222 &7726511317668330589
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6643,7 +6630,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7726511317668330584}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -6745,6 +6732,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7726511317668330592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726511317668330584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05ec7e726b9d3f4598657dbc2b8edfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GamePadList: []
 --- !u!114 &7726511317946351916
 MonoBehaviour:
   m_ObjectHideFlags: 0

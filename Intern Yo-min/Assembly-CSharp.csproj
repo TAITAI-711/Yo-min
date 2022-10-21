@@ -97,7 +97,7 @@
     <Compile Include="Assets\Scripts\Result\Result_UI_Osero_Panel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\Logo\Logo.cs" />
-    <Compile Include="Assets\Scripts\Game\UI_GamePadSelect.cs" />
+    <Compile Include="Assets\Scripts\Game\UI_GamePadManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\StandaloneInputModuleButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
@@ -137,7 +137,7 @@
     <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectManager.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelectEnd.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelectManager.cs" />
-    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectGamePad.cs" />
+    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectGamePadManager.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelectPlayerManager.cs" />
   </ItemGroup>
   <ItemGroup>

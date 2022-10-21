@@ -42,19 +42,29 @@ public class StageSelectPlayerManager : PlayerManager
     // Update is called once per frame
     protected override void FixedUpdate()
     {
-        if (PlayerLangth == GamePlayManager.Instance.Players.Length)
+        if (!StageSelectManager.Instance.isStageSelect)
             return;
 
-
-        PlayerLangth = GamePlayManager.Instance.Players.Length;
-
-        // プレイヤーの色設定
-        for (int i = 1; i <= GamePlayManager.Instance.Players.Length; i++)
+        if (GamePlayManager.Instance.Players != null && PlayerLangth != GamePlayManager.Instance.Players.Length)
         {
-            PlayerMoveObj[i - 1].gameObject.SetActive(true);
-            PlayerMoveObj[i - 1].SetPlayerOseroType(GamePlayManager.Instance.Players[i - 1].PlayerOseroType);
-            UI_OseroObj[i - 1].gameObject.SetActive(true);
-            UI_OseroObj[i - 1].SetPlayerOseroType(GamePlayManager.Instance.Players[i - 1].PlayerOseroType);
+            PlayerLangth = GamePlayManager.Instance.Players.Length;
+
+            // プレイヤーの色設定
+            for (int i = 0; i < GamePlayManager.Instance.Players.Length; i++)
+            {
+                PlayerMoveObj[i].gameObject.SetActive(true);
+                PlayerMoveObj[i].SetPlayerOseroType(GamePlayManager.Instance.Players[i].PlayerOseroType);
+            }
+        }
+
+        if (UI_StageSelectGamePadManager.Instance.GamePadList != null)
+        {
+            // オセロの色表示
+            for (int i = 0; i < UI_StageSelectGamePadManager.Instance.GamePadList.Count; i++)
+            {
+                UI_OseroObj[i].gameObject.SetActive(true);
+                UI_OseroObj[i].SetPlayerOseroType(UI_StageSelectGamePadManager.Instance.GamePadList[i].NowSelectPlayerOseroType);
+            }
         }
     }
 }
