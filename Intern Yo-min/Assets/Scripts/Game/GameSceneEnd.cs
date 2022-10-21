@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameSceneEnd : MonoBehaviour
@@ -22,8 +23,10 @@ public class GameSceneEnd : MonoBehaviour
         {
             NowTime -= Time.fixedDeltaTime;
 
-            if (NowTime <= 0.0f)
+            if (!isOnce && NowTime <= 0.0f)
             {
+                isOnce = true;
+
                 GamePlayManager.Instance.PlayerOseroNumSet();
 
                 SceneChangeManager.Instance.SceneChange("ResultScene", true);
