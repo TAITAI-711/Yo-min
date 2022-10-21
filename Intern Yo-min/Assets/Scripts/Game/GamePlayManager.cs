@@ -9,11 +9,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     [ReadOnly] public bool isStartCount = false;
     [ReadOnly] public bool isGameEnd = false;
     [ReadOnly] public bool isPause = false;
-    [ReadOnly] public BanmenManager BanmenManagerObj = null;
     [ReadOnly] public UI_GamePadSelect GamePadSelectObj = null;
-    [ReadOnly] public PlayerManager PlayerManagerObj = null;
-    [ReadOnly] public FloorManager FloorManagerObj = null;
-    [ReadOnly] public Gimmick_Wind Gimmick_WindObj = null;
     [ReadOnly] public static readonly float MasuScaleY = 4.6f;
     [ReadOnly] public static readonly float MasuScaleXZ = 10.0f;
 
@@ -131,7 +127,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         // ÉIÉZÉçÇÃêîï€ë∂
         for (int i = 0; i < Players.Length; i++)
         {
-            Players[i].OseroNum = PlayerManagerObj.UI_OseroObj[i].Num;
+            Players[i].OseroNum = PlayerManager.Instance.UI_OseroObj[i].Num;
         }
 
         // èáà ïtÇØ

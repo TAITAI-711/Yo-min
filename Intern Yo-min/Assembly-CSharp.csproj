@@ -134,9 +134,10 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Game\GameSceneEnd.cs" />
     <Compile Include="Assets\Scripts\StageSelect\UI_Stage.cs" />
-    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectPanel.cs" />
+    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectManager.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelectEnd.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelectManager.cs" />
+    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectGamePad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

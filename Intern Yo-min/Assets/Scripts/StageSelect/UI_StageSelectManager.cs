@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_StageSelectPanel : MonoBehaviour
+public class UI_StageSelectManager : SingletonMonoBehaviour<UI_StageSelectManager>
 {
     private UI_Stage[] UI_StageObj;
     private Button[] UI_ButtonObj;
@@ -14,6 +14,12 @@ public class UI_StageSelectPanel : MonoBehaviour
 
     private void Awake()
     {
+        if (this != Instance)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         UI_StageObj = gameObject.GetComponentsInChildren<UI_Stage>();
         UI_ButtonObj = gameObject.GetComponentsInChildren<Button>();
     }
@@ -65,6 +71,7 @@ public class UI_StageSelectPanel : MonoBehaviour
             OldSelectNum = NowSelectNum;
         }
 
+        // ステージ選択
         if (Input.GetButtonDown("Joystick_0_Button_B"))
         {
             StageSelectManager.Instance.NextSceneName = UI_StageObj[NowSelectNum].StageSceneName;

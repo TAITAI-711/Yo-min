@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class UI_GamePadSelect : MonoBehaviour
 {
-    private TextMeshProUGUI GamePadSelectUI;
+    protected TextMeshProUGUI GamePadSelectUI;
 
-    private bool isPress = false;
+    protected bool isPress = false;
 
 
-    [ReadOnly] public int PlayerNum = 2;
-    private int NowPlayerNum = 0;
+    public int PlayerNum = 2;
+    protected int NowPlayerNum = 0;
 
-    [ReadOnly] private string[] GamePadName_Player = new string[4];
+    protected string[] GamePadName_Player = new string[4];
 
 
     private void Awake()

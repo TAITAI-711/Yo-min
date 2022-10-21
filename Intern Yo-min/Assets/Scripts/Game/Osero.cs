@@ -48,9 +48,9 @@ public class Osero : MonoBehaviour
             Rb.AddForce(Gravity, ForceMode.Acceleration);
 
             // 風
-            if (!(GamePlayManager.Instance.Gimmick_WindObj == null) && !(GamePlayManager.Instance.Gimmick_WindObj.WindInfo.Wind_Type == Gimmick_Wind.Enum_Wind_Type.None))
+            if (!(BanmenManager.Instance.Gimmick_WindObj == null) && !(BanmenManager.Instance.Gimmick_WindObj.WindInfo.Wind_Type == Gimmick_Wind.Enum_Wind_Type.None))
             {
-                Gimmick_Wind.Wind_Info WindInfo = GamePlayManager.Instance.Gimmick_WindObj.WindInfo;
+                Gimmick_Wind.Wind_Info WindInfo = BanmenManager.Instance.Gimmick_WindObj.WindInfo;
                 Rb.AddForce(WindInfo.WindVec * WindInfo.OseroMovePow, ForceMode.Acceleration);
             }
 

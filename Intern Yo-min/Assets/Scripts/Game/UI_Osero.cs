@@ -26,7 +26,7 @@ public class UI_Osero : MonoBehaviour
     {
         int num = 0;
 
-        foreach (var obj in GamePlayManager.Instance.BanmenManagerObj.BanmenObj)
+        foreach (var obj in BanmenManager.Instance.BanmenObj)
         {
             num += obj.GetOseroNum(PlayerOseroType.OseroType);
         }
@@ -38,8 +38,11 @@ public class UI_Osero : MonoBehaviour
             NumText.text = Num.ToString();
         }
 
-        if (GamePlayManager.Instance.PlayerManagerObj.UI_GameTimeObj.UI_TimeObj.NowTime <= UI_OseroDisappearTime)
-            NumText.text = "?";
+        if (PlayerManager.Instance.UI_GameTimeObj != null)
+        {
+            if (PlayerManager.Instance.UI_GameTimeObj.UI_TimeObj.NowTime <= UI_OseroDisappearTime)
+                NumText.text = "?";
+        }
     }
 
     public void SetPlayerOseroType(GamePlayManager.PlayerOseroTypeInfo playerOseroType)

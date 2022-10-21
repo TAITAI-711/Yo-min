@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class UI_OseroPanel : MonoBehaviour
 {
-    public Vector2 LeftPos;
-    public Vector2 RightPos;
+    //public Vector2 LeftPos;
+    //public Vector2 RightPos;
 
 
     // オセロUIの整列処理（インスペクター上での変更時）
     private void OnValidate()
     {
-        UI_Osero[] UI = GetComponentsInChildren<UI_Osero>();
+        //UI_Osero[] UI = GetComponentsInChildren<UI_Osero>();
 
         //if (UI.Length > 1)
         //{

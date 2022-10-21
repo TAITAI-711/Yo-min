@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
     [HideInInspector] public PlayerMove[] PlayerMoveObj;
     [HideInInspector] public UI_Osero[] UI_OseroObj;
@@ -15,7 +15,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        GamePlayManager.Instance.PlayerManagerObj = this;
+        if (this != Instance)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         GamePlayManager.Instance.OldGameStageName = SceneManager.GetActiveScene().name;
 
         isOnce = false;

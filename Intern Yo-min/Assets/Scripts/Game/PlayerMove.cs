@@ -329,7 +329,7 @@ public class PlayerMove : MonoBehaviour
         // オセロ生成
         GameObject osero = Instantiate(OseroPrefab, OseroPos, Quaternion.identity);
         Osero OseroObj = osero.GetComponent<Osero>();
-        GamePlayManager.Instance.FloorManagerObj.FloorObj.SetFieldOsero(OseroObj);
+        FloorManager.Instance.FloorObj.SetFieldOsero(OseroObj);
 
         // 色設定
         OseroObj.SetOseroType(PlayerOseroType);
@@ -367,7 +367,7 @@ public class PlayerMove : MonoBehaviour
         // 移動制限
         Vector3 Pos = gameObject.transform.position; // 位置
 
-        Vector3 MaxPos = GamePlayManager.Instance.FloorManagerObj.PlayerMoveMaxObj.PlayerMoveMaxScale * 0.5f;
+        Vector3 MaxPos = FloorManager.Instance.PlayerMoveMaxObj.PlayerMoveMaxScale * 0.5f;
 
         MaxPos.x -= cd.bounds.size.x * 0.5f;
         MaxPos.y -= cd.bounds.size.y * 0.5f;
@@ -432,7 +432,7 @@ public class PlayerMove : MonoBehaviour
             Vector3 MoveVel = new Vector3(Vec.x, 0.0f, Vec.y) * Pow * Time.fixedDeltaTime;
 
             // 風なし
-            if (GamePlayManager.Instance.Gimmick_WindObj == null || GamePlayManager.Instance.Gimmick_WindObj.WindInfo.Wind_Type == Gimmick_Wind.Enum_Wind_Type.None)
+            if (BanmenManager.Instance.Gimmick_WindObj == null || BanmenManager.Instance.Gimmick_WindObj.WindInfo.Wind_Type == Gimmick_Wind.Enum_Wind_Type.None)
             {
                 // 移動量増加
                 Vel += MoveVel;
@@ -448,7 +448,7 @@ public class PlayerMove : MonoBehaviour
             {
                 //+風方向に力加える
 
-                Gimmick_Wind.Wind_Info WindInfo = GamePlayManager.Instance.Gimmick_WindObj.WindInfo;
+                Gimmick_Wind.Wind_Info WindInfo = BanmenManager.Instance.Gimmick_WindObj.WindInfo;
 
                 // 風移動増加量
                 if (!Mathf.Approximately(WindInfo.WindVec.x, 0))

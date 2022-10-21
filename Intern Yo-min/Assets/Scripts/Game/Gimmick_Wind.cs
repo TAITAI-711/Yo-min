@@ -38,13 +38,13 @@ public class Gimmick_Wind : MonoBehaviour
 
     private void Awake()
     {
-        GamePlayManager.Instance.Gimmick_WindObj = this;
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        OldTime = GamePlayManager.Instance.PlayerManagerObj.UI_GameTimeObj.UI_TimeObj.NowTime;
+        OldTime = PlayerManager.Instance.UI_GameTimeObj.UI_TimeObj.NowTime;
         WindCount = 0;
 
         Wind_Type_Next = new Enum_Wind_Type[(int)Enum_Wind_Type.Max - 1] 
@@ -62,9 +62,9 @@ public class Gimmick_Wind : MonoBehaviour
             return;
 
 
-        if (OldTime - WindChangeTime >= GamePlayManager.Instance.PlayerManagerObj.UI_GameTimeObj.UI_TimeObj.NowTime)
+        if (OldTime - WindChangeTime >= PlayerManager.Instance.UI_GameTimeObj.UI_TimeObj.NowTime)
         {
-            OldTime = GamePlayManager.Instance.PlayerManagerObj.UI_GameTimeObj.UI_TimeObj.NowTime;
+            OldTime = PlayerManager.Instance.UI_GameTimeObj.UI_TimeObj.NowTime;
             SetWind();
         }
     }

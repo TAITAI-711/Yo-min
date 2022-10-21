@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BanmenObj: []
+  Gimmick_WindObj: {fileID: 1318511174}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
