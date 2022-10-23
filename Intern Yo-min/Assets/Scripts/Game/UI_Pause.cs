@@ -25,7 +25,7 @@ public class UI_Pause : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (Input.GetButtonDown("Joystick_0_Button_Start") && (GamePlayManager.Instance.isGamePlay || GamePlayManager.Instance.isGameEnd))
+        if (Input.GetButtonDown(GamePlayManager.Instance.MenuSelectPlayerName + "_Button_Select") && (GamePlayManager.Instance.isGamePlay || GamePlayManager.Instance.isGameEnd))
         {
             Pause();    // É|Å[ÉYèàóù
         }

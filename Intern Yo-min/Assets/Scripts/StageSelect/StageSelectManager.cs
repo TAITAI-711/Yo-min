@@ -28,7 +28,7 @@ public class StageSelectManager : SingletonMonoBehaviour<StageSelectManager>
 
         if (!isOnce && GamePlayManager.Instance.Players != null && 
             GamePlayManager.Instance.Players.Length >= 2 && 
-            Input.GetButtonDown(GamePlayManager.Instance.Players[0].GamePadName_Player + "_Button_Select"))
+            Input.GetButtonDown(GamePlayManager.Instance.Players[0].GamePadName_Player + "_Button_Start"))
         {
             isOnce = true;
 

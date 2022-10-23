@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class EventSystemManager : SingletonMonoBehaviour<EventSystemManager>
 {
     public EventSystem EventSystemObj = null;
+    public StandaloneInputModuleButton StandaloneInputObj = null;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class EventSystemManager : SingletonMonoBehaviour<EventSystemManager>
         DontDestroyOnLoad(this.gameObject); // ƒV[ƒ“‚ª•Ï‚í‚Á‚Ä‚à€‚È‚È‚¢
 
 
-        EventSystemObj = GetComponent<EventSystem>();
+        EventSystemObj = gameObject.GetComponent<EventSystem>();
+        StandaloneInputObj = gameObject.GetComponent<StandaloneInputModuleButton>();
     }
 }

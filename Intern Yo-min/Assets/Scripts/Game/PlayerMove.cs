@@ -239,12 +239,12 @@ public class PlayerMove : MonoBehaviour
             case EnumOseroShootType.Type1:
 
                 Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_RightAxis_X");
-                Vec.y = -Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_RightAxis_Y");
+                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_RightAxis_Y");
                 break;
             case EnumOseroShootType.Type2:
             case EnumOseroShootType.Type3:
                 Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_X");
-                Vec.y = -Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_Y");
+                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_Y");
                 break;
             default:
                 break;
@@ -410,7 +410,7 @@ public class PlayerMove : MonoBehaviour
                     break;
 
                 Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_X");
-                Vec.y = -Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_Y");
+                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_Y");
                 break;
         }
 

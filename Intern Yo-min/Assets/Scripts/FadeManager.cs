@@ -179,7 +179,22 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
         }
     }
 
-    
+    public void FadeLogoStart()
+    {
+        if (NowFadeState == FADE_STATE.FADE_NONE)
+        {
+            NextSceneName = "LogoScene";
+
+            NowFadeState = FADE_STATE.FADE_IN;
+            NowFadeKind = FADE_KIND.FADE_SCENECHANGE;
+
+            FadeColor.a = 1.0f;
+
+            NowTime = 0.0f;
+        }
+    }
+
+
     static public FADE_STATE GetNowState()
     {
         return NowFadeState;
