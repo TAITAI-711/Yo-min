@@ -26,7 +26,7 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
     // 変数
 
     // フェード秒数
-    private float FadeTime = 0.4f;
+    private float FadeTime = 0.6f;
 
 
     private Texture2D FadeTexture;                    // フェードのテクスチャ

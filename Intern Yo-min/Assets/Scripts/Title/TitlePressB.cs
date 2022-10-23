@@ -88,6 +88,8 @@ public class TitlePressB : MonoBehaviour
                         StandaloneObj.horizontalAxis = "Joystick_" + i.ToString() + "_LeftAxis_X";
                         StandaloneObj.submitButton = ButtonName;
 
+                        NowAlphaTime = 0.0f;
+
                         break;
                     }
                 }
