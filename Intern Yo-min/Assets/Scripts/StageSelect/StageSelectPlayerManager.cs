@@ -8,6 +8,7 @@ public class StageSelectPlayerManager : PlayerManager
 {
     private int PlayerLangth = 0;
     private UI_StageSelect_InPlayer[] inPlayer;
+    private UI_StageSelect_Start Select_Start;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -22,6 +23,7 @@ public class StageSelectPlayerManager : PlayerManager
         UI_OseroObj = GetComponentsInChildren<UI_Osero>();
         UI_GameTimeObj = GetComponentInChildren<UI_GameTime>();
         inPlayer = gameObject.GetComponentsInChildren<UI_StageSelect_InPlayer>();
+        Select_Start = gameObject.GetComponentInChildren<UI_StageSelect_Start>();
     }
 
     protected override void Start()
@@ -45,6 +47,8 @@ public class StageSelectPlayerManager : PlayerManager
         {
             inPlayer[i].TMPro.enabled = false;
         }
+
+        Select_Start.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,6 +56,12 @@ public class StageSelectPlayerManager : PlayerManager
     {
         if (!StageSelectManager.Instance.isStageSelect)
             return;
+
+        if (GamePlayManager.Instance.Players != null &&
+            GamePlayManager.Instance.Players.Length >= 2)
+        {
+            Select_Start.gameObject.SetActive(true);
+        }
 
         // Bƒ{ƒ^ƒ“‰Ÿ‚·UI•\Ž¦
         for (int i = 0; i < inPlayer.Length; i++)
