@@ -9,7 +9,9 @@ public class PlayerMove : MonoBehaviour
     [Header("[ プレイヤー設定 ]")]
     [Tooltip("プレイヤーのコントローラー番号")]
     [SerializeField]
-    EnumPlayerType PlayerType = EnumPlayerType.Player1;
+    public EnumPlayerType PlayerType = EnumPlayerType.Player1;
+
+    [HideInInspector] public int PlayersNum = 0; // プレイヤーリストとの紐づけ用
 
     private GamePlayManager.PlayerOseroTypeInfo PlayerOseroType;
 
@@ -122,6 +124,33 @@ public class PlayerMove : MonoBehaviour
         //    }
         //}
         //UnityEngine.Debug.Log(currentConnectionCount);
+
+        
+    }
+
+    private void Start()
+    {
+        if (GamePlayManager.Instance.Players == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        bool isSame = false;
+        for (int i = 0; i < GamePlayManager.Instance.Players.Length; i++)
+        {
+            if (GamePlayManager.Instance.Players[i].PlayerType == PlayerType)
+            {
+                isSame = true;
+                PlayersNum = i;
+                break;
+            }
+        }
+
+        if (!isSame)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     // 移動
@@ -238,13 +267,13 @@ public class PlayerMove : MonoBehaviour
         {
             case EnumOseroShootType.Type1:
 
-                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_RightAxis_X");
-                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_RightAxis_Y");
+                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_RightAxis_X");
+                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_RightAxis_Y");
                 break;
             case EnumOseroShootType.Type2:
             case EnumOseroShootType.Type3:
-                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_X");
-                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_Y");
+                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_LeftAxis_X");
+                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_LeftAxis_Y");
                 break;
             default:
                 break;
@@ -271,7 +300,7 @@ public class PlayerMove : MonoBehaviour
             NowReChargeTime -= Time.fixedDeltaTime;
 
         // Rトリガー入力
-        if (Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_Button_L2_R2") > 0)
+        if (Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_Button_L2_R2") > 0)
         {
             isPress = true;
         }
@@ -409,8 +438,8 @@ public class PlayerMove : MonoBehaviour
                 if (OseroShootType == EnumOseroShootType.Type2 && isPress) 
                     break;
 
-                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_X");
-                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_Y");
+                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_LeftAxis_X");
+                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_LeftAxis_Y");
                 break;
         }
 

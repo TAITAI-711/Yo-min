@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class UI_StageSelect_InPlayer : MonoBehaviour
+{
+    public TextMeshProUGUI TMPro = null;
+
+
+    private void Awake()
+    {
+        TMPro = gameObject.GetComponent<TextMeshProUGUI>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
