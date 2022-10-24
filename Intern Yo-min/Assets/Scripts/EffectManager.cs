@@ -22,8 +22,6 @@ public class EffectManager : SingletonMonoBehaviour<EffectManager>
         DontDestroyOnLoad(this.gameObject); // ƒV[ƒ“‚ª•Ï‚í‚Á‚Ä‚à€‚È‚È‚¢
     }
 
-
-
     public void SetEffect(string EffectName, Vector3 Pos, Quaternion Rot, float Size)
     {
         for (int i = 0; i < EffectObj.Length; ++i)
