@@ -16,22 +16,24 @@ public class Title : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            //Debug.Log("次のシーン");
-            SetNextScene();
-        }
+        //if (Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    //Debug.Log("次のシーン");
+        //    SetNextScene();
+        //}
     }
 
     public void SetNextScene()
     {
+        SoundManager.Instance.PlaySound("決定", false);
         SceneChangeManager.Instance.SceneChange("StageSelectScene", true);
     }
 
     public void SetGameEnd()
     {
+        SoundManager.Instance.PlaySound("決定", false);
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
 #else
     Application.Quit();//ゲームプレイ終了
 #endif

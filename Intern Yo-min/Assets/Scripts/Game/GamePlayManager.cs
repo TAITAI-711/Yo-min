@@ -115,6 +115,12 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         
     }
 
+    private void Update()
+    {
+
+    }
+
+
     public void GameReset()
     {
         isGamePlay = false;

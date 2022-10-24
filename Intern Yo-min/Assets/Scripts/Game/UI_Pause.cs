@@ -36,6 +36,9 @@ public class UI_Pause : MonoBehaviour
     protected void Pause()
     {
         //Debug.Log("ぽーずよばれた");
+
+        SoundManager.Instance.PlaySound("ポップアップ", false, 0.1f);
+
         GamePlayManager.Instance.isPause = !GamePlayManager.Instance.isPause;
 
         if (GamePlayManager.Instance.isPause)
@@ -60,16 +63,19 @@ public class UI_Pause : MonoBehaviour
 
     public void Button_StageSelect()
     {
+        SoundManager.Instance.PlaySound("決定", false);
         SceneChangeManager.Instance.SceneChange("StageSelectScene", true);
     }
 
     public void Button_Title()
     {
+        SoundManager.Instance.PlaySound("決定", false);
         SceneChangeManager.Instance.SceneChange("TitleScene", true);
     }
 
     public void Button_GamePlayAgain()
     {
+        SoundManager.Instance.PlaySound("決定", false);
         SceneChangeManager.Instance.SceneChange(GamePlayManager.Instance.OldGameStageName, true);
     }
 }
