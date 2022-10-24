@@ -48,6 +48,40 @@ public class SceneChangeManager : SingletonMonoBehaviour<SceneChangeManager>
 
             SceneManager.LoadScene(NextSceneName);
 
+            switch (NextSceneName)
+            {
+                case "TitleScene":
+                    SoundManager.Instance.PlaySound("BGM_タイトル", true);
+                    break;
+                case "StageSelectScene":
+                    SoundManager.Instance.PlaySound("BGM_メインメニュー", true);
+                    break;
+                case "GameScene":
+                    SoundManager.Instance.PlaySound("BGM_ベーシック", true);
+                    break;
+                case "Stage_2":
+                    SoundManager.Instance.PlaySound("BGM_田んぼ", true);
+                    break;
+                case "Stage_3":
+                    SoundManager.Instance.PlaySound("BGM_浮島", true);
+                    break;
+                case "Stage_4":
+                    SoundManager.Instance.PlaySound("BGM_ジャングル", true);
+                    break;
+                case "Stage_5":
+                    SoundManager.Instance.PlaySound("BGM_氷", true);
+                    break;
+                case "Stage_6":
+                    SoundManager.Instance.PlaySound("BGM_草原", true);
+                    break;
+                case "ResultScene":
+                    //SoundManager.Instance.PlaySound("BGM_リザルト", true);
+                    break;
+                default:
+                    break;
+            }
+
+
             Time.timeScale = 1.0f;
 
             if (GamePlayManager.Instance != null)

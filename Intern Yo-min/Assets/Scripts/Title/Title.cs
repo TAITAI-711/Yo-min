@@ -10,8 +10,6 @@ public class Title : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SoundManager.Instance.PlaySound("BGM_ƒ^ƒCƒgƒ‹", true);
-
         EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(FirstSelectObj);
     }
 

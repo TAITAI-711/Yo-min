@@ -22,7 +22,7 @@ public class StageSelectManager : SingletonMonoBehaviour<StageSelectManager>
 
     private void Start()
     {
-        SoundManager.Instance.PlaySound("BGM_ƒƒCƒ“ƒƒjƒ…[", true);
+        
     }
 
 

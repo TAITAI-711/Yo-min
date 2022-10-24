@@ -67,6 +67,11 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     // サウンドの再生開始
     public void PlaySound(string AudioName, bool isloop)
     {
+        PlaySound(AudioName, isloop, 0.0f);
+    }
+
+    public void PlaySound(string AudioName, bool isloop, float StartTime)
+    {
         AudioInfo Audio;
         Audio.audioClip = null;
 
@@ -86,12 +91,14 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         {
             audioSource[(int)Enum_AudioType.BGM].loop = true;
             audioSource[(int)Enum_AudioType.BGM].clip = Audio.audioClip;
+            audioSource[(int)Enum_AudioType.BGM].time = StartTime;
             audioSource[(int)Enum_AudioType.BGM].Play();
         }  
         else
         {
             audioSource[(int)Enum_AudioType.SE].loop = false;
             audioSource[(int)Enum_AudioType.SE].clip = Audio.audioClip;
+            audioSource[(int)Enum_AudioType.SE].time = StartTime;
             audioSource[(int)Enum_AudioType.SE].PlayOneShot(Audio.audioClip);
         }
     }

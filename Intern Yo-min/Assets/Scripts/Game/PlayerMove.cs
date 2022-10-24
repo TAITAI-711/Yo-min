@@ -313,7 +313,9 @@ public class PlayerMove : MonoBehaviour
             {
                 // 投げる
                 if (AnimatorObj != null)
+                {
                     AnimatorObj.SetBool("isThrow", true);
+                }
             }
 
             isOldPress = false;
@@ -345,6 +347,9 @@ public class PlayerMove : MonoBehaviour
 
     public void OseroThrow()
     {
+        // 投げる音再生
+        SoundManager.Instance.PlaySound("コマ投げ", false, 0.05f);
+
         // オセロの生成座標
         Vector3 OseroPos = transform.position;
         OseroPos.y += 18.0f;
