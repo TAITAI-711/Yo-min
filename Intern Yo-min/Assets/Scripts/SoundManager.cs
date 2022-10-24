@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SoundManager : SingletonMonoBehaviour<SoundManager>
 {
@@ -67,10 +68,25 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     // サウンドの再生開始
     public void PlaySound(string AudioName, bool isloop)
     {
-        PlaySound(AudioName, isloop, 0.0f);
+        PlaySound(AudioName, isloop, 0.0f, 0.0f, 1.0f);
+    }
+    public void PlaySound(string AudioName, bool isloop, float StartTime)
+    {
+        PlaySound(AudioName, isloop, StartTime, 0.0f, 1.0f);
     }
 
-    public void PlaySound(string AudioName, bool isloop, float StartTime)
+    // BGM遅延用
+    public void PlaySoundBGMDelay(string AudioName, float DelayTime)
+    {
+        PlaySound(AudioName, true, 0.0f, DelayTime, 1.0f);
+    }
+    public void PlaySoundBGMDelay(string AudioName, float DelayTime, float Volume)
+    {
+        PlaySound(AudioName, true, 0.0f, DelayTime, Volume);
+    }
+
+    // 本体
+    public void PlaySound(string AudioName, bool isloop, float StartTime, float DelayTime, float Volume)
     {
         AudioInfo Audio;
         Audio.audioClip = null;
@@ -92,13 +108,19 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
             audioSource[(int)Enum_AudioType.BGM].loop = true;
             audioSource[(int)Enum_AudioType.BGM].clip = Audio.audioClip;
             audioSource[(int)Enum_AudioType.BGM].time = StartTime;
-            audioSource[(int)Enum_AudioType.BGM].Play();
+            audioSource[(int)Enum_AudioType.BGM].volume = Volume;
+
+            if (DelayTime <= 0.0f)
+                audioSource[(int)Enum_AudioType.BGM].Play();
+            else
+                audioSource[(int)Enum_AudioType.BGM].PlayDelayed(DelayTime);
         }  
         else
         {
             audioSource[(int)Enum_AudioType.SE].loop = false;
             audioSource[(int)Enum_AudioType.SE].clip = Audio.audioClip;
             audioSource[(int)Enum_AudioType.SE].time = StartTime;
+            audioSource[(int)Enum_AudioType.SE].volume = Volume;
             audioSource[(int)Enum_AudioType.SE].PlayOneShot(Audio.audioClip);
         }
     }
