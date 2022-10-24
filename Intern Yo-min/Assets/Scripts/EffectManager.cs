@@ -23,6 +23,7 @@ public class EffectManager : SingletonMonoBehaviour<EffectManager>
     }
 
 
+
     public void SetEffect(string EffectName, Vector3 Pos, Quaternion Rot, float Size)
     {
         for (int i = 0; i < EffectObj.Length; ++i)
