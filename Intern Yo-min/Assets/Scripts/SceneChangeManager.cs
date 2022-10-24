@@ -44,6 +44,8 @@ public class SceneChangeManager : SingletonMonoBehaviour<SceneChangeManager>
         }            
         else
         {
+            SoundManager.Instance.StopSoundAll();
+
             SceneManager.LoadScene(NextSceneName);
 
             Time.timeScale = 1.0f;

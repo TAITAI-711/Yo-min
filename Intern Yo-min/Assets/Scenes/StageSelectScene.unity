@@ -7839,26 +7839,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8300006902632204073, guid: f84c11cc8c4c8464fa7b2e8073d6a36b, type: 3}
-      propertyPath: Audios.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8300006902632204073, guid: f84c11cc8c4c8464fa7b2e8073d6a36b, type: 3}
-      propertyPath: Audios.Array.data[1].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2b356c3b91e0bb441ad982e96ddc2060, type: 3}
-    - target: {fileID: 8300006902632204073, guid: f84c11cc8c4c8464fa7b2e8073d6a36b, type: 3}
-      propertyPath: Audios.Array.data[1].audioName
-      value: Test
-      objectReference: {fileID: 0}
-    - target: {fileID: 8300006902632204073, guid: f84c11cc8c4c8464fa7b2e8073d6a36b, type: 3}
-      propertyPath: Audios.Array.data[2].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2b356c3b91e0bb441ad982e96ddc2060, type: 3}
-    - target: {fileID: 8300006902632204073, guid: f84c11cc8c4c8464fa7b2e8073d6a36b, type: 3}
-      propertyPath: Audios.Array.data[2].audioName
-      value: Test
-      objectReference: {fileID: 0}
     - target: {fileID: 8300006902632204078, guid: f84c11cc8c4c8464fa7b2e8073d6a36b, type: 3}
       propertyPath: m_RootOrder
       value: 6
