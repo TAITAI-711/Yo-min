@@ -49,8 +49,11 @@ public class UI_StageSelectGamePadManager : SingletonMonoBehaviour<UI_StageSelec
     // Update is called once per frame
     void Update()
     {
-        if (!StageSelectManager.Instance.isStageSelect)
+        if (!StageSelectManager.Instance.isStageSelect || GamePlayManager.Instance.isPause)
+        {
+            ButtonOnceTime = 0.1f;
             return;
+        }
 
         if (ButtonOnceTime > 0.0f)
         {

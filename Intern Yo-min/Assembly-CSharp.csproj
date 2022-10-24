@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\Game\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\Scripts\Game\FloorManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
+    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelect_InPlayer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\Game\UI_StartCount.cs" />
     <Compile Include="Assets\Scripts\Game\PlayerMoveMax.cs" />
@@ -139,7 +140,6 @@
     <Compile Include="Assets\Scripts\Game\BanmenManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Game\GameSceneEnd.cs" />
-    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelect_InPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
