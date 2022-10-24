@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\ObjectPositionSetEditor.cs" />
+    <Compile Include="Assets\LowPolyWater_Pack\Scripts\Editor\GeneratePlane.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
