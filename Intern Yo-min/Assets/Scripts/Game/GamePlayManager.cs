@@ -85,7 +85,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         //============
         // デバッグ用
         //============
-        Players = new PlayerInfo[0];
+        Players = new PlayerInfo[4];
         for (int i = 0; i < Players.Length; i++)
         {
             Players[i].OseroNum = 20 * (i + 1);

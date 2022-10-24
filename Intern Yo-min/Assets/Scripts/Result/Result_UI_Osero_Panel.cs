@@ -35,7 +35,7 @@ public class Result_UI_Osero_Panel : MonoBehaviour
 
     private void Update()
     {
-        if (ResultManager.Instance.isCountStop && !ResultManager.Instance.isPause)
+        if (ResultManager.Instance.isCountStop && !ResultManager.Instance.isPause && FadeManager.GetNowState() == FADE_STATE.FADE_NONE)
         {
             Result_UI_Osero[] UI_OseroObjs = ResultManager.Instance.Result_UI_Oseros;
             GamePlayManager.PlayerInfo[] PlayerObjs = GamePlayManager.Instance.Players;
@@ -62,7 +62,7 @@ public class Result_UI_Osero_Panel : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (ResultManager.Instance.isCountStop)
+        if (ResultManager.Instance.isCountStop || FadeManager.GetNowState() != FADE_STATE.FADE_NONE)
             return;
 
         Result_UI_Osero[] UI_OseroObjs = ResultManager.Instance.Result_UI_Oseros;
