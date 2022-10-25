@@ -9,6 +9,7 @@ public class StageSelectPlayerManager : PlayerManager
     private int PlayerLangth = 0;
     private UI_StageSelect_InPlayer[] inPlayer;
     private UI_StageSelect_Start Select_Start;
+    private UI_StageSelect_Ready[] Select_Ready;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -24,6 +25,7 @@ public class StageSelectPlayerManager : PlayerManager
         UI_GameTimeObj = GetComponentInChildren<UI_GameTime>();
         inPlayer = gameObject.GetComponentsInChildren<UI_StageSelect_InPlayer>();
         Select_Start = gameObject.GetComponentInChildren<UI_StageSelect_Start>();
+        Select_Ready = gameObject.GetComponentsInChildren<UI_StageSelect_Ready>();
     }
 
     protected override void Start()
@@ -46,6 +48,12 @@ public class StageSelectPlayerManager : PlayerManager
         for (int i = 0; i < inPlayer.Length; i++)
         {
             inPlayer[i].TMPro.enabled = false;
+        }
+
+        // レディボタン
+        for (int i = 0; i < Select_Ready.Length; i++)
+        {
+            Select_Ready[i].TMPro.enabled = false;
         }
 
         Select_Start.gameObject.SetActive(false);
@@ -119,6 +127,22 @@ public class StageSelectPlayerManager : PlayerManager
                 {
                     SoundManager.Instance.PlaySound("システム移動", false);
                     UI_OseroObj[i].SetPlayerOseroType(UI_StageSelectGamePadManager.Instance.GamePadList[i].NowSelectPlayerOseroType);
+                }
+
+                if (UI_StageSelectGamePadManager.Instance.GamePadList[i].isOK)
+                {
+                    if (Select_Ready[i].TMPro.enabled)
+                        Select_Ready[i].TMPro.enabled = false;
+
+                    if (UI_StageSelectGamePadManager.Instance.GamePadList[i].isFinalyOK)
+                    {
+                        
+                    }
+                }
+                else
+                {
+                    if (!Select_Ready[i].TMPro.enabled)
+                        Select_Ready[i].TMPro.enabled = true;
                 }
             }
         }

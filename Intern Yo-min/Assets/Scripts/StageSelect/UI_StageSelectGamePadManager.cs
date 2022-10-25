@@ -13,12 +13,14 @@ public class UI_StageSelectGamePadManager : SingletonMonoBehaviour<UI_StageSelec
         {
             PadName = "";
             isOK = false;
+            isFinalyOK = false;
             isStickOnce = false;
         }
         public string PadName;
         public PlayerOseroTypeInfo NowSelectPlayerOseroType;
         public EnumPlayerType PlayerType;   // 操作プレイヤー番号
         public bool isOK;
+        public bool isFinalyOK;
         public bool isStickOnce;
     }
 
@@ -64,37 +66,46 @@ public class UI_StageSelectGamePadManager : SingletonMonoBehaviour<UI_StageSelec
         // 色変え
         for (int i = 0; i < GamePadList.Count; i++)
         {
+            // 最終確認判定
             if (GamePadList[i].isOK)
-                continue;
-
-            string Bbutton = GamePadList[i].PadName + "_Button_B";
-            string Stick_L = GamePadList[i].PadName + "_LeftAxis_X";
-
-            if (Input.GetButtonDown(Bbutton))
             {
-                GamePadList[i].isOK = true;
-                SetGamePad();   // ゲームパッド情報をマネージャーに入力
-            }
-
-            if (Input.GetAxis(Stick_L) != 0.0f)
-            {
-                if (!GamePadList[i].isStickOnce)
+                if (!GamePadList[i].isFinalyOK && Input.GetButtonDown(GamePadList[i].PadName + "_Button_B"))
                 {
-                    GamePadList[i].isStickOnce = true;
-
-                    if (Input.GetAxis(Stick_L) > 0.0f)
-                    {
-                        ChangeOseroType(i, true);
-                    }
-                    else
-                    {
-                        ChangeOseroType(i, false);
-                    }
+                    GamePadList[i].isFinalyOK = true;
                 }
             }
+            // 色替え＆プレイヤーの色決定
             else
             {
-                GamePadList[i].isStickOnce = false;
+                string Bbutton = GamePadList[i].PadName + "_Button_B";
+                string Stick_L = GamePadList[i].PadName + "_LeftAxis_X";
+
+                if (Input.GetButtonDown(Bbutton))
+                {
+                    GamePadList[i].isOK = true;
+                    SetGamePad();   // ゲームパッド情報をマネージャーに入力
+                }
+
+                if (Input.GetAxis(Stick_L) != 0.0f)
+                {
+                    if (!GamePadList[i].isStickOnce)
+                    {
+                        GamePadList[i].isStickOnce = true;
+
+                        if (Input.GetAxis(Stick_L) > 0.0f)
+                        {
+                            ChangeOseroType(i, true);
+                        }
+                        else
+                        {
+                            ChangeOseroType(i, false);
+                        }
+                    }
+                }
+                else
+                {
+                    GamePadList[i].isStickOnce = false;
+                }
             }
         }
 
