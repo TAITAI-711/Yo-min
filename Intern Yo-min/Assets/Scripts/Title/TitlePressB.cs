@@ -82,6 +82,11 @@ public class TitlePressB : MonoBehaviour
                     if (Input.GetButtonDown(ButtonName))
                     {
                         isPress = true;
+
+                        // ‰¹
+                        SoundManager.Instance.PlaySound("Œˆ’è", false);
+
+
                         GamePlayManager.Instance.MenuSelectPlayerName = "Joystick_" + i.ToString();
 
                         StandaloneObj.verticalAxis = "Joystick_" + i.ToString() + "_LeftAxis_Y";

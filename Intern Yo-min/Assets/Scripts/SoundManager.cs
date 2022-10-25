@@ -28,7 +28,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     // オーディオソース
     private AudioSource[] audioSource;
 
-
+    private float StartVolumeBGM = 1.0f;
+    private float StartVolumeSE = 1.0f;
 
     private void Awake()
     {
@@ -103,6 +104,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         if (Audio.audioClip == null)
             return;
 
+
         if (isloop)
         {
             audioSource[(int)Enum_AudioType.BGM].loop = true;
@@ -114,6 +116,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
                 audioSource[(int)Enum_AudioType.BGM].Play();
             else
                 audioSource[(int)Enum_AudioType.BGM].PlayDelayed(DelayTime);
+
+            StartVolumeBGM = Volume;
         }  
         else
         {
@@ -122,6 +126,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
             audioSource[(int)Enum_AudioType.SE].time = StartTime;
             audioSource[(int)Enum_AudioType.SE].volume = Volume;
             audioSource[(int)Enum_AudioType.SE].PlayOneShot(Audio.audioClip);
+
+            StartVolumeSE = Volume;
         }
     }
 
@@ -175,4 +181,16 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
             obj.UnPause();
         }
     }
+
+
+    // 音量調節用
+    public void SetVolumeBGM(float Volume)
+    {
+        audioSource[(int)Enum_AudioType.BGM].volume = StartVolumeBGM * Volume;
+    }
+    public void SetVolumeSE(float Volume)
+    {
+        audioSource[(int)Enum_AudioType.SE].volume = StartVolumeSE * Volume;
+    }
+
 }

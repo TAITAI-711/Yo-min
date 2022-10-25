@@ -38,6 +38,9 @@ public class UI_StageSelectManager : SingletonMonoBehaviour<UI_StageSelectManage
                 UI_StageObj[i].gameObject.transform.localPosition = new Vector3(2000, 0, 0);
         }
 
+        // 選択で音が鳴らない例外設定
+        EventSystemManager.Instance.NoSelectObj = UI_ButtonObj[2].gameObject;
+
         // 真ん中のボタンを選択
         EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(UI_ButtonObj[2].gameObject);
     }
