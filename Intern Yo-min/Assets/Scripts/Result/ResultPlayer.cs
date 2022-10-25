@@ -37,6 +37,6 @@ public class ResultPlayer : MonoBehaviour
         if (animator == null)
             animator = gameObject.GetComponent<Animator>();
 
-        animator.SetBool("isThrow", true);
+        animator.SetBool("isWin", true);
     }
 }
