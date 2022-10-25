@@ -112,8 +112,14 @@ public class StageSelectPlayerManager : PlayerManager
             // オセロの色表示
             for (int i = 0; i < UI_StageSelectGamePadManager.Instance.GamePadList.Count; i++)
             {
-                UI_OseroObj[i].gameObject.SetActive(true);
-                UI_OseroObj[i].SetPlayerOseroType(UI_StageSelectGamePadManager.Instance.GamePadList[i].NowSelectPlayerOseroType);
+                if (!UI_OseroObj[i].gameObject.activeSelf)
+                    UI_OseroObj[i].gameObject.SetActive(true);
+
+                if (UI_OseroObj[i].PlayerOseroType.OseroType != UI_StageSelectGamePadManager.Instance.GamePadList[i].NowSelectPlayerOseroType.OseroType)
+                {
+                    SoundManager.Instance.PlaySound("システム移動", false);
+                    UI_OseroObj[i].SetPlayerOseroType(UI_StageSelectGamePadManager.Instance.GamePadList[i].NowSelectPlayerOseroType);
+                }
             }
         }
     }

@@ -92,6 +92,8 @@ public class UI_StageSelectManager : SingletonMonoBehaviour<UI_StageSelectManage
         // ステージ選択
         if (Input.GetButtonDown(GamePlayManager.Instance.MenuSelectPlayerName + "_Button_B"))
         {
+            SoundManager.Instance.PlaySound("決定", false);
+
             StageSelectManager.Instance.NextSceneName = UI_StageObj[NowSelectNum].StageSceneName;
 
             GamePlayManager.Instance.isGamePlay = true;

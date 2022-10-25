@@ -25,8 +25,10 @@ public class UI_Time : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.W))
             NowTime -= 10.0f;
+#endif
     }
 
 

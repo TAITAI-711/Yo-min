@@ -48,6 +48,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Q))
         {
             PlaySound("Test", false);
@@ -64,6 +65,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         {
             PauseRestartSoundAll();
         }
+#endif
     }
 
     // サウンドの再生開始

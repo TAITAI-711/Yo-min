@@ -40,21 +40,26 @@ public class Result_UI_Osero_Panel : MonoBehaviour
             Result_UI_Osero[] UI_OseroObjs = ResultManager.Instance.Result_UI_Oseros;
             GamePlayManager.PlayerInfo[] PlayerObjs = GamePlayManager.Instance.Players;
 
-            bool isNoReady = true; 
+            bool isReady = true; 
 
 
             for (int i = 0; i < PlayerObjs.Length; i++)
             {
                 if (Input.GetButtonDown(PlayerObjs[i].GamePadName_Player + "_Button_B"))
                 {
-                    UI_OseroObjs[i].SetOKText("OK");
+                    if (UI_OseroObjs[i].GetOKText() != "OK")
+                    {
+                        // Œˆ’è‰¹
+                        SoundManager.Instance.PlaySound("€”õŠ®—¹", false);
+                        UI_OseroObjs[i].SetOKText("OK");
+                    }
                 }
 
                 if (UI_OseroObjs[i].GetOKText() != "OK")
-                    isNoReady = false;
+                    isReady = false;
             }
 
-            if (isNoReady)
+            if (isReady)
                 ResultManager.Instance.isPause = true;
         }
     }
