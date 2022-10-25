@@ -75,7 +75,7 @@ public class TitlePressB : MonoBehaviour
         {
             if (Input.GetButtonDown("Joystick_0_Button_B"))
             {
-                for (int i = 1; i <= 10; i++)
+                for (int i = 1; i <= 12; i++)
                 {
                     string ButtonName = "Joystick_" + i.ToString() + "_Button_B";
 

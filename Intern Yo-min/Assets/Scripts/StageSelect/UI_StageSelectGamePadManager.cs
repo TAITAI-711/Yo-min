@@ -104,7 +104,7 @@ public class UI_StageSelectGamePadManager : SingletonMonoBehaviour<UI_StageSelec
             // Œˆ’è
             if (Input.GetButtonDown("Joystick_0_Button_B"))
             {
-                for (int i = 1; i <= 10; i++)
+                for (int i = 1; i <= 12; i++)
                 {
                     bool isSameName = false;
 

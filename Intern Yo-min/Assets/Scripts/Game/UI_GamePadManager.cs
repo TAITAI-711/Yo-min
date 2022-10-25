@@ -89,7 +89,7 @@ public class UI_GamePadManager : SingletonMonoBehaviour<UI_GamePadManager>
                     {
                         if (Input.GetButtonDown("Joystick_0_Button_B"))
                         {
-                            for (int j = 1; j <= 10; j++)
+                            for (int j = 1; j <= 12; j++)
                             {
                                 string NowGamePadName = "Joystick_" + j.ToString() + "_Button_B";
 
