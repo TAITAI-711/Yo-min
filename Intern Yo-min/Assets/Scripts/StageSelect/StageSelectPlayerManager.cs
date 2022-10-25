@@ -67,9 +67,18 @@ public class StageSelectPlayerManager : PlayerManager
         for (int i = 0; i < inPlayer.Length; i++)
         {
             if (UI_StageSelectGamePadManager.Instance.GamePadList.Count <= i)
-                inPlayer[i].TMPro.enabled = true;
+            {
+                if (!inPlayer[i].TMPro.enabled)
+                    inPlayer[i].TMPro.enabled = true;
+            }                
             else
-                inPlayer[i].TMPro.enabled = false;
+            {
+                if (inPlayer[i].TMPro.enabled)
+                {
+                    SoundManager.Instance.PlaySound("準備完了", false);
+                    inPlayer[i].TMPro.enabled = false;
+                }
+            }
         }
 
         // プレイヤーの表示
@@ -84,10 +93,15 @@ public class StageSelectPlayerManager : PlayerManager
                 {
                     if (PlayerMoveObj[j].PlayerType == GamePlayManager.Instance.Players[i].PlayerType)
                     {
-                        PlayerMoveObj[j].gameObject.SetActive(true);
-                        PlayerMoveObj[j].SetPlayerOseroType(GamePlayManager.Instance.Players[i].PlayerOseroType);
-                        PlayerMoveObj[j].PlayersNum = i;
-                        break;
+                        if (!PlayerMoveObj[j].gameObject.activeSelf)
+                        {
+                            SoundManager.Instance.PlaySound("決定", false);
+
+                            PlayerMoveObj[j].gameObject.SetActive(true);
+                            PlayerMoveObj[j].SetPlayerOseroType(GamePlayManager.Instance.Players[i].PlayerOseroType);
+                            PlayerMoveObj[j].PlayersNum = i;
+                            break;
+                        }
                     }
                 }
             }

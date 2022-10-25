@@ -83,7 +83,7 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 3e9e6d489a77d294f99b5f6edb37ede8, type: 3}
   - audioName: "\u30EA\u30B6\u30EB\u30C8\u9806\u4F4D\u6C7A\u5B9A"
     audioClip: {fileID: 8300000, guid: 8b2932f7e0366144fa202d93b0ee9890, type: 3}
-  - audioName: "\u623B\u308B"
+  - audioName: "\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7\u623B\u308B"
     audioClip: {fileID: 8300000, guid: d8e5b9ed46a7b174a9bd860c19948354, type: 3}
   - audioName: "\u6C7A\u5B9A"
     audioClip: {fileID: 8300000, guid: 1f1ca7107e23408449be1b8393500705, type: 3}

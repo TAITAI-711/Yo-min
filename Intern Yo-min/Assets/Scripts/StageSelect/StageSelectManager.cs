@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class StageSelectManager : SingletonMonoBehaviour<StageSelectManager>
 {
-    public bool isSelectSceneEnd = false;
     public bool isStageSelect = false;
     public string NextSceneName = "TitleScene";
 
@@ -38,6 +37,8 @@ public class StageSelectManager : SingletonMonoBehaviour<StageSelectManager>
             isOnce = true;
 
             GamePlayManager.Instance.isGamePadOK = true;
+
+            SoundManager.Instance.PlaySound("Œˆ’è", false);
 
             SceneChangeManager.Instance.SceneChange(NextSceneName, true);
         }

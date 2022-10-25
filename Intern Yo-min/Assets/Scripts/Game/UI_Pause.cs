@@ -43,6 +43,7 @@ public class UI_Pause : MonoBehaviour
         {
             SoundManager.Instance.PauseSoundSE();   // SEの音ポーズ
             SoundManager.Instance.SetVolumeBGM(0.5f);   // BGM音量下げる
+            SoundManager.Instance.PlaySound("ポップアップ", false, 0.1f);
 
             Time.timeScale = 0.0f;
             UI_PausePanelObj.SetActive(true);
@@ -52,13 +53,12 @@ public class UI_Pause : MonoBehaviour
         {
             SoundManager.Instance.PauseRestartSoundAll();   // 音のポーズ解除
             SoundManager.Instance.SetVolumeBGM(1.0f);       // BGM音量戻す
+            SoundManager.Instance.PlaySound("ポップアップ戻る", false, 0.1f);
 
             Time.timeScale = 1.0f;
             EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(null);
             UI_PausePanelObj.SetActive(false);
         }
-
-        SoundManager.Instance.PlaySound("ポップアップ", false, 0.1f);
     }
 
 
