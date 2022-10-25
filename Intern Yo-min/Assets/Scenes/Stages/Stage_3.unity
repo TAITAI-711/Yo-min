@@ -4637,12 +4637,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4240907213348958581, guid: 760b1d0a8ce10cd42a3e72c9740dce14, type: 3}
       propertyPath: m_Cameras.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4240907213348958581, guid: 760b1d0a8ce10cd42a3e72c9740dce14, type: 3}
       propertyPath: m_Cameras.Array.data[0]
       value: 
       objectReference: {fileID: 8735853651006391859}
+    - target: {fileID: -4240907213348958581, guid: 760b1d0a8ce10cd42a3e72c9740dce14, type: 3}
+      propertyPath: m_Cameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 1716611073}
     - target: {fileID: 8735853650626227035, guid: 760b1d0a8ce10cd42a3e72c9740dce14, type: 3}
       propertyPath: m_RootOrder
       value: 1
