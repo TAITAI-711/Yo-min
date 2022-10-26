@@ -49,7 +49,7 @@ public class StageSelectPlayerManager : PlayerManager
         // Bボタン押すUI非表示
         for (int i = 0; i < inPlayer.Length; i++)
         {
-            inPlayer[i].TMPro.enabled = false;
+            inPlayer[i].SetImageActive(false);
         }
 
         // レディボタン
@@ -90,15 +90,15 @@ public class StageSelectPlayerManager : PlayerManager
         {
             if (UI_StageSelectGamePadManager.Instance.GamePadList.Count <= i)
             {
-                if (!inPlayer[i].TMPro.enabled)
-                    inPlayer[i].TMPro.enabled = true;
+                if (!inPlayer[i].GetImageActive())
+                    inPlayer[i].SetImageActive(true);
             }                
             else
             {
-                if (inPlayer[i].TMPro.enabled)
+                if (inPlayer[i].GetImageActive())
                 {
                     SoundManager.Instance.PlaySound("準備完了", false);
-                    inPlayer[i].TMPro.enabled = false;
+                    inPlayer[i].SetImageActive(false);
                 }
             }
         }

@@ -912,6 +912,10 @@
       <Project>{648BFD8F-3BC8-B0D8-A0AD-EC9576661745}</Project>
       <Name>CFXRDemo</Name>
     </ProjectReference>
+    <ProjectReference Include="Andtech.StarPack.Editor.csproj">
+      <Project>{E6456AFD-A326-C4B3-1BCA-170DD412B87D}</Project>
+      <Name>Andtech.StarPack.Editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
