@@ -159,6 +159,7 @@
     <Compile Include="Assets\Scripts\Game\GameSceneEnd.cs" />
     <Compile Include="Assets\Andtech\Star Pack\Samples\Star Pack Demo\Scripts\ActivateDepthRendering.cs" />
     <Compile Include="Assets\Andtech\Star Pack\Samples\Star Pack Demo\Scripts\Spin.cs" />
+    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelect_GamePlaying.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

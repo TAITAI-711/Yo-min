@@ -11,6 +11,7 @@ public class StageSelectPlayerManager : PlayerManager
     private UI_StageSelect_Start Select_Start;
     private UI_StageSelect_Ready[] Select_Ready;
     private UI_StageSelectColorOK[] Select_ColorOK;
+    private UI_StageSelect_GamePlaying Select_GamePlaying;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -28,6 +29,7 @@ public class StageSelectPlayerManager : PlayerManager
         Select_Start = gameObject.GetComponentInChildren<UI_StageSelect_Start>();
         Select_Ready = gameObject.GetComponentsInChildren<UI_StageSelect_Ready>();
         Select_ColorOK = gameObject.GetComponentsInChildren<UI_StageSelectColorOK>();
+        Select_GamePlaying = gameObject.GetComponentInChildren<UI_StageSelect_GamePlaying>();
     }
 
     protected override void Start()
@@ -64,6 +66,9 @@ public class StageSelectPlayerManager : PlayerManager
             Select_ColorOK[i].ImageObj.enabled = false;
         }
 
+        // 操作説明
+        Select_GamePlaying.gameObject.SetActive(false);
+
         Select_Start.gameObject.SetActive(false);
     }
 
@@ -72,6 +77,13 @@ public class StageSelectPlayerManager : PlayerManager
     {
         if (!StageSelectManager.Instance.isStageSelect)
             return;
+
+        // 操作説明UI
+        if (!Select_GamePlaying.gameObject.activeSelf)
+        {
+            Select_GamePlaying.gameObject.SetActive(true);
+        }
+
 
         // 次シーンへ進む用のUI
         if (StageSelectManager.Instance.isStageSelectEnd)
