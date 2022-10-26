@@ -47,15 +47,15 @@ public class Result_UI_Osero_Panel : MonoBehaviour
             {
                 if (Input.GetButtonDown(PlayerObjs[i].GamePadName_Player + "_Button_B"))
                 {
-                    if (UI_OseroObjs[i].GetOKText() != "OK")
+                    if (!UI_OseroObjs[i].GetOK())
                     {
                         // Œˆ’è‰¹
                         SoundManager.Instance.PlaySound("€”õŠ®—¹", false);
-                        UI_OseroObjs[i].SetOKText("OK");
+                        UI_OseroObjs[i].SetReadyImage();
                     }
                 }
 
-                if (UI_OseroObjs[i].GetOKText() != "OK")
+                if (!UI_OseroObjs[i].GetOK())
                     isReady = false;
             }
 
@@ -134,7 +134,7 @@ public class Result_UI_Osero_Panel : MonoBehaviour
             // €”õŠ®—¹ƒ{ƒ^ƒ“•\¦
             for (int i = 0; i < PlayerObjs.Length; i++)
             {
-                UI_OseroObjs[i].SetOKText("PRESS B");
+                UI_OseroObjs[i].SetButtonBImage();
             }
         }
     }

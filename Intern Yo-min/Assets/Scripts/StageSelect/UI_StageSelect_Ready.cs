@@ -29,13 +29,13 @@ public class UI_StageSelect_Ready : MonoBehaviour
     }
 
 
-    public void SetWaitSprite()
+    public void SetSpriteWait()
     {
         if (ImageObj.sprite != WaitSprite)
             ImageObj.sprite = WaitSprite;
     }
 
-    public void SetReadySprite()
+    public void SetSpriteReady()
     {
         if (ImageObj.sprite != ReadySprite)
             ImageObj.sprite = ReadySprite;

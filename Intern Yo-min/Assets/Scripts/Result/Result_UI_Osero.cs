@@ -8,13 +8,15 @@ public class Result_UI_Osero : MonoBehaviour
 {
     private float OffsetPosY = -1.8f;
     private float OffsetRankPosY = 15.0f;
-    private float OffsetOKPosY = -4.8f;
+    private float OffsetOKPosY = -5.3f;
 
     private TextMeshProUGUI[] TextMP = null;
+    private UI_Result_OK Result_OK;
 
     private void Awake()
     {
         TextMP = GetComponentsInChildren<TextMeshProUGUI>();
+        Result_OK = GetComponentInChildren<UI_Result_OK>();
     }
 
     private void FixedUpdate()
@@ -51,7 +53,7 @@ public class Result_UI_Osero : MonoBehaviour
             TextMP = GetComponentsInChildren<TextMeshProUGUI>();
 
         TextMP[1].rectTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, UIRankPos);
-        TextMP[2].rectTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, UIOKPos);
+        Result_OK.ImageObj.rectTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, UIOKPos);
     }
 
     public void SetText(string Text)
@@ -87,19 +89,27 @@ public class Result_UI_Osero : MonoBehaviour
         return TextMP[1].text;
     }
 
-    public void SetOKText(string Text)
+    public void SetReadyImage()
     {
-        if (TextMP == null)
-            TextMP = GetComponentsInChildren<TextMeshProUGUI>();
+        if (Result_OK == null)
+            Result_OK = GetComponentInChildren<UI_Result_OK>();
 
-        TextMP[2].text = Text;
+        Result_OK.SetSpriteReady();
     }
 
-    public string GetOKText()
+    public void SetButtonBImage()
     {
-        if (TextMP == null)
-            TextMP = GetComponentsInChildren<TextMeshProUGUI>();
+        if (Result_OK == null)
+            Result_OK = GetComponentInChildren<UI_Result_OK>();
 
-        return TextMP[2].text;
+        Result_OK.SetSpriteButtonB();
+    }
+
+    public bool GetOK()
+    {
+        if (Result_OK == null)
+            Result_OK = GetComponentInChildren<UI_Result_OK>();
+
+        return Result_OK.GetNowReady();
     }
 }

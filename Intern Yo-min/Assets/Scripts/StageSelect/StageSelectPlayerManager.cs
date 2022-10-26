@@ -169,7 +169,7 @@ public class StageSelectPlayerManager : PlayerManager
                     if (!Select_Ready[i].ImageObj.enabled)
                         Select_Ready[i].ImageObj.enabled = true;
 
-                    Select_Ready[i].SetWaitSprite();
+                    Select_Ready[i].SetSpriteWait();
                 }
                 else
                 {
@@ -178,7 +178,7 @@ public class StageSelectPlayerManager : PlayerManager
                         if (!Select_Ready[i].ImageObj.enabled)
                             Select_Ready[i].ImageObj.enabled = true;
 
-                        Select_Ready[i].SetReadySprite();
+                        Select_Ready[i].SetSpriteReady();
                     }
                     else
                     {
