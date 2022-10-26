@@ -68,7 +68,7 @@
     <Compile Include="Assets\Scripts\StageSelect\StageSelectManager.cs" />
     <Compile Include="Assets\Scripts\Game\UI_GameTime.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoRotate.cs" />
-    <Compile Include="Assets\Scripts\Title\Title.cs" />
+    <Compile Include="Assets\Scripts\Title\TitleManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\Game\SkyMove.cs" />
@@ -120,6 +120,7 @@
     <Compile Include="Assets\Scripts\Game\Gimmick_Wind.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\Result\ResultPlayer.cs" />
+    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectColorOK.cs" />
     <Compile Include="Assets\Scripts\StageSelect\UI_Stage.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
@@ -150,13 +151,12 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\Scripts\Game\UI_Pause.cs" />
+    <Compile Include="Assets\Scripts\Result\UI_Result_OK.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Scripts\StageSelect\UI_StageSelect_Ready.cs" />
     <Compile Include="Assets\Scripts\Game\BanmenManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Game\GameSceneEnd.cs" />
-    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectColorOK.cs" />
-    <Compile Include="Assets\Scripts\Result\UI_Result_OK.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

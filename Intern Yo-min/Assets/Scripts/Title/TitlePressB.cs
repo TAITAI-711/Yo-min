@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class TitlePressB : MonoBehaviour
 {
-    [SerializeField] private GameObject ButtonsObj;
     private TextMeshProUGUI TMPro;
     private StandaloneInputModuleButton StandaloneObj;
 
@@ -25,7 +24,6 @@ public class TitlePressB : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        ButtonsObj.SetActive(false);
         TMPro = GetComponent<TextMeshProUGUI>();
         NowTime = PressBTime;
         NowAlphaTime = AlphaTime;
@@ -43,9 +41,10 @@ public class TitlePressB : MonoBehaviour
         {
             NowTime -= Time.deltaTime;
 
+            // Bƒ{ƒ^ƒ“‰Ÿ‚³‚ê‚½
             if (NowTime < 0.0f)
             {
-                ButtonsObj.SetActive(true);
+                TitleManager.Instance.isPressB = true;
                 gameObject.SetActive(false);
             }
 
