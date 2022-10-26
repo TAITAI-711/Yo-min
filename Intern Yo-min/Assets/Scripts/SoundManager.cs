@@ -87,6 +87,10 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     {
         PlaySound(AudioName, true, 0.0f, DelayTime, Volume);
     }
+    public void PlaySoundBGMDelay(string AudioName, float StartTime, float DelayTime, float Volume)
+    {
+        PlaySound(AudioName, true, StartTime, DelayTime, Volume);
+    }
 
     // –{‘Ì
     public void PlaySound(string AudioName, bool isloop, float StartTime, float DelayTime, float Volume)

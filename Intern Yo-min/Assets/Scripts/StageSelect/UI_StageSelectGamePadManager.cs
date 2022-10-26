@@ -72,6 +72,7 @@ public class UI_StageSelectGamePadManager : SingletonMonoBehaviour<UI_StageSelec
                 if (!GamePadList[i].isFinalyOK && Input.GetButtonDown(GamePadList[i].PadName + "_Button_B"))
                 {
                     GamePadList[i].isFinalyOK = true;
+                    SoundManager.Instance.PlaySound("決定", false);
                 }
             }
             // 色替え＆プレイヤーの色決定

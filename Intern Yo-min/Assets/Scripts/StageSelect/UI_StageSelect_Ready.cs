@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_StageSelect_Ready : MonoBehaviour
 {
-    public TextMeshProUGUI TMPro;
+    [HideInInspector] public Image ImageObj;
+    [SerializeField] private Sprite WaitSprite;
+    [SerializeField] private Sprite ReadySprite;
 
     private void Awake()
     {
-        TMPro = gameObject.GetComponent<TextMeshProUGUI>();
+        ImageObj = gameObject.GetComponent<Image>();
+        ImageObj.sprite = WaitSprite;
     }
 
     // Start is called before the first frame update
@@ -22,5 +26,18 @@ public class UI_StageSelect_Ready : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+    public void SetWaitSprite()
+    {
+        if (ImageObj.sprite != WaitSprite)
+            ImageObj.sprite = WaitSprite;
+    }
+
+    public void SetReadySprite()
+    {
+        if (ImageObj.sprite != ReadySprite)
+            ImageObj.sprite = ReadySprite;
     }
 }

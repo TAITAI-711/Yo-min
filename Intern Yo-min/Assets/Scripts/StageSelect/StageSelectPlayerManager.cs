@@ -10,6 +10,7 @@ public class StageSelectPlayerManager : PlayerManager
     private UI_StageSelect_InPlayer[] inPlayer;
     private UI_StageSelect_Start Select_Start;
     private UI_StageSelect_Ready[] Select_Ready;
+    private UI_StageSelectColorOK[] Select_ColorOK;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -26,6 +27,7 @@ public class StageSelectPlayerManager : PlayerManager
         inPlayer = gameObject.GetComponentsInChildren<UI_StageSelect_InPlayer>();
         Select_Start = gameObject.GetComponentInChildren<UI_StageSelect_Start>();
         Select_Ready = gameObject.GetComponentsInChildren<UI_StageSelect_Ready>();
+        Select_ColorOK = gameObject.GetComponentsInChildren<UI_StageSelectColorOK>();
     }
 
     protected override void Start()
@@ -53,7 +55,13 @@ public class StageSelectPlayerManager : PlayerManager
         // レディボタン
         for (int i = 0; i < Select_Ready.Length; i++)
         {
-            Select_Ready[i].TMPro.enabled = false;
+            Select_Ready[i].ImageObj.enabled = false;
+        }
+        
+        // カラーの準備完了
+        for (int i = 0; i < Select_ColorOK.Length; i++)
+        {
+            Select_ColorOK[i].ImageObj.enabled = false;
         }
 
         Select_Start.gameObject.SetActive(false);
@@ -65,10 +73,16 @@ public class StageSelectPlayerManager : PlayerManager
         if (!StageSelectManager.Instance.isStageSelect)
             return;
 
-        if (GamePlayManager.Instance.Players != null &&
-            GamePlayManager.Instance.Players.Length >= 2)
+        // 次シーンへ進む用のUI
+        if (StageSelectManager.Instance.isStageSelectEnd)
         {
-            Select_Start.gameObject.SetActive(true);
+            if (!Select_Start.gameObject.activeSelf)
+                Select_Start.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (Select_Start.gameObject.activeSelf)
+                Select_Start.gameObject.SetActive(true);
         }
 
         // Bボタン押すUI表示
@@ -103,7 +117,7 @@ public class StageSelectPlayerManager : PlayerManager
                     {
                         if (!PlayerMoveObj[j].gameObject.activeSelf)
                         {
-                            SoundManager.Instance.PlaySound("決定", false);
+                            SoundManager.Instance.PlaySound("準備完了", false);
 
                             PlayerMoveObj[j].gameObject.SetActive(true);
                             PlayerMoveObj[j].SetPlayerOseroType(GamePlayManager.Instance.Players[i].PlayerOseroType);
@@ -117,9 +131,15 @@ public class StageSelectPlayerManager : PlayerManager
 
         if (UI_StageSelectGamePadManager.Instance.GamePadList != null)
         {
-            // オセロの色表示
+            bool isStageSelectEnd = true;
+
+            if (UI_StageSelectGamePadManager.Instance.GamePadList.Count < 2)
+                isStageSelectEnd = false;
+
+            // 現在の参加中プレイヤーリストの数だけ回す
             for (int i = 0; i < UI_StageSelectGamePadManager.Instance.GamePadList.Count; i++)
             {
+                // オセロの色表示
                 if (!UI_OseroObj[i].gameObject.activeSelf)
                     UI_OseroObj[i].gameObject.SetActive(true);
 
@@ -129,22 +149,54 @@ public class StageSelectPlayerManager : PlayerManager
                     UI_OseroObj[i].SetPlayerOseroType(UI_StageSelectGamePadManager.Instance.GamePadList[i].NowSelectPlayerOseroType);
                 }
 
+
+                // 色決定表示
                 if (UI_StageSelectGamePadManager.Instance.GamePadList[i].isOK)
                 {
-                    if (Select_Ready[i].TMPro.enabled)
-                        Select_Ready[i].TMPro.enabled = false;
-
-                    if (UI_StageSelectGamePadManager.Instance.GamePadList[i].isFinalyOK)
-                    {
-                        
-                    }
+                    if (Select_ColorOK[i].ImageObj.enabled)
+                        Select_ColorOK[i].ImageObj.enabled = false;
                 }
                 else
                 {
-                    if (!Select_Ready[i].TMPro.enabled)
-                        Select_Ready[i].TMPro.enabled = true;
+                    if (!Select_ColorOK[i].ImageObj.enabled)
+                        Select_ColorOK[i].ImageObj.enabled = true;
                 }
+
+
+                // 最終確認オブジェクト表示
+                if (UI_StageSelectGamePadManager.Instance.GamePadList[i].isOK && !UI_StageSelectGamePadManager.Instance.GamePadList[i].isFinalyOK)
+                {
+                    if (!Select_Ready[i].ImageObj.enabled)
+                        Select_Ready[i].ImageObj.enabled = true;
+
+                    Select_Ready[i].SetWaitSprite();
+                }
+                else
+                {
+                    if (UI_StageSelectGamePadManager.Instance.GamePadList[i].isFinalyOK)
+                    {
+                        if (!Select_Ready[i].ImageObj.enabled)
+                            Select_Ready[i].ImageObj.enabled = true;
+
+                        Select_Ready[i].SetReadySprite();
+                    }
+                    else
+                    {
+                        if (Select_Ready[i].ImageObj.enabled)
+                            Select_Ready[i].ImageObj.enabled = false;
+                    }
+                }
+
+                // 一つでもパッドの準備が完了してない
+                if (!UI_StageSelectGamePadManager.Instance.GamePadList[i].isFinalyOK)
+                    isStageSelectEnd = false;
             }
+
+            // 次のシーンへ進めるか
+            if (isStageSelectEnd)
+                StageSelectManager.Instance.isStageSelectEnd = true;
+            else
+                StageSelectManager.Instance.isStageSelectEnd = false;
         }
     }
 }

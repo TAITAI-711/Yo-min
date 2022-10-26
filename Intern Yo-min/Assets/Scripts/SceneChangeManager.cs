@@ -57,7 +57,7 @@ public class SceneChangeManager : SingletonMonoBehaviour<SceneChangeManager>
                     SoundManager.Instance.PlaySoundBGMDelay("BGM_メインメニュー", 0.5f);
                     break;
                 case "GameScene":
-                    SoundManager.Instance.PlaySoundBGMDelay("BGM_ベーシック", 0.5f);
+                    SoundManager.Instance.PlaySoundBGMDelay("BGM_ベーシック", 8.0f, 0.5f, 1.0f);
                     break;
                 case "Stage_2":
                     SoundManager.Instance.PlaySoundBGMDelay("BGM_田んぼ", 0.5f);
