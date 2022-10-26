@@ -7,7 +7,7 @@ public class UI_BackGroundMove : MonoBehaviour
 
     Vector3 StartPos;
 
-    float MoveTime = 10.0f;
+    float MoveTime = 20.0f;
     float NowTime = 0.0f;
 
     private void Start()
@@ -17,8 +17,11 @@ public class UI_BackGroundMove : MonoBehaviour
         StartPos = Rt.localPosition;
     }
 
-    void FixedUpdate()
+    void Update()
     {
+        if (GamePlayManager.Instance.isPause)
+            return;
+
         Vector3 Pos = Rt.localPosition;
 
         Pos.x = StartPos.x + 1920.0f * NowTime / MoveTime;
@@ -26,7 +29,7 @@ public class UI_BackGroundMove : MonoBehaviour
 
         Rt.localPosition = Pos;
 
-        NowTime += Time.fixedDeltaTime;
+        NowTime += Time.deltaTime;
 
         if (NowTime >= MoveTime)
         {
