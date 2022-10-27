@@ -9705,6 +9705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI_TimeObj: {fileID: 0}
   UI_StartCountObj: {fileID: 0}
+  UI_30SecObj: {fileID: 0}
 --- !u!224 &7726511317946351917
 RectTransform:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ MonoBehaviour:
   - audioName: "BGM_\u30BF\u30A4\u30C8\u30EB"
     audioClip: {fileID: 8300000, guid: 570215784553d4948b93584221708c0e, type: 3}
   - audioName: "BGM_\u30D9\u30FC\u30B7\u30C3\u30AF"
-    audioClip: {fileID: 8300000, guid: 6471ce6b15f5e32499174d3f6aedd3c1, type: 3}
+    audioClip: {fileID: 8300000, guid: 1c959166a08e8054c84849c6c693bef1, type: 3}
   - audioName: "BGM_\u30E1\u30A4\u30F3\u30E1\u30CB\u30E5\u30FC"
     audioClip: {fileID: 8300000, guid: 69bad18d16564fc4881d5af29eed4b46, type: 3}
   - audioName: "BGM_\u6C37"
@@ -91,6 +91,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 1f1ca7107e23408449be1b8393500705, type: 3}
   - audioName: "\u6E96\u5099\u5B8C\u4E86"
     audioClip: {fileID: 8300000, guid: 04d9af41ea7436c46a8b875d61e58bfd, type: 3}
+  - audioName: "\u30D7\u30EC\u30A4\u30E4\u30FC\u885D\u7A81"
+    audioClip: {fileID: 8300000, guid: b9603ae47c951804880435aa818c9974, type: 3}
 --- !u!82 &8300006902632204076
 AudioSource:
   m_ObjectHideFlags: 0

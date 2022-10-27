@@ -214,7 +214,7 @@ public class PlayerMove : MonoBehaviour
 
                 if (!isCrash)
                 {
-                    SoundManager.Instance.PlaySound("システム移動", false);
+                    SoundManager.Instance.PlaySound("プレイヤー衝突", false, 0.0f, 0.0f, 0.7f);
                 }
 
                 isCrash = true;
