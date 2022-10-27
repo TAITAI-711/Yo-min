@@ -55,5 +55,6 @@ public class UI_30Sec : MonoBehaviour
         isMove = true;
 
         // Žc‚è30•b‚Ì‰¹–Â‚ç‚·
+        SoundManager.Instance.PlaySound("Žc‚è30•b", false);
     }
 }

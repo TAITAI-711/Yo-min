@@ -93,6 +93,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 04d9af41ea7436c46a8b875d61e58bfd, type: 3}
   - audioName: "\u30D7\u30EC\u30A4\u30E4\u30FC\u885D\u7A81"
     audioClip: {fileID: 8300000, guid: b9603ae47c951804880435aa818c9974, type: 3}
+  - audioName: "\u6B8B\u308A30\u79D2"
+    audioClip: {fileID: 8300000, guid: 4a40384c94b4b7746baccf8c9999e71f, type: 3}
 --- !u!82 &8300006902632204076
 AudioSource:
   m_ObjectHideFlags: 0

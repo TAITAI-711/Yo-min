@@ -76,7 +76,7 @@ public class UI_Time : MonoBehaviour
 
             if (PlayerManager.Instance.UI_GameTimeObj.UI_30SecObj != null)
                 PlayerManager.Instance.UI_GameTimeObj.UI_30SecObj.SetMove();
-            TimeObj.color = new Color(1.0f, 0.25f, 0.25f, 1.0f);
+            TimeObj.color = new Color(1.0f, 0.2f, 0.2f, 1.0f);
         }
     }
 
