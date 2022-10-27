@@ -124,8 +124,6 @@ public class PlayerMove : MonoBehaviour
         //    }
         //}
         //UnityEngine.Debug.Log(currentConnectionCount);
-
-        
     }
 
     private void Start()
@@ -151,6 +149,8 @@ public class PlayerMove : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+        else
+            EffectManager.Instance.SetEffect("PlayerGo", gameObject.transform.position + new Vector3(0.0f, 5.0f, 0.0f), Quaternion.identity, 8.0f);
     }
 
     // ˆÚ“®
