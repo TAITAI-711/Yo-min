@@ -35,7 +35,7 @@ public class TitleManager : SingletonMonoBehaviour<TitleManager>
     // Update is called once per frame
     void Update()
     {
-        if (!isPressB)
+        if (!isPressB || FadeManager.GetNowState() != FADE_STATE.FADE_NONE)
             return;
 
         if (!isOnce)
@@ -68,12 +68,18 @@ public class TitleManager : SingletonMonoBehaviour<TitleManager>
 
     public void SetNextScene()
     {
+        if (FadeManager.GetNowState() != FADE_STATE.FADE_NONE)
+            return;
+
         SoundManager.Instance.PlaySound("決定", false);
         SceneChangeManager.Instance.SceneChange("StageSelectScene", true);
     }
 
     public void SetGameEnd()
     {
+        if (FadeManager.GetNowState() != FADE_STATE.FADE_NONE)
+            return;
+
         SoundManager.Instance.PlaySound("決定", false);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了

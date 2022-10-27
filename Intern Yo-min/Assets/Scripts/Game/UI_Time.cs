@@ -14,6 +14,8 @@ public class UI_Time : MonoBehaviour
 
     public float NowTime = 0.0f;
 
+    private bool isOnce_UI_30Sec = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -64,6 +66,17 @@ public class UI_Time : MonoBehaviour
                 TimeObj.fontSize = 90;
                 TimeObj.text = "GameSet";
             }
+        }
+
+
+        // Žc‚è30•b‚Ì•\Ž¦
+        if (!isOnce_UI_30Sec && NowTime <= 31.0f)
+        {
+            isOnce_UI_30Sec = true;
+
+            if (PlayerManager.Instance.UI_GameTimeObj.UI_30SecObj != null)
+                PlayerManager.Instance.UI_GameTimeObj.UI_30SecObj.SetMove();
+            TimeObj.color = new Color(1.0f, 0.25f, 0.25f, 1.0f);
         }
     }
 

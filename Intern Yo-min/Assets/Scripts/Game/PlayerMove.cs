@@ -77,6 +77,9 @@ public class PlayerMove : MonoBehaviour
     // 氷ギミック用
     private float StartDownMovePow; // 初期移動減少量
 
+    // 衝突音一回のみ用
+    [HideInInspector] public bool isCrash = false;
+
 
     // プレイヤーの入力のみ
     //private Vector2 PlayerMoveAngleVec = Vector2.zero;
@@ -174,6 +177,9 @@ public class PlayerMove : MonoBehaviour
             // プレイヤーの移動座標の固定処理
             PlayerMoveMax();
         }
+
+        // プレイヤー同士の衝突判定リセット
+        CrashReset();
     }
 
 
@@ -205,6 +211,14 @@ public class PlayerMove : MonoBehaviour
 
                 rb.velocity = Vector3.zero;
                 rb.AddForce(vec * PlayerCrashPow, ForceMode.VelocityChange);
+
+                if (!isCrash)
+                {
+                    SoundManager.Instance.PlaySound("システム移動", false);
+                }
+
+                isCrash = true;
+                collision.gameObject.GetComponent<PlayerMove>().isCrash = true;
             }
         }
     }
@@ -592,5 +606,10 @@ public class PlayerMove : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+
+    private void CrashReset()
+    {
+        isCrash = false;
     }
 }
