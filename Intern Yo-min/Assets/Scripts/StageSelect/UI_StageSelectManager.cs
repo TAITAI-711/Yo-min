@@ -98,6 +98,8 @@ public class UI_StageSelectManager : SingletonMonoBehaviour<UI_StageSelectManage
 
             GamePlayManager.Instance.isGamePlay = true;
 
+            EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(null);
+
             StageSelectManager.Instance.isStageSelect = true;
         }
     }

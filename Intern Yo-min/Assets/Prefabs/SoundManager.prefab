@@ -74,7 +74,7 @@ MonoBehaviour:
   - audioName: "\u30B3\u30DE\u6295\u3052"
     audioClip: {fileID: 8300000, guid: 1b61864a20264024b8e477d5cbfb2f78, type: 3}
   - audioName: "\u30B3\u30DE\u8A2D\u7F6E"
-    audioClip: {fileID: 8300000, guid: 006af7b9e4cbab242b8e386a9b6e29ab, type: 3}
+    audioClip: {fileID: 8300000, guid: 17f5e955245c7ea408303a619aea8459, type: 3}
   - audioName: "\u30B3\u30DE\u8FD4\u3057"
     audioClip: {fileID: 8300000, guid: ae9cb4eb756f9c24db0753dcd70cc357, type: 3}
   - audioName: "\u30B7\u30B9\u30C6\u30E0\u79FB\u52D5"
