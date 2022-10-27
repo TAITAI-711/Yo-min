@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     public EnumPlayerType PlayerType = EnumPlayerType.Player1;
 
-    [HideInInspector] public int PlayersNum = 0; // プレイヤーリストとの紐づけ用
+    public int PlayersNum = 0; // プレイヤーリストとの紐づけ用
 
     private GamePlayManager.PlayerOseroTypeInfo PlayerOseroType;
 
@@ -134,22 +134,9 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        bool isSame = false;
-        for (int i = 0; i < GamePlayManager.Instance.Players.Length; i++)
-        {
-            if (GamePlayManager.Instance.Players[i].PlayerType == PlayerType)
-            {
-                isSame = true;
-                PlayersNum = i;
-                break;
-            }
-        }
+        SetPlayersNum();
 
-        if (!isSame)
-        {
-            gameObject.SetActive(false);
-        }
-        else
+        if (gameObject.activeSelf)
             EffectManager.Instance.SetEffect("PlayerGo", gameObject.transform.position + new Vector3(0.0f, 5.0f, 0.0f), Quaternion.identity, 8.0f);
     }
 
@@ -585,6 +572,25 @@ public class PlayerMove : MonoBehaviour
         if ((SMesh = GetComponentInChildren<SkinnedMeshRenderer>()) != null)
         {
             SMesh.material = PlayerOseroType.PlayerMaterial;
+        }
+    }
+
+    public void SetPlayersNum()
+    {
+        bool isSame = false;
+        for (int i = 0; i < GamePlayManager.Instance.Players.Length; i++)
+        {
+            if (GamePlayManager.Instance.Players[i].PlayerType == PlayerType)
+            {
+                isSame = true;
+                PlayersNum = i;
+                break;
+            }
+        }
+
+        if (!isSame)
+        {
+            gameObject.SetActive(false);
         }
     }
 }

@@ -92,6 +92,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         //============
         // デバッグ用
         //============
+#if UNITY_EDITOR
         Players = new PlayerInfo[4];
         for (int i = 0; i < Players.Length; i++)
         {
@@ -105,6 +106,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 
         MenuSelectPlayerName = "Joystick_0";
         OldGameStageName = "GameScene";
+#endif
         //============
         // ここまで
         //============

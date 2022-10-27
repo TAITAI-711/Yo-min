@@ -133,12 +133,19 @@ public class StageSelectPlayerManager : PlayerManager
 
                             PlayerMoveObj[j].gameObject.SetActive(true);
                             PlayerMoveObj[j].SetPlayerOseroType(GamePlayManager.Instance.Players[i].PlayerOseroType);
-                            PlayerMoveObj[j].PlayersNum = i;
                             EffectManager.Instance.SetEffect("PlayerGo", PlayerMoveObj[j].gameObject.transform.position + new Vector3(0.0f, 5.0f, 0.0f), Quaternion.identity, 8.0f);
                             break;
                         }
                     }
                 }
+            }
+
+
+            // ゲームプレイマネージャーのプレイヤーと紐づく番号の指定更新
+            for (int i = 0; i < PlayerMoveObj.Length; i++)
+            {
+                if (PlayerMoveObj[i].gameObject.activeSelf)
+                    PlayerMoveObj[i].SetPlayersNum();
             }
         }
 
