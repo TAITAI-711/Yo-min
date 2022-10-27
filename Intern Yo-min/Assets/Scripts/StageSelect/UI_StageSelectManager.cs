@@ -12,6 +12,9 @@ public class UI_StageSelectManager : SingletonMonoBehaviour<UI_StageSelectManage
     private int NowSelectNum = 0;
     private int OldSelectNum = 0;
 
+    private float CountTime = 0.1f;
+    private float NowTime = 0.0f;
+
     private void Awake()
     {
         if (this != Instance)
@@ -35,6 +38,9 @@ public class UI_StageSelectManager : SingletonMonoBehaviour<UI_StageSelectManage
                 UI_StageObj[i].gameObject.transform.localPosition = new Vector3(2000, 0, 0);
         }
 
+        // 選択で音が鳴らない例外設定
+        EventSystemManager.Instance.NoSelectObj = UI_ButtonObj[2].gameObject;
+
         // 真ん中のボタンを選択
         EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(UI_ButtonObj[2].gameObject);
     }
@@ -42,25 +48,37 @@ public class UI_StageSelectManager : SingletonMonoBehaviour<UI_StageSelectManage
     // Update is called once per frame
     void Update()
     {
-        // 右を選択
-        if (EventSystemManager.Instance.EventSystemObj.currentSelectedGameObject == UI_ButtonObj[0].gameObject)
+        if (NowTime <= 0.0f)
         {
-            if(NowSelectNum < UI_StageObj.Length - 1)
-                NowSelectNum++;
+            // 右を選択
+            if (EventSystemManager.Instance.EventSystemObj.currentSelectedGameObject == UI_ButtonObj[0].gameObject)
+            {
+                if (NowSelectNum < UI_StageObj.Length - 1)
+                    NowSelectNum++;
 
-            // 真ん中のボタンを選択
-            EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(UI_ButtonObj[2].gameObject);
+                NowTime = CountTime;
+            }
+
+            // 左を選択
+            if (EventSystemManager.Instance.EventSystemObj.currentSelectedGameObject == UI_ButtonObj[1].gameObject)
+            {
+                if (NowSelectNum > 0)
+                    NowSelectNum--;
+
+                NowTime = CountTime;
+            }
         }
-
-        // 左を選択
-        if (EventSystemManager.Instance.EventSystemObj.currentSelectedGameObject == UI_ButtonObj[1].gameObject)
+        else
         {
-            if (NowSelectNum > 0)
-                NowSelectNum--;
+            NowTime -= Time.deltaTime;
 
-            // 真ん中のボタンを選択
-            EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(UI_ButtonObj[2].gameObject);
+            if (NowTime <= 0.0f)
+            {
+                // 真ん中のボタンを選択
+                EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(UI_ButtonObj[2].gameObject);
+            }
         }
+        
 
         // 選択中のステージ情報に切り替わる
         if (NowSelectNum != OldSelectNum)
@@ -74,9 +92,13 @@ public class UI_StageSelectManager : SingletonMonoBehaviour<UI_StageSelectManage
         // ステージ選択
         if (Input.GetButtonDown(GamePlayManager.Instance.MenuSelectPlayerName + "_Button_B"))
         {
+            SoundManager.Instance.PlaySound("決定", false);
+
             StageSelectManager.Instance.NextSceneName = UI_StageObj[NowSelectNum].StageSceneName;
 
             GamePlayManager.Instance.isGamePlay = true;
+
+            EventSystemManager.Instance.EventSystemObj.SetSelectedGameObject(null);
 
             StageSelectManager.Instance.isStageSelect = true;
         }

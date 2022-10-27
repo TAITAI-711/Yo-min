@@ -21,15 +21,32 @@ public class Banmen_Move : Banmen
 
     public GameObject MovePointObj = null;
 
+    private Rigidbody Rb = null;
+    private Vector3 OldPos;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
 
-        StartPos = this.transform.position;
+        StartPos = OldPos = this.transform.position;
         EndPos = MovePointObj.transform.position;
 
         MovePointObj.GetComponent<MeshRenderer>().enabled = false;
+
+        if ((Rb = gameObject.GetComponent<Rigidbody>()) == null)
+        {
+            Rb = gameObject.AddComponent<Rigidbody>();
+        }
+
+        Rb.mass = 10000000.0f;
+        Rb.drag = 0.0f;
+        Rb.useGravity = false;
+        Rb.freezeRotation = true;
+        Rb.constraints = RigidbodyConstraints.None;
+        Rb.constraints = RigidbodyConstraints.FreezeRotation | 
+            RigidbodyConstraints.FreezePositionY |
+            RigidbodyConstraints.FreezePositionZ;
     }
 
     protected override void OnValidate()
@@ -52,25 +69,43 @@ public class Banmen_Move : Banmen
         if (!GamePlayManager.Instance.isGamePlay)
             return;
 
+        // “®‚¢‚Ä‚é
         if (NowStopTime <= 0.0f)
         {
             // ‘OˆÚ“®
             if (isMoveFront)
             {
-                transform.position = StartPos + (EndPos - StartPos) * (NowMoveTime / MoveTime);
+                //transform.position = StartPos + (EndPos - StartPos) * (NowMoveTime / MoveTime);
+                Rb.velocity = ((StartPos + (EndPos - StartPos) * (NowMoveTime / MoveTime)) - OldPos) * (1.0f / Time.fixedDeltaTime);
+
+                OldPos = StartPos + (EndPos - StartPos) * (NowMoveTime / MoveTime);
             }
             else
             {
-                transform.position = EndPos - (EndPos - StartPos) * (NowMoveTime / MoveTime);
+                //transform.position = EndPos - (EndPos - StartPos) * (NowMoveTime / MoveTime);
+                Rb.velocity = ((EndPos - (EndPos - StartPos) * (NowMoveTime / MoveTime)) - OldPos) * (1.0f / Time.fixedDeltaTime);
+
+                OldPos = EndPos - (EndPos - StartPos) * (NowMoveTime / MoveTime);
             }
 
             NowMoveTime += Time.fixedDeltaTime;
 
+            // Ž~‚Ü‚é
             if (NowMoveTime >= MoveTime)
             {
                 NowStopTime = StopTime;
+
+                Rb.velocity = Vector3.zero;
+
+                if (isMoveFront)
+                    transform.position = EndPos;
+                else
+                    transform.position = StartPos;
+
+                OldPos = transform.position;
             }
         }
+        // Ž~‚Ü‚Á‚Ä‚é
         else
         {
             NowStopTime -= Time.fixedDeltaTime;

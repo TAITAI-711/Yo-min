@@ -22,8 +22,6 @@ public class EffectManager : SingletonMonoBehaviour<EffectManager>
         DontDestroyOnLoad(this.gameObject); // ÉVÅ[ÉìÇ™ïœÇÌÇ¡ÇƒÇ‡éÄÇ»Ç»Ç¢
     }
 
-
-
     public void SetEffect(string EffectName, Vector3 Pos, Quaternion Rot, float Size)
     {
         for (int i = 0; i < EffectObj.Length; ++i)
@@ -32,13 +30,13 @@ public class EffectManager : SingletonMonoBehaviour<EffectManager>
             {
                 GameObject Effect = Instantiate(EffectObj[i].EffectObj, Pos, Rot);
                 Effect.transform.localScale *= Size;
-                ParticleSystem[] particles;
-                particles = Effect.gameObject.GetComponentsInChildren<ParticleSystem>();
+                //ParticleSystem[] particles;
+                //particles = Effect.gameObject.GetComponentsInChildren<ParticleSystem>();
 
-                for (int j = 0; j < particles.Length; ++j)
-                {
-                    particles[i].Play();
-                }
+                //for (int j = 0; j < particles.Length; ++j)
+                //{
+                //    particles[i].Play();
+                //}
                 return;
             }
         }

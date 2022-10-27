@@ -9,7 +9,9 @@ public class PlayerMove : MonoBehaviour
     [Header("[ プレイヤー設定 ]")]
     [Tooltip("プレイヤーのコントローラー番号")]
     [SerializeField]
-    EnumPlayerType PlayerType = EnumPlayerType.Player1;
+    public EnumPlayerType PlayerType = EnumPlayerType.Player1;
+
+    public int PlayersNum = 0; // プレイヤーリストとの紐づけ用
 
     private GamePlayManager.PlayerOseroTypeInfo PlayerOseroType;
 
@@ -75,6 +77,9 @@ public class PlayerMove : MonoBehaviour
     // 氷ギミック用
     private float StartDownMovePow; // 初期移動減少量
 
+    // 衝突音一回のみ用
+    [HideInInspector] public bool isCrash = false;
+
 
     // プレイヤーの入力のみ
     //private Vector2 PlayerMoveAngleVec = Vector2.zero;
@@ -124,6 +129,20 @@ public class PlayerMove : MonoBehaviour
         //UnityEngine.Debug.Log(currentConnectionCount);
     }
 
+    private void Start()
+    {
+        if (GamePlayManager.Instance.Players == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        SetPlayersNum();
+
+        if (gameObject.activeSelf)
+            EffectManager.Instance.SetEffect("PlayerGo", gameObject.transform.position + new Vector3(0.0f, 5.0f, 0.0f), Quaternion.identity, 8.0f);
+    }
+
     // 移動
     void Update()
     {
@@ -158,6 +177,9 @@ public class PlayerMove : MonoBehaviour
             // プレイヤーの移動座標の固定処理
             PlayerMoveMax();
         }
+
+        // プレイヤー同士の衝突判定リセット
+        CrashReset();
     }
 
 
@@ -189,6 +211,14 @@ public class PlayerMove : MonoBehaviour
 
                 rb.velocity = Vector3.zero;
                 rb.AddForce(vec * PlayerCrashPow, ForceMode.VelocityChange);
+
+                if (!isCrash)
+                {
+                    SoundManager.Instance.PlaySound("プレイヤー衝突", false, 0.0f, 0.0f, 0.7f);
+                }
+
+                isCrash = true;
+                collision.gameObject.GetComponent<PlayerMove>().isCrash = true;
             }
         }
     }
@@ -238,13 +268,13 @@ public class PlayerMove : MonoBehaviour
         {
             case EnumOseroShootType.Type1:
 
-                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_RightAxis_X");
-                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_RightAxis_Y");
+                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_RightAxis_X");
+                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_RightAxis_Y");
                 break;
             case EnumOseroShootType.Type2:
             case EnumOseroShootType.Type3:
-                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_X");
-                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_Y");
+                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_LeftAxis_X");
+                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_LeftAxis_Y");
                 break;
             default:
                 break;
@@ -271,7 +301,7 @@ public class PlayerMove : MonoBehaviour
             NowReChargeTime -= Time.fixedDeltaTime;
 
         // Rトリガー入力
-        if (Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_Button_L2_R2") > 0)
+        if (Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_Button_L2_R2") > 0)
         {
             isPress = true;
         }
@@ -284,7 +314,9 @@ public class PlayerMove : MonoBehaviour
             {
                 // 投げる
                 if (AnimatorObj != null)
+                {
                     AnimatorObj.SetBool("isThrow", true);
+                }
             }
 
             isOldPress = false;
@@ -316,6 +348,9 @@ public class PlayerMove : MonoBehaviour
 
     public void OseroThrow()
     {
+        // 投げる音再生
+        SoundManager.Instance.PlaySound("コマ投げ", false, 0.05f);
+
         // オセロの生成座標
         Vector3 OseroPos = transform.position;
         OseroPos.y += 18.0f;
@@ -409,8 +444,8 @@ public class PlayerMove : MonoBehaviour
                 if (OseroShootType == EnumOseroShootType.Type2 && isPress) 
                     break;
 
-                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_X");
-                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[(int)PlayerType].GamePadName_Player + "_LeftAxis_Y");
+                Vec.x = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_LeftAxis_X");
+                Vec.y = Input.GetAxis(GamePlayManager.Instance.Players[PlayersNum].GamePadName_Player + "_LeftAxis_Y");
                 break;
         }
 
@@ -552,5 +587,29 @@ public class PlayerMove : MonoBehaviour
         {
             SMesh.material = PlayerOseroType.PlayerMaterial;
         }
+    }
+
+    public void SetPlayersNum()
+    {
+        bool isSame = false;
+        for (int i = 0; i < GamePlayManager.Instance.Players.Length; i++)
+        {
+            if (GamePlayManager.Instance.Players[i].PlayerType == PlayerType)
+            {
+                isSame = true;
+                PlayersNum = i;
+                break;
+            }
+        }
+
+        if (!isSame)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void CrashReset()
+    {
+        isCrash = false;
     }
 }

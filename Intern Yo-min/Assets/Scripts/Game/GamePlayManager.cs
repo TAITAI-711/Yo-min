@@ -71,6 +71,13 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     public string MenuSelectPlayerName = "Joystick_0";
 
 
+
+    // マウスの非表示処理用
+    private Vector3 MousePosPre = Vector3.zero;
+    private float CursorTimer = 0.0f;
+    private static float HiddenTime = 4.0f;    // マウスが消える時間
+
+
     private void Awake()
     {
         if (this != Instance)
@@ -85,7 +92,8 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
         //============
         // デバッグ用
         //============
-        Players = new PlayerInfo[0];
+#if UNITY_EDITOR
+        Players = new PlayerInfo[4];
         for (int i = 0; i < Players.Length; i++)
         {
             Players[i].OseroNum = 20 * (i + 1);
@@ -98,6 +106,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 
         MenuSelectPlayerName = "Joystick_0";
         OldGameStageName = "GameScene";
+#endif
         //============
         // ここまで
         //============
@@ -106,7 +115,11 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.visible = false;
+
+        // マウスの処理用変数に初期値代入
+        MousePosPre = Input.mousePosition;
+        CursorTimer = HiddenTime;
     }
 
     // Update is called once per frame
@@ -114,6 +127,46 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
     {
         
     }
+
+    private void Update()
+    {
+        // マウス非表示処理
+        CursorUpdate();
+
+        // ESCキーでの強制終了処理
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
+    // カーソル非表示処理
+    private void CursorUpdate()
+    {
+        Vector3 MousePos = Input.mousePosition; // 現在のマウス座標
+
+        if (MousePos != MousePosPre)
+        {
+            if (!Cursor.visible)
+                Cursor.visible = true;
+            CursorTimer = 0.0f;
+        }
+        else
+        {
+            if (CursorTimer >= HiddenTime)    // 非表示にする時間
+            {
+                if (Cursor.visible)
+                    Cursor.visible = false;
+            }
+            else
+            {
+                CursorTimer += Time.deltaTime;
+            }
+        }
+
+        MousePosPre = MousePos;
+    }
+
 
     public void GameReset()
     {

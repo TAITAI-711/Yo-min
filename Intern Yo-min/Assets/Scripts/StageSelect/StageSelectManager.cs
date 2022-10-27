@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StageSelectManager : SingletonMonoBehaviour<StageSelectManager>
 {
-    public bool isSelectSceneEnd = false;
+    public bool isStageSelectEnd = false;
     public bool isStageSelect = false;
     public string NextSceneName = "TitleScene";
 
@@ -20,19 +20,24 @@ public class StageSelectManager : SingletonMonoBehaviour<StageSelectManager>
         }
     }
 
+    private void Start()
+    {
+        
+    }
+
 
     private void Update()
     {
-        if (GamePlayManager.Instance.isPause)
+        if (GamePlayManager.Instance.isPause || !isStageSelectEnd)
             return;
 
-        if (!isOnce && GamePlayManager.Instance.Players != null && 
-            GamePlayManager.Instance.Players.Length >= 2 && 
-            Input.GetButtonDown(GamePlayManager.Instance.Players[0].GamePadName_Player + "_Button_Start"))
+        if (!isOnce && Input.GetButtonDown(GamePlayManager.Instance.Players[0].GamePadName_Player + "_Button_Start"))
         {
             isOnce = true;
 
             GamePlayManager.Instance.isGamePadOK = true;
+
+            SoundManager.Instance.PlaySound("Œˆ’è", false);
 
             SceneChangeManager.Instance.SceneChange(NextSceneName, true);
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Banmen
   - Gimmick_Ice
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - UI
   - Osero
   - Player
-  - 
-  - 
+  - BuckGround
+  - Maruta
   - 
   - 
   - 

@@ -44,7 +44,43 @@ public class SceneChangeManager : SingletonMonoBehaviour<SceneChangeManager>
         }            
         else
         {
+            SoundManager.Instance.StopSoundAll();
+
             SceneManager.LoadScene(NextSceneName);
+
+            switch (NextSceneName)
+            {
+                case "TitleScene":
+                    SoundManager.Instance.PlaySoundBGMDelay("BGM_タイトル", 0.5f, 0.8f);
+                    break;
+                case "StageSelectScene":
+                    SoundManager.Instance.PlaySoundBGMDelay("BGM_メインメニュー", 0.5f);
+                    break;
+                case "GameScene":
+                    SoundManager.Instance.PlaySoundBGMDelay("BGM_ベーシック", 8.0f, 0.5f, 1.0f);
+                    break;
+                case "Stage_2":
+                    SoundManager.Instance.PlaySoundBGMDelay("BGM_田んぼ", 0.5f);
+                    break;
+                case "Stage_3":
+                    SoundManager.Instance.PlaySoundBGMDelay("BGM_浮島", 0.5f);
+                    break;
+                case "Stage_4":
+                    SoundManager.Instance.PlaySoundBGMDelay("BGM_ジャングル", 0.5f);
+                    break;
+                case "Stage_5":
+                    SoundManager.Instance.PlaySoundBGMDelay("BGM_氷", 0.5f);
+                    break;
+                case "Stage_6":
+                    SoundManager.Instance.PlaySoundBGMDelay("BGM_草原", 0.5f);
+                    break;
+                case "ResultScene":
+                    //SoundManager.Instance.PlaySound("BGM_リザルト", true);
+                    break;
+                default:
+                    break;
+            }
+
 
             Time.timeScale = 1.0f;
 

@@ -31,12 +31,16 @@ public class UI_StartCount : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (FadeManager.GetNowState() != FADE_STATE.FADE_NONE)
+            return;
+
         if (GamePlayManager.Instance.isGamePadOK && NowCount >= 0)
         {
             if (!isOnce)
             {
                 isOnce = true;
                 CountObj.enabled = true;
+                SoundManager.Instance.PlaySound("カウントダウン", false);
             }
             
 
@@ -46,10 +50,12 @@ public class UI_StartCount : MonoBehaviour
 
                 if (NowCount != 0)
                 {
+                    SoundManager.Instance.PlaySound("カウントダウン", false);
                     CountObj.text = NowCount.ToString();
                 }
                 else
                 {
+                    SoundManager.Instance.PlaySound("ゲーム開始", false);
                     CountObj.text = "START";
                     GamePlayManager.Instance.isGamePlay = true;
                 }
@@ -76,6 +82,8 @@ public class UI_StartCount : MonoBehaviour
             {
                 isOnce = true;
                 CountObj.enabled = true;
+
+                SoundManager.Instance.PlaySound("ゲーム終了", false);
 
                 CountObj.text = "GAMESET";
             }

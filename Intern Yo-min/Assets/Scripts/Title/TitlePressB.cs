@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class TitlePressB : MonoBehaviour
 {
-    [SerializeField] private GameObject ButtonsObj;
     private TextMeshProUGUI TMPro;
     private StandaloneInputModuleButton StandaloneObj;
 
@@ -25,7 +24,6 @@ public class TitlePressB : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        ButtonsObj.SetActive(false);
         TMPro = GetComponent<TextMeshProUGUI>();
         NowTime = PressBTime;
         NowAlphaTime = AlphaTime;
@@ -43,9 +41,10 @@ public class TitlePressB : MonoBehaviour
         {
             NowTime -= Time.deltaTime;
 
+            // Bƒ{ƒ^ƒ“‰Ÿ‚³‚ê‚½
             if (NowTime < 0.0f)
             {
-                ButtonsObj.SetActive(true);
+                TitleManager.Instance.isPressB = true;
                 gameObject.SetActive(false);
             }
 
@@ -75,13 +74,18 @@ public class TitlePressB : MonoBehaviour
         {
             if (Input.GetButtonDown("Joystick_0_Button_B"))
             {
-                for (int i = 1; i <= 10; i++)
+                for (int i = 1; i <= 12; i++)
                 {
                     string ButtonName = "Joystick_" + i.ToString() + "_Button_B";
 
                     if (Input.GetButtonDown(ButtonName))
                     {
                         isPress = true;
+
+                        // ‰¹
+                        SoundManager.Instance.PlaySound("Œˆ’è", false);
+
+
                         GamePlayManager.Instance.MenuSelectPlayerName = "Joystick_" + i.ToString();
 
                         StandaloneObj.verticalAxis = "Joystick_" + i.ToString() + "_LeftAxis_Y";

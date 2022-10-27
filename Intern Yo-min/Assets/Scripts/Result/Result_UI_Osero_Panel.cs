@@ -35,26 +35,31 @@ public class Result_UI_Osero_Panel : MonoBehaviour
 
     private void Update()
     {
-        if (ResultManager.Instance.isCountStop && !ResultManager.Instance.isPause)
+        if (ResultManager.Instance.isCountStop && !ResultManager.Instance.isPause && FadeManager.GetNowState() == FADE_STATE.FADE_NONE)
         {
             Result_UI_Osero[] UI_OseroObjs = ResultManager.Instance.Result_UI_Oseros;
             GamePlayManager.PlayerInfo[] PlayerObjs = GamePlayManager.Instance.Players;
 
-            bool isNoReady = true; 
+            bool isReady = true; 
 
 
             for (int i = 0; i < PlayerObjs.Length; i++)
             {
                 if (Input.GetButtonDown(PlayerObjs[i].GamePadName_Player + "_Button_B"))
                 {
-                    UI_OseroObjs[i].SetOKText("OK");
+                    if (!UI_OseroObjs[i].GetOK())
+                    {
+                        // Œˆ’è‰¹
+                        SoundManager.Instance.PlaySound("€”õŠ®—¹", false);
+                        UI_OseroObjs[i].SetReadyImage();
+                    }
                 }
 
-                if (UI_OseroObjs[i].GetOKText() != "OK")
-                    isNoReady = false;
+                if (!UI_OseroObjs[i].GetOK())
+                    isReady = false;
             }
 
-            if (isNoReady)
+            if (isReady)
                 ResultManager.Instance.isPause = true;
         }
     }
@@ -62,7 +67,7 @@ public class Result_UI_Osero_Panel : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (ResultManager.Instance.isCountStop)
+        if (ResultManager.Instance.isCountStop || FadeManager.GetNowState() != FADE_STATE.FADE_NONE)
             return;
 
         Result_UI_Osero[] UI_OseroObjs = ResultManager.Instance.Result_UI_Oseros;
@@ -92,6 +97,7 @@ public class Result_UI_Osero_Panel : MonoBehaviour
                 switch (PlayerObjs[i].RankNum)
                 {
                     case 1:
+                        UI_OseroObjs[i].SetRankColor(new Color(1.0f, 0.1f, 0.1f, 1.0f));
                         StText = "st";
                         break;
                     case 2:
@@ -129,7 +135,7 @@ public class Result_UI_Osero_Panel : MonoBehaviour
             // €”õŠ®—¹ƒ{ƒ^ƒ“•\Ž¦
             for (int i = 0; i < PlayerObjs.Length; i++)
             {
-                UI_OseroObjs[i].SetOKText("PRESS B");
+                UI_OseroObjs[i].SetButtonBImage();
             }
         }
     }

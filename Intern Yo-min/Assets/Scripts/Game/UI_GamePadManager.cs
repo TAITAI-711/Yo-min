@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.Collections;
 using UnityEngine;
+using static GamePlayManager;
 
 public class UI_GamePadManager : SingletonMonoBehaviour<UI_GamePadManager>
 {
@@ -88,7 +89,7 @@ public class UI_GamePadManager : SingletonMonoBehaviour<UI_GamePadManager>
                     {
                         if (Input.GetButtonDown("Joystick_0_Button_B"))
                         {
-                            for (int j = 1; j <= 10; j++)
+                            for (int j = 1; j <= 12; j++)
                             {
                                 string NowGamePadName = "Joystick_" + j.ToString() + "_Button_B";
 
@@ -108,6 +109,7 @@ public class UI_GamePadManager : SingletonMonoBehaviour<UI_GamePadManager>
                                         {
                                             GamePlayManager.Instance.Players[k].OseroNum = 0;
                                             GamePlayManager.Instance.Players[k].GamePadName_Player = GamePadName_Player[k];
+                                            GamePlayManager.Instance.Players[k].PlayerType = (EnumPlayerType)k;
                                             //GamePlayManager.Instance.Players[k].MaterialInfo.OseroType = (PlayerManager.EnumOseroType)k;
 
                                             for (int OseroTypeCnt = 0; OseroTypeCnt < GamePlayManager.Instance.PlayerOseroType.Length; OseroTypeCnt++)

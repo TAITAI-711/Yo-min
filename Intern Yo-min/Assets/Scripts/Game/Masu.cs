@@ -42,6 +42,8 @@ public class Masu : MonoBehaviour
 
         // 設置エフェクト
         EffectManager.Instance.SetEffect("Test", transform.position + new Vector3(0, GamePlayManager.MasuScaleY + OseroObj.transform.localScale.y, 0), Quaternion.identity, 2.0f);
+        // 設置音
+        SoundManager.Instance.PlaySound("コマ設置", false, 0.0f, 0.0f, 0.75f);
 
         // オセロをひっくり返す処理
         GamePlayManager.PlayerOseroTypeInfo MyOseroType = OseroObj.GetOseroType();

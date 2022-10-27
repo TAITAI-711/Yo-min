@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SoundManager : SingletonMonoBehaviour<SoundManager>
 {
@@ -27,6 +28,18 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     // オーディオソース
     private AudioSource[] audioSource;
 
+    private float StartVolumeBGM = 1.0f;
+    private float StartVolumeSE = 1.0f;
+
+    private void Awake()
+    {
+        if (this != Instance)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        DontDestroyOnLoad(this.gameObject); // シーンが変わっても死なない
+    }
 
     void Start()
     {
@@ -35,6 +48,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Q))
         {
             PlaySound("Test", false);
@@ -51,10 +65,35 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         {
             PauseRestartSoundAll();
         }
+#endif
     }
 
     // サウンドの再生開始
     public void PlaySound(string AudioName, bool isloop)
+    {
+        PlaySound(AudioName, isloop, 0.0f, 0.0f, 1.0f);
+    }
+    public void PlaySound(string AudioName, bool isloop, float StartTime)
+    {
+        PlaySound(AudioName, isloop, StartTime, 0.0f, 1.0f);
+    }
+
+    // BGM遅延用
+    public void PlaySoundBGMDelay(string AudioName, float DelayTime)
+    {
+        PlaySound(AudioName, true, 0.0f, DelayTime, 1.0f);
+    }
+    public void PlaySoundBGMDelay(string AudioName, float DelayTime, float Volume)
+    {
+        PlaySound(AudioName, true, 0.0f, DelayTime, Volume);
+    }
+    public void PlaySoundBGMDelay(string AudioName, float StartTime, float DelayTime, float Volume)
+    {
+        PlaySound(AudioName, true, StartTime, DelayTime, Volume);
+    }
+
+    // 本体
+    public void PlaySound(string AudioName, bool isloop, float StartTime, float DelayTime, float Volume)
     {
         AudioInfo Audio;
         Audio.audioClip = null;
@@ -71,17 +110,30 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         if (Audio.audioClip == null)
             return;
 
+
         if (isloop)
         {
             audioSource[(int)Enum_AudioType.BGM].loop = true;
             audioSource[(int)Enum_AudioType.BGM].clip = Audio.audioClip;
-            audioSource[(int)Enum_AudioType.BGM].Play();
+            audioSource[(int)Enum_AudioType.BGM].time = StartTime;
+            audioSource[(int)Enum_AudioType.BGM].volume = Volume;
+
+            if (DelayTime <= 0.0f)
+                audioSource[(int)Enum_AudioType.BGM].Play();
+            else
+                audioSource[(int)Enum_AudioType.BGM].PlayDelayed(DelayTime);
+
+            StartVolumeBGM = Volume;
         }  
         else
         {
             audioSource[(int)Enum_AudioType.SE].loop = false;
             audioSource[(int)Enum_AudioType.SE].clip = Audio.audioClip;
+            audioSource[(int)Enum_AudioType.SE].time = StartTime;
+            audioSource[(int)Enum_AudioType.SE].volume = Volume;
             audioSource[(int)Enum_AudioType.SE].PlayOneShot(Audio.audioClip);
+
+            StartVolumeSE = Volume;
         }
     }
 
@@ -135,4 +187,16 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
             obj.UnPause();
         }
     }
+
+
+    // 音量調節用
+    public void SetVolumeBGM(float Volume)
+    {
+        audioSource[(int)Enum_AudioType.BGM].volume = StartVolumeBGM * Volume;
+    }
+    public void SetVolumeSE(float Volume)
+    {
+        audioSource[(int)Enum_AudioType.SE].volume = StartVolumeSE * Volume;
+    }
+
 }
