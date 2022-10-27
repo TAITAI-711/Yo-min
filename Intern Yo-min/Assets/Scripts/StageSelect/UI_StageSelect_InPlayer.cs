@@ -23,8 +23,11 @@ public class UI_StageSelect_InPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
+        if (GamePlayManager.Instance.isPause)
+            return;
+
         NowTime += Time.deltaTime;
 
         if (NowTime > ButtonUpTime)
@@ -35,7 +38,7 @@ public class UI_StageSelect_InPlayer : MonoBehaviour
         ImageObj.rectTransform.localScale = new Vector3(
             (1.0f - NowTime / ButtonUpTime) * 0.2f + 0.8f, 
             (1.0f - NowTime / ButtonUpTime) * 0.2f + 0.8f, 
-            0.0f);
+            1.0f);
     }
 
     public void SetImageActive(bool isActive)
