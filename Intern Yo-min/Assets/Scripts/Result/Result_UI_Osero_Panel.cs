@@ -97,6 +97,7 @@ public class Result_UI_Osero_Panel : MonoBehaviour
                 switch (PlayerObjs[i].RankNum)
                 {
                     case 1:
+                        UI_OseroObjs[i].SetRankColor(new Color(1.0f, 0.1f, 0.1f, 1.0f));
                         StText = "st";
                         break;
                     case 2:

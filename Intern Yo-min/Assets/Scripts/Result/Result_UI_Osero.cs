@@ -81,6 +81,14 @@ public class Result_UI_Osero : MonoBehaviour
         TextMP[1].text = Text;
     }
 
+    public void SetRankColor(Color color)
+    {
+        if (TextMP == null)
+            TextMP = GetComponentsInChildren<TextMeshProUGUI>();
+
+        TextMP[1].color = color;
+    }
+
     public string GetRankText()
     {
         if (TextMP == null)
