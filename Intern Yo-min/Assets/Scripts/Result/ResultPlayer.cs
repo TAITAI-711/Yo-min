@@ -38,5 +38,6 @@ public class ResultPlayer : MonoBehaviour
             animator = gameObject.GetComponent<Animator>();
 
         animator.SetBool("isWin", true);
+        EffectManager.Instance.SetEffect("Light", gameObject.transform.position - new Vector3(0, -8.0f, -5.0f), Quaternion.identity, 8.0f);
     }
 }

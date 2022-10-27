@@ -47,3 +47,5 @@ MonoBehaviour:
   EffectObj:
   - EffectName: Test
     EffectObj: {fileID: 6257044063349824563, guid: f44e1675d28867b41bae73a1ea077a2d, type: 3}
+  - EffectName: Light
+    EffectObj: {fileID: 1652143759095011289, guid: c6e0470475cae9b4e8cf1d529959d9f8, type: 3}

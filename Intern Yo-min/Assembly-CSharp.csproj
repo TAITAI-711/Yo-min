@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Game\SkyMove.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\Scripts\Game\UI_Yajirusi.cs" />
+    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelect_GamePlaying.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\StageSelect\UI_StageSelectManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\Scripts\Game\Gimmik_WindEffect.cs" />
     <Compile Include="Assets\Scripts\ObjectPositionSet.cs" />
     <Compile Include="Assets\Scripts\Result\ResultManager.cs" />
+    <Compile Include="Assets\Andtech\Star Pack\Samples\Star Pack Demo\Scripts\Spin.cs" />
     <Compile Include="Assets\Scripts\FadeManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoDestructShuriken.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\Game\Osero.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+    <Compile Include="Assets\Andtech\Star Pack\Samples\Star Pack Demo\Scripts\ActivateDepthRendering.cs" />
     <Compile Include="Assets\Scripts\Result\UI_ResultPause.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Result\PlayerResultPosition.cs" />
@@ -157,9 +160,6 @@
     <Compile Include="Assets\Scripts\Game\BanmenManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Game\GameSceneEnd.cs" />
-    <Compile Include="Assets\Andtech\Star Pack\Samples\Star Pack Demo\Scripts\ActivateDepthRendering.cs" />
-    <Compile Include="Assets\Andtech\Star Pack\Samples\Star Pack Demo\Scripts\Spin.cs" />
-    <Compile Include="Assets\Scripts\StageSelect\UI_StageSelect_GamePlaying.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -984,6 +984,10 @@
       <Project>{F90F3EFB-E8C1-D46A-6C3F-A0D81DD23F0E}</Project>
       <Name>CFXREditor</Name>
     </ProjectReference>
+    <ProjectReference Include="Andtech.StarPack.Editor.csproj">
+      <Project>{E6456AFD-A326-C4B3-1BCA-170DD412B87D}</Project>
+      <Name>Andtech.StarPack.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="CFXR.WelcomeScreen.csproj">
       <Project>{04827D30-EFB7-806B-AA17-5E0AB71E0AB9}</Project>
       <Name>CFXR.WelcomeScreen</Name>
@@ -999,10 +1003,6 @@
     <ProjectReference Include="CFXRDemo.csproj">
       <Project>{648BFD8F-3BC8-B0D8-A0AD-EC9576661745}</Project>
       <Name>CFXRDemo</Name>
-    </ProjectReference>
-    <ProjectReference Include="Andtech.StarPack.Editor.csproj">
-      <Project>{E6456AFD-A326-C4B3-1BCA-170DD412B87D}</Project>
-      <Name>Andtech.StarPack.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

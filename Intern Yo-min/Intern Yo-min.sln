@@ -11,13 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinoBloom.Runtime", "KinoBl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFXREditor", "CFXREditor.csproj", "{F90F3EFB-E8C1-D46A-6C3F-A0D81DD23F0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andtech.StarPack.Editor", "Andtech.StarPack.Editor.csproj", "{E6456AFD-A326-C4B3-1BCA-170DD412B87D}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFXR.WelcomeScreen", "CFXR.WelcomeScreen.csproj", "{04827D30-EFB7-806B-AA17-5E0AB71E0AB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToonyColorsPro.Demo.Editor", "ToonyColorsPro.Demo.Editor.csproj", "{70001F05-104F-31C1-FBEB-F24917F07224}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{93ACE67E-ADA0-00D1-3D1F-96686858EC85}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andtech.StarPack.Editor", "Andtech.StarPack.Editor.csproj", "{E6456AFD-A326-C4B3-1BCA-170DD412B87D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +45,10 @@ Global
 		{F90F3EFB-E8C1-D46A-6C3F-A0D81DD23F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F90F3EFB-E8C1-D46A-6C3F-A0D81DD23F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F90F3EFB-E8C1-D46A-6C3F-A0D81DD23F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6456AFD-A326-C4B3-1BCA-170DD412B87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6456AFD-A326-C4B3-1BCA-170DD412B87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6456AFD-A326-C4B3-1BCA-170DD412B87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6456AFD-A326-C4B3-1BCA-170DD412B87D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04827D30-EFB7-806B-AA17-5E0AB71E0AB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04827D30-EFB7-806B-AA17-5E0AB71E0AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04827D30-EFB7-806B-AA17-5E0AB71E0AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,10 +61,6 @@ Global
 		{93ACE67E-ADA0-00D1-3D1F-96686858EC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93ACE67E-ADA0-00D1-3D1F-96686858EC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93ACE67E-ADA0-00D1-3D1F-96686858EC85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6456AFD-A326-C4B3-1BCA-170DD412B87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6456AFD-A326-C4B3-1BCA-170DD412B87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6456AFD-A326-C4B3-1BCA-170DD412B87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6456AFD-A326-C4B3-1BCA-170DD412B87D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
