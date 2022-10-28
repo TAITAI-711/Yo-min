@@ -34,6 +34,7 @@ public class ResultTimeCount : MonoBehaviour
             {
                 NowTime = 0.0f;
                 SoundManager.Instance.PlaySound("リザルト順位決定", false);
+                SoundManager.Instance.PlaySoundBGMDelay("BGM_リザルト", 0.5f, 1.0f);
             }
         }
     }

@@ -101,7 +101,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 
             Players[i].PlayerOseroType = PlayerOseroType[i];
 
-            Players[i].GamePadName_Player = "Joystick_1";
+            Players[i].GamePadName_Player = "Joystick_0";
         }
 
         MenuSelectPlayerName = "Joystick_0";

@@ -29,7 +29,8 @@ public class ResultPlayer : MonoBehaviour
         if (animator == null)
             animator = gameObject.GetComponent<Animator>();
 
-        animator.SetBool("isIdle", true);
+        if (!animator.GetBool("isIdle"))
+            animator.SetBool("isIdle", true);
     }
 
     public void SetThrowAnimetion()
@@ -37,7 +38,10 @@ public class ResultPlayer : MonoBehaviour
         if (animator == null)
             animator = gameObject.GetComponent<Animator>();
 
-        animator.SetBool("isWin", true);
-        EffectManager.Instance.SetEffect("Light", gameObject.transform.position - new Vector3(0, -8.0f, -5.0f), Quaternion.identity, 8.0f);
+        if (!animator.GetBool("isWin"))
+        {
+            animator.SetBool("isWin", true);
+            EffectManager.Instance.SetEffect("Light", gameObject.transform.position - new Vector3(0, -8.0f, -5.0f), Quaternion.identity, 8.0f);
+        }
     }
 }
