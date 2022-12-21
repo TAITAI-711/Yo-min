@@ -65,6 +65,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: e49f698da87b24e4ca3bac1a16a3ff6a, type: 3}
   - audioName: "BGM_\u8349\u539F"
     audioClip: {fileID: 8300000, guid: a6769cb4ee63c194a8f2c7316446556b, type: 3}
+  - audioName: "BGM_\u30EA\u30B6\u30EB\u30C8"
+    audioClip: {fileID: 8300000, guid: 8bc75cf7e20a5d7408f51d0146ba28e2, type: 3}
   - audioName: "\u30AB\u30A6\u30F3\u30C8\u30C0\u30A6\u30F3"
     audioClip: {fileID: 8300000, guid: 67bb36f8a72f8e0418c2641fbf70c1a8, type: 3}
   - audioName: "\u30B2\u30FC\u30E0\u7D42\u4E86"
